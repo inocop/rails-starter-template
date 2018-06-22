@@ -1,4 +1,2 @@
-/.DS_Store
-/.project
-/.buildpath
-/.settings/
+/**/vendor/bundle
+/**/node_modules

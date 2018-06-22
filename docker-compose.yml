@@ -1,18 +1,25 @@
 version: '2'
 services:
   db:
-    build: ./db
-    ports:
-      - "3306:3306"
+    build: ./docker/db
     environment:
       - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_USER=testing
-      - MYSQL_PASSWORD=testing
-      - MYSQL_DATABASE=testing
+    volumes:
+      - rails_db:/var/lib/mysql
 
   web:
-    build: ./web
+    build: 
+      context: ./docker/web
+      #dockerfile: "Dockerfile_centos7"
+      dockerfile: "Dockerfile_centos6"
+      args:
+        - RAILS_ENV=development # or production
     ports:
       - "8080:80"
     volumes:
-      - ./src:/var/www/html
+      - ./source:/var/rails_app
+    privileged: true
+
+volumes:
+  rails_db:
+    driver: 'local'
