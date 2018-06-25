@@ -2,7 +2,7 @@
 
 set -eux
 
-cd /home/railsdev/rails_app
+cd /var/rails_app
 
 ###########################
 #  already run            #
@@ -11,6 +11,7 @@ cd /home/railsdev/rails_app
 # rails _5.1.6_ new . --database=mysql --skip-bundle --skip-coffee --skip-turbolinks --skip-sprockets
 
 
+bundle config --local build.nokogiri --use-system-libraries
 bundle install --path vendor/bundle
 npm install
 

@@ -26,6 +26,8 @@ RUN yum install -y sudo \
                    readline \
                    readline-devel \
                    libyaml-devel \
+                   libxml2-devel \
+                   libxslt-devel \
                    zlib \
                    zlib-devel \
                    sqlite-devel \
@@ -48,7 +50,13 @@ RUN wget http://cache.ruby-lang.org/pub/ruby/2.4/ruby-2.4.4.tar.gz \
 # passenger install
 RUN bash -l -c 'gem install --no-document bundler' \
 &&  bash -l -c 'gem install --no-document passenger -v "5.3.2"' \
+&&  bash -l -c 'gem install --no-document nokogiri -- --use-system-libraries -v "1.8.3"' \
 &&  passenger-install-apache2-module --auto
+
+
+# apache disable PrivateTmp
+RUN cp /usr/lib/systemd/system/httpd.service /etc/systemd/system/httpd.service \
+&&  sed -i -e "s/PrivateTmp=true/PrivateTmp=false/g" /etc/systemd/system/httpd.service
 
 
 # set TimeZone
@@ -60,6 +68,17 @@ RUN ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 ARG RAILS_ENV
 ADD vhost.conf.tmp ./
 RUN RAILS_ENV=${RAILS_ENV} cat vhost.conf.tmp | envsubst > /etc/httpd/conf.d/vhost.conf
+
+
+# set env
+ARG RAILS_ENV
+ARG RAILS_ENV
+RUN echo "export RAILS_ENV=${RAILS_ENV}" | tee -a /etc/sysconfig/httpd /etc/profile.d/rails_conf.sh
+
+
+# install db tools for development
+ADD install_adminer.sh ./
+RUN if [ "${RAILS_ENV}" = "development" ] ; then ./install_adminer.sh ; fi
 
 
 # set use systemd
@@ -75,8 +94,6 @@ RUN useradd railsdev \
 RUN sed -i.org -e "s|secure_path =.*|&:/usr/local/bin|" /etc/sudoers \
 &&  echo "railsdev ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
-
-#USER railsdev
 WORKDIR /var/rails_app
 
 

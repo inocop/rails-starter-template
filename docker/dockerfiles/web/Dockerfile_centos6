@@ -26,6 +26,8 @@ RUN yum install -y sudo \
                    readline \
                    readline-devel \
                    libyaml-devel \
+                   libxml2-devel \
+                   libxslt-devel \
                    zlib \
                    zlib-devel \
                    sqlite-devel \
@@ -48,6 +50,7 @@ RUN wget http://cache.ruby-lang.org/pub/ruby/2.4/ruby-2.4.4.tar.gz \
 # passenger install
 RUN bash -l -c 'gem install --no-document bundler' \
 &&  bash -l -c 'gem install --no-document passenger -v "5.3.2"' \
+&&  bash -l -c 'gem install --no-document nokogiri -- --use-system-libraries -v "1.8.3"' \
 &&  passenger-install-apache2-module --auto
 
 
@@ -62,10 +65,19 @@ RUN mv /etc/sysconfig/clock /etc/sysconfig/clock.org \
 # set apache conf
 ARG RAILS_ENV
 ADD vhost.conf.tmp ./
-RUN RAILS_ENV=${RAILS_ENV} cat vhost.conf.tmp | envsubst > /etc/httpd/conf.d/vhost.conf
+RUN RAILS_ENV=${RAILS_ENV} cat vhost.conf.tmp | envsubst > /etc/httpd/conf.d/vhost.conf \
+&&  sed -i -e "s/Require all granted/#&/" /etc/httpd/conf.d/vhost.conf
 
 
-# set use systemd
+# set env
+RUN echo "export RAILS_ENV=${RAILS_ENV}" | tee -a /etc/sysconfig/httpd /etc/profile.d/rails_conf.sh
+
+# install db tools for development
+ADD install_adminer.sh ./
+RUN if [ "${RAILS_ENV}" = "development" ] ; then ./install_adminer.sh ; fi
+
+
+# set use service
 RUN chkconfig  httpd on \
 &&  chkconfig  crond on
 
@@ -84,4 +96,5 @@ WORKDIR /var/rails_app
 
 
 CMD sudo service httpd start \
+&&  sudo service crond start \
 &&  /usr/bin/tail -f /dev/null
