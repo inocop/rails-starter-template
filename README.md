@@ -13,9 +13,10 @@
 
 setup
 ```
-$ cd { ~/docker/dev | ~/docker/prd }
+$ cd {~/docker/dev | ~/docker/prd}
 $ docker-compose build
 $ docker-compose up -d
-$ docker cp docker/setup.sh docker-ror_web_1:/tmp/setup.sh && docker exec -it docker-ror_web_1 bash -c 'sh /tmp/setup.sh'
+$ docker cp ../dockerfiles/web/setup.sh {dev_web_1 | prd_web_1}:/tmp/setup.sh
+$ docker exec -it {dev_web_1 | prd_web_1} bash -c 'sh /tmp/setup.sh'
 ```
 
