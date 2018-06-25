@@ -1,7 +1,7 @@
 NameVirtualHost *:80
 <VirtualHost *:80>
   ServerName localhost.localdomain
-  RailsEnv ${RAILS_ENV}
+  RackEnv ${RAILS_ENV}
   DocumentRoot /var/rails_app/public
 
   <Directory /var/rails_app/public>
