@@ -9,9 +9,8 @@
 |Web Server|Apache + Passenger|
 
 
-### コンテナ起動
+### Dockerコンテナ setup
 
-setup
 ```
 $ cd {~/docker/dev | ~/docker/prd}
 $ docker-compose build
@@ -20,10 +19,10 @@ $ docker cp ../dockerfiles/web/setup.sh {dev_web_1 | prd_web_1}:/tmp/setup.sh
 $ docker exec -it {dev_web_1 | prd_web_1} bash -c 'sh /tmp/setup.sh'
 ```
 
-rails_apps
+rails_apps  
 http://localhost:8888
 
-adminer
+adminer  
 http://localhost:8888/tools
 
 
