@@ -23,9 +23,7 @@ RAILS_ENV=development bundle exec rake db:create
 RAILS_ENV=production  bundle exec rake db:create
 
 npm install
-pushd public
-  ln -s ../node_modules libs
-popd
+ln -s /var/rails_app/node_modules /var/rails_app/public/libs
 
 
 # puma (rails defautl)
