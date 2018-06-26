@@ -19,22 +19,10 @@ cd /var/rails_app
 
 bundle config --local build.nokogiri --use-system-libraries
 bundle install --path vendor/bundle
-RAILS_ENV=test        bundle exec rake db:create
 RAILS_ENV=development bundle exec rake db:create
 RAILS_ENV=production  bundle exec rake db:create
 
 npm install
-ln -s node_modules public/libs
-
-
-###########################
-#  built-in server        #
-###########################
-# cd /home/railsdev/rails_app
-# bundle exec rails s -b 0.0.0.0 -p 8080
-
-###########################
-#  passenger              #
-###########################
-# passenger-config restart-app
-# http://localhost:8080/
+pushd public
+  ln -s ../node_modules libs
+popd 
