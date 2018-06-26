@@ -1,5 +1,5 @@
 {
-  "name": "test-project",
+  "name": "rails_app",
   "private": true,
   "dependencies": {
     "bootstrap": "^4.1.1",

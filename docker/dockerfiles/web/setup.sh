@@ -5,7 +5,7 @@ set -eux
 cd /var/rails_app
 
 ###########################
-#  already run            #
+#  create project         #
 ###########################
 # sudo gem install rails '5.1.6'
 # rails _5.1.6_ new . --database=mysql --skip-bundle --skip-coffee --skip-turbolinks --skip-sprockets
@@ -25,4 +25,12 @@ RAILS_ENV=production  bundle exec rake db:create
 npm install
 pushd public
   ln -s ../node_modules libs
-popd 
+popd
+
+
+# puma (rails defautl)
+# $ cd /var/rails_app
+# $ bundle exec rails s -b 0.0.0.0 -p 8888
+
+# passenger
+# $ passenger-config restart-app
