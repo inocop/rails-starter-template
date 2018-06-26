@@ -72,6 +72,7 @@ RUN RAILS_ENV=${RAILS_ENV} cat vhost.conf.tmp | envsubst > /etc/httpd/conf.d/vho
 # set env
 RUN echo "export RAILS_ENV=${RAILS_ENV}" | tee -a /etc/sysconfig/httpd /etc/profile.d/rails_conf.sh
 
+
 # install db tools for development
 ADD install_adminer.sh ./
 RUN if [ "${RAILS_ENV}" = "development" ] ; then ./install_adminer.sh ; fi

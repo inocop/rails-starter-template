@@ -71,8 +71,6 @@ RUN RAILS_ENV=${RAILS_ENV} cat vhost.conf.tmp | envsubst > /etc/httpd/conf.d/vho
 
 
 # set env
-ARG RAILS_ENV
-ARG RAILS_ENV
 RUN echo "export RAILS_ENV=${RAILS_ENV}" | tee -a /etc/sysconfig/httpd /etc/profile.d/rails_conf.sh
 
 
