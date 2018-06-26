@@ -19,7 +19,7 @@ services:
         - RAILS_SERVE_STATIC_FILES=true
     image: docker-ror_web_prd
     ports:
-      - "8080:80"
+      - "80:80"
     volumes:
       - ../../source:/var/rails_app
     privileged: true

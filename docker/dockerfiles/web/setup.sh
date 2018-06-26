@@ -1,0 +1,40 @@
+#!/bin/bash
+
+set -eux
+
+cd /var/rails_app
+
+###########################
+#  already run            #
+###########################
+# sudo gem install rails '5.1.6'
+# rails _5.1.6_ new . --database=mysql --skip-bundle --skip-coffee --skip-turbolinks --skip-sprockets
+
+###########################
+#  change file            #
+###########################
+# config/database.yml - DB params
+# config/secrets.yml  - production : secret_key_base
+
+
+bundle config --local build.nokogiri --use-system-libraries
+bundle install --path vendor/bundle
+RAILS_ENV=test        bundle exec rake db:create
+RAILS_ENV=development bundle exec rake db:create
+RAILS_ENV=production  bundle exec rake db:create
+
+npm install
+ln -s node_modules public/libs
+
+
+###########################
+#  built-in server        #
+###########################
+# cd /home/railsdev/rails_app
+# bundle exec rails s -b 0.0.0.0 -p 8080
+
+###########################
+#  passenger              #
+###########################
+# passenger-config restart-app
+# http://localhost:8080/
