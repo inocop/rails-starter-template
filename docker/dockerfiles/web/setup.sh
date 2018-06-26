@@ -7,7 +7,7 @@ cd /var/rails_app
 ###########################
 #  create project         #
 ###########################
-# sudo gem install rails '5.1.6'
+# gem install rails -v '5.1.6'
 # rails _5.1.6_ new . --database=mysql --skip-bundle --skip-coffee --skip-turbolinks --skip-sprockets
 
 ###########################
