@@ -16,7 +16,6 @@
 $ cd docker/rails_dev
 $ docker-compose build
 $ docker-compose up -d
-$ docker cp ../dockerfiles/web/setup.sh rails_dev_web_1:/tmp/setup.sh
 $ docker exec -it rails_dev_web_1 bash -c 'sh /tmp/setup.sh'
 ```
 
