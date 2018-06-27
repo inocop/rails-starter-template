@@ -62,25 +62,22 @@ RUN mv /etc/sysconfig/clock /etc/sysconfig/clock.org \
 &&  echo 'UTC=false"'        >> /etc/sysconfig/clock
 
 
-# set environment
+# set env
 ARG RAILS_ENV
-ADD web_vhost.conf.tmp ./
-ADD .env ./
+ARG SECRET_KEY_BASE
+ENV RAILS_ENV ${RAILS_ENV}
+ADD vhost.conf.tmp ./
 
-RUN RAILS_ENV=${RAILS_ENV} cat web_vhost.conf.tmp | envsubst > /etc/httpd/conf.d/web_vhost.conf \
-&&  sed -i -e "s/Require all granted/#&/" /etc/httpd/conf.d/web_vhost.conf \
-&&  cat .env >> /etc/sysconfig/httpd \
+RUN RAILS_ENV=${RAILS_ENV} cat vhost.conf.tmp | envsubst > /etc/httpd/conf.d/vhost.conf \
+&&  sed -i -e "s/Require all granted/#&/" /etc/httpd/conf.d/vhost.conf \
+&&  echo "RAILS_ENV=${RAILS_ENV}"        >> /etc/sysconfig/httpd \
+&&  echo "SECRET_KEY_BASE=${SECRET_KEY_BASE}" >> /etc/sysconfig/httpd \
 &&  echo "export RAILS_ENV=${RAILS_ENV}" >> /etc/profile.d/rails_conf.sh
 
 
-# set env
-RUN echo "export RAILS_ENV=${RAILS_ENV}" >> /etc/profile.d/rails_conf.sh \
-&&  echo "RAILS_ENV=${RAILS_ENV}"        >> /etc/sysconfig/httpd
-
-
 # install db tools for development
-ADD web_install_adminer.sh ./
-RUN if [ "${RAILS_ENV}" = "development" ] ; then ./web_install_adminer.sh ; fi
+ADD install_adminer.sh ./
+RUN if [ "${RAILS_ENV}" = "development" ] ; then ./install_adminer.sh ; fi
 
 
 # set use service

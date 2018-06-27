@@ -3,4 +3,4 @@ FROM mysql:5.6
 MAINTAINER inocop
 
 # set charset.cnf
-COPY ./db_charset.cnf /etc/mysql/db_charset.cnf
+COPY charset.cnf /etc/mysql/charset.cnf

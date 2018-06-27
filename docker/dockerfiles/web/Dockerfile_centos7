@@ -64,19 +64,21 @@ RUN ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 #RUN timedatectl set-timezone Asia/Tokyo
 
 
-# set environment
+# set env
 ARG RAILS_ENV
-ADD web_vhost.conf.tmp ./
-ADD .env ./
+ARG SECRET_KEY_BASE
+ENV RAILS_ENV ${RAILS_ENV}
+ADD vhost.conf.tmp ./
 
-RUN RAILS_ENV=${RAILS_ENV} cat web_vhost.conf.tmp | envsubst > /etc/httpd/conf.d/web_vhost.conf \
-&&  cat .env >> /etc/sysconfig/httpd \
-&&  echo "export RAILS_ENV=${RAILS_ENV}" >> /etc/profile.d/rails_conf.sh
+RUN RAILS_ENV=${RAILS_ENV} cat vhost.conf.tmp | envsubst > /etc/httpd/conf.d/vhost.conf \
+&&  echo "RAILS_ENV=${RAILS_ENV}"             >> /etc/sysconfig/httpd \
+&&  echo "SECRET_KEY_BASE=${SECRET_KEY_BASE}" >> /etc/sysconfig/httpd \
+&&  echo "export RAILS_ENV=${RAILS_ENV}"      >> /etc/profile.d/rails_conf.sh
 
 
 # install db tools for development
-ADD web_install_adminer.sh ./
-RUN if [ "${RAILS_ENV}" = "development" ] ; then ./web_install_adminer.sh ; fi
+ADD install_adminer.sh ./
+RUN if [ "${RAILS_ENV}" = "development" ] ; then ./install_adminer.sh ; fi
 
 
 # set use systemd

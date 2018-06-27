@@ -13,7 +13,7 @@ cd /var/rails_app
 ###########################
 #  change file            #
 ###########################
-# config/database.yml - DB params
+# config/database.yml -> use .env params
 
 bundle config --local build.nokogiri --use-system-libraries
 bundle install --path vendor/bundle
