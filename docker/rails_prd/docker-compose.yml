@@ -1,0 +1,29 @@
+version: '2'
+services:
+  db:
+    build:
+      context: ../dockerfiles/db
+      dockerfile: "Dockerfile"
+    environment: 
+      - MYSQL_ROOT_PASSWORD=root
+    volumes:
+      - rails_db:/var/lib/mysql
+    restart: always
+
+  web:
+    build: 
+      context: ../dockerfiles/web
+      dockerfile: "Dockerfile_centos7"
+      args:
+        - RAILS_ENV=production
+        - SECRET_KEY_BASE=xxxyyyzzz
+    ports:
+      - "80:80"
+    volumes:
+      - ../../source:/var/rails_app
+    privileged: true
+    restart: always
+
+volumes:
+  rails_db:
+    driver: 'local'

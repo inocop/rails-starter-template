@@ -1,0 +1,103 @@
+FROM centos:6
+
+MAINTAINER inocop
+
+WORKDIR /tmp
+
+
+# add nodejs8.x repository
+RUN curl --silent --location https://rpm.nodesource.com/setup_8.x | bash -
+
+
+# yum install 
+RUN yum install -y sudo \
+                   cronie \
+                   which \
+                   wget \
+                   httpd \
+                   httpd-devel \
+                   libcurl-devel \
+                   apr-devel \
+                   apr-util-devel \
+                   gcc-c++ \
+                   make \
+                   glibc-headers \
+                   openssl-devel \
+                   readline \
+                   readline-devel \
+                   libyaml-devel \
+                   libxml2-devel \
+                   libxslt-devel \
+                   zlib \
+                   zlib-devel \
+                   sqlite-devel \
+                   mysql \
+                   mysql-devel \
+                   git \
+                   nodejs \
+                   gettext
+
+
+# ruby install
+RUN wget http://cache.ruby-lang.org/pub/ruby/2.4/ruby-2.4.4.tar.gz \
+&&  tar zxf ruby-2.4.4.tar.gz \
+&&  cd ruby-2.4.4 \
+&&  ./configure --disable-install-rdoc \
+&&  make \
+&&  make install
+
+
+# passenger install
+RUN bash -l -c 'gem install --no-document bundler' \
+&&  bash -l -c 'gem install --no-document passenger -v "5.3.2"' \
+&&  bash -l -c 'gem install --no-document nokogiri -- --use-system-libraries -v "1.8.3"' \
+&&  passenger-install-apache2-module --auto
+
+
+# set TimeZone
+RUN mv /etc/localtime /etc/localtime.org \
+&&  cp /usr/share/zoneinfo/Japan /etc/localtime
+RUN mv /etc/sysconfig/clock /etc/sysconfig/clock.org \
+&&  echo 'ZONE="Asia/Tokyo"' >> /etc/sysconfig/clock \
+&&  echo 'UTC=false"'        >> /etc/sysconfig/clock
+
+
+# set env
+ARG RAILS_ENV
+ARG SECRET_KEY_BASE
+ENV RAILS_ENV ${RAILS_ENV}
+ADD vhost.conf.tmp ./
+
+RUN RAILS_ENV=${RAILS_ENV} cat vhost.conf.tmp | envsubst > /etc/httpd/conf.d/vhost.conf \
+&&  sed -i -e "s/Require all granted/#&/" /etc/httpd/conf.d/vhost.conf \
+&&  echo "RAILS_ENV=${RAILS_ENV}"        >> /etc/sysconfig/httpd \
+&&  echo "SECRET_KEY_BASE=${SECRET_KEY_BASE}" >> /etc/sysconfig/httpd \
+&&  echo "export RAILS_ENV=${RAILS_ENV}" >> /etc/profile.d/rails_conf.sh
+
+
+# install db tools for development
+ADD install_adminer.sh ./
+RUN if [ "${RAILS_ENV}" = "development" ] ; then ./install_adminer.sh ; fi
+
+
+# set use service
+RUN chkconfig  httpd on \
+&&  chkconfig  crond on
+
+
+# create user
+RUN useradd railsdev \
+&&  echo "railsdev:password" | chpasswd \
+&&  usermod  -u 1000 railsdev \
+&&  groupmod -g 1000 railsdev
+RUN sed -i.org -e "s|secure_path =.*|&:/usr/local/bin|" /etc/sudoers \
+&&  echo "railsdev ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+
+
+USER railsdev
+WORKDIR /var/rails_app
+
+
+CMD sudo service httpd start \
+&&  sudo service crond start \
+&&  /usr/bin/tail -f /dev/null
