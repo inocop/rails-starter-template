@@ -6,7 +6,7 @@
 |:--|---|
 |Ruby|2.4.4|
 |Rails|5.1.6|
-|Web|Apache + Passenger|
+|Web|Apache2.4 + Passenger5.3.2|
 |MySQL|5.6|
 
 ## 環境構築(development)
