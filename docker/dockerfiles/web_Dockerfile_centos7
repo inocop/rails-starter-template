@@ -60,23 +60,23 @@ RUN cp /usr/lib/systemd/system/httpd.service /etc/systemd/system/httpd.service \
 
 
 # set TimeZone
-#RUN timedatectl set-timezone Asia/Tokyo
 RUN ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
+#RUN timedatectl set-timezone Asia/Tokyo
 
 
-# set apache conf
+# set environment
 ARG RAILS_ENV
-ADD vhost.conf.tmp ./
-RUN RAILS_ENV=${RAILS_ENV} cat vhost.conf.tmp | envsubst > /etc/httpd/conf.d/vhost.conf
+ADD web_vhost.conf.tmp ./
+ADD .env ./
 
-
-# set env
-RUN echo "export RAILS_ENV=${RAILS_ENV}" | tee -a /etc/sysconfig/httpd /etc/profile.d/rails_conf.sh
+RUN RAILS_ENV=${RAILS_ENV} cat web_vhost.conf.tmp | envsubst > /etc/httpd/conf.d/web_vhost.conf \
+&&  cat .env >> /etc/sysconfig/httpd \
+&&  echo "export RAILS_ENV=${RAILS_ENV}" >> /etc/profile.d/rails_conf.sh
 
 
 # install db tools for development
-ADD install_adminer.sh ./
-RUN if [ "${RAILS_ENV}" = "development" ] ; then ./install_adminer.sh ; fi
+ADD web_install_adminer.sh ./
+RUN if [ "${RAILS_ENV}" = "development" ] ; then ./web_install_adminer.sh ; fi
 
 
 # set use systemd
@@ -85,12 +85,10 @@ RUN systemctl enable httpd.service \
 
 
 # create user
-RUN useradd railsdev \
-&&  echo "railsdev:password" | chpasswd \
+RUN useradd -s /sbin/nologin railsdev \
 &&  usermod  -u 1000 railsdev \
 &&  groupmod -g 1000 railsdev
-RUN sed -i.org -e "s|secure_path =.*|&:/usr/local/bin|" /etc/sudoers \
-&&  echo "railsdev ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+
 
 WORKDIR /var/rails_app
 

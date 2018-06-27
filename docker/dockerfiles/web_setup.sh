@@ -14,8 +14,6 @@ cd /var/rails_app
 #  change file            #
 ###########################
 # config/database.yml - DB params
-# config/secrets.yml  - production : secret_key_base
-
 
 bundle config --local build.nokogiri --use-system-libraries
 bundle install --path vendor/bundle

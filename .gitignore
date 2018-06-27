@@ -1,3 +1,5 @@
 /**/vendor/bundle
 /**/node_modules
 /**/public/libs
+/**/public/assets
+/**/dockerfiles/.env

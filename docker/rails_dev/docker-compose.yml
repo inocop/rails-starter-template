@@ -1,21 +1,20 @@
 version: '2'
 services:
   db:
-    build: ../dockerfiles/db
-    image: docker-ror_db_dev
-    environment:
-      - MYSQL_ROOT_PASSWORD=root
+    build:
+      context: ../dockerfiles
+      dockerfile: "db_Dockerfile"
+    env_file: ../dockerfiles/.env
     volumes:
       - rails_db:/var/lib/mysql
 
 
   web:
     build: 
-      context: ../dockerfiles/web
-      dockerfile: "Dockerfile_centos7"
+      context: ../dockerfiles
+      dockerfile: "web_Dockerfile_centos7"
       args:
         - RAILS_ENV=development
-    image: docker-ror_web_dev
     ports:
       - "8888:80"
     volumes:
