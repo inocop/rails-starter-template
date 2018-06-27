@@ -13,7 +13,7 @@
 
 #### コンテナビルド
 ```
-$ docker/rails_dev
+$ cd docker/rails_dev
 $ docker-compose build
 $ docker-compose up -d
 $ docker cp ../dockerfiles/web/setup.sh rails_dev_web_1:/tmp/setup.sh
