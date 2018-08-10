@@ -15,17 +15,27 @@ cd /var/rails_app
 ###########################
 # config/database.yml -> use .env params
 
+
 bundle config --local build.nokogiri --use-system-libraries
 bundle install --path vendor/bundle
-RAILS_ENV=development bundle exec rake db:create
-RAILS_ENV=production  bundle exec rake db:create
+bundle exec rake db:create:all
+bundle exec rake db:schema:load # bundle exec rake db:migrate
+bundle exec rake db:seed
 
+
+###########################
+#  settting devise        #
+###########################
+# bundle exec rails g devise:install
+# bundle exec rails g controller Dashboards index --skip-assets
+# bundle exec rails g devise User users
+# bundle exec rails g devise:views
+
+
+cd /var/rails_app/public
 npm install
-if [ ! -e public/libs ]; then
-pushd public
-  ln -fs ../node_modules libs
-popd
-fi
+
+
 
 # puma (rails defautl)
 # $ cd /var/rails_app
