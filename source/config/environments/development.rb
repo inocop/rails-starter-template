@@ -49,6 +49,7 @@ Rails.application.configure do
   # 追加分
 
   config.action_mailer.default_url_options = { host: 'localhost', port: 8888 }
-  # modelやcontrollerの変更も即時反映する
+  # 変更が無くてもクラスファイルをreloadする (Docker等の共有フォルダの場合、file_watcherのEventedFileUpdateCheckerでファイル変更が検出できないらしい)
   config.reload_classes_only_on_change = false
+  #config.file_watcher = ActiveSupport::FileUpdateChecker # これでも良い
 end

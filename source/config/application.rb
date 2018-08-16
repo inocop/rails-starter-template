@@ -28,5 +28,6 @@ module RailsApp
 
     # 追加分
     config.i18n.default_locale = :ja
+    config.i18n.fallbacks = [:ja, :en]
   end
 end
