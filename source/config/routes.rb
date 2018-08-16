@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
 
   devise_for :users
-  root 'top#index'
+  devise_scope :user do
+    get '/users/sign_out' => 'devise/sessions#destroy'
+  end
 
-  get 'top/index'
-  get 'top', :to => 'top#index', :as => :user_root
+  root 'dashboard#index'
+  get 'dashboard/index'
+  get 'dashboard', :to => 'dashboard#index'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
