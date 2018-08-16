@@ -3,7 +3,7 @@
 ## 構成
 
 #### アーキテクチャ
-|#  |version|
+|#  |name / version|
 |:--|-------|
 |Lang |Ruby 2.4.4|
 |Web  |Apache 2.4 + Passenger 5.3.2|
@@ -34,12 +34,31 @@ $ docker exec -it rails_dev_web_1 bash -c 'sh /tmp/setup.sh'
 ```
 
 #### アクセス
-rails_apps  
+
 http://localhost:8888
 
-adminer  
+
+開発用初期ユーザ
+
+|key |value|
+|:---|:----|
+|id  |rails@example.com|
+|pw  |password|
+
+
+#### DBツール(adminer)
+
 http://localhost:8888/tools
 
+
+#### デバッグ
+
+not yet
+
+
+#### テスト
+
+not yet
 
 
 ## 環境構築(production)
@@ -49,8 +68,8 @@ http://localhost:8888/tools
 $ yum install -y yum-utils device-mapper-persistent-data lvm2
 $ yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 $ yum install -y docker-ce
-$ systemctl start docker
 $ systemctl enable docker
+$ systemctl start docker
 $ curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
 $ chmod +x /usr/local/bin/docker-compose
 ```
@@ -65,20 +84,19 @@ $ usermod -u 1000 railsdev && groupmod -g 1000 railsdev
 ```
 
 #### production用の変数設定
-```
+
 docker/rails_prd/docker-compose.yml
 * SECRET_KEY_BASE
 * DB_HOST
 * DB_USERNAME
 * DB_PASSWORD
-```
 
 開発環境等で以下コマンドからSECRET_KEY_BASEを生成。
 ```
 $ bin/rake secret
 ```
 
-コンテナビルド後に、/etc/sysconfig/httpdを変更してもOK。(passenger再起動で変更反映)
+※コンテナビルド後に/etc/sysconfig/httpdを編集、またはdotenvで設定してもOK。(要passenger再起動)
 
 
 #### コンテナビルド
@@ -90,6 +108,11 @@ $ docker-compose build
 $ docker-compose up -d
 $ docker exec -it rails_prd_web_1 bash -c 'sh /tmp/setup.sh'
 ```
+
+
+#### デプロイ
+
+not yet
 
 
 
