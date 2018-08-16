@@ -2,17 +2,31 @@
 
 ## 構成
 
+#### アーキテクチャ
 |#  |version|
-|:--|---|
-|Ruby|2.4.4|
-|Rails|5.1.6|
-|Web|Apache2.4 + Passenger5.3.2|
-|MySQL|5.6|
+|:--|-------|
+|Lang |Ruby 2.4.4|
+|Web  |Apache 2.4 + Passenger 5.3.2|
+|DB   |MySQL 5.6|
+
+
+#### ライブラリ
+|#  |name|version|
+|:--|----|-------|
+|gem|rails       |5.1.6|
+|gem|devise      |4.4.3|
+|gem|devise-i18n |1.6.4|
+|npm|bootstrap   |4.1.3|
+|npm|jquery      |3.3.1|
+|npm|chart.js    |2.7.2|
+
 
 ## 環境構築(development)
 
 #### コンテナビルド
+
 ```
+$ git clone https://github.com/inocop/docker-ror
 $ cd docker/rails_dev
 $ docker-compose build
 $ docker-compose up -d
@@ -27,9 +41,10 @@ adminer
 http://localhost:8888/tools
 
 
+
 ## 環境構築(production)
 
-#### Dockerのインストール（CentOS7）
+#### Dockerのインストール(CentOS7)
 ```
 $ yum install -y yum-utils device-mapper-persistent-data lvm2
 $ yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
@@ -40,21 +55,43 @@ $ curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-comp
 $ chmod +x /usr/local/bin/docker-compose
 ```
 
-#### コンテナ内ユーザーのrailsdev(uid:1000)をホストにも作成
-ユーザーマッピングで対応した方が良いかも。。。
+
+#### ホスト & コンテナ間の共通ユーザー作成
+
+railsdev(uid:1000)
 ```
 $ useradd -s /sbin/nologin railsdev
 $ usermod -u 1000 railsdev && groupmod -g 1000 railsdev
-$ cd /home/railsdev
-$ git clone https://github.com/inocop/docker-ror
 ```
 
-#### コンテナビルド
+#### production用の変数設定
+```
+docker/rails_prd/docker-compose.yml
+* SECRET_KEY_BASE
+* DB_HOST
+* DB_USERNAME
+* DB_PASSWORD
+```
 
-[rails_dev] を [rails_prd] に置き換えてdevelopmentのコマンド実行。
-
-/etc/sysconfig/httpdのSECRET_KEY_BASEの値を更新。
-以下のコマンドでKEYを生成。
+開発環境等で以下コマンドからSECRET_KEY_BASEを生成。
 ```
 $ bin/rake secret
 ```
+
+コンテナビルド後に、/etc/sysconfig/httpdを変更してもOK。(passenger再起動で変更反映)
+
+
+#### コンテナビルド
+```
+$ cd /home/railsdev
+$ git clone https://github.com/inocop/docker-ror
+$ cd docker/rails_prd
+$ docker-compose build
+$ docker-compose up -d
+$ docker exec -it rails_prd_web_1 bash -c 'sh /tmp/setup.sh'
+```
+
+
+
+
+
