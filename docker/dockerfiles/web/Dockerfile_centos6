@@ -62,16 +62,29 @@ RUN mv /etc/sysconfig/clock /etc/sysconfig/clock.org \
 &&  echo 'UTC=false"'        >> /etc/sysconfig/clock
 
 
-# set env
+# get build-arg
 ARG RAILS_ENV
 ARG SECRET_KEY_BASE
+ARG DB_HOST
+ARG DB_USERNAME
+ARG DB_PASSWORD
+
 ENV RAILS_ENV ${RAILS_ENV}
+
+
+# set env for apache
+RUN echo "RAILS_ENV=${RAILS_ENV}"             >> /etc/sysconfig/httpd \
+&&  echo "SECRET_KEY_BASE=${SECRET_KEY_BASE}" >> /etc/sysconfig/httpd \
+&&  echo "DB_HOST=${DB_HOST}"                 >> /etc/sysconfig/httpd \
+&&  echo "DB_USERNAME=${DB_USERNAME}"         >> /etc/sysconfig/httpd \
+&&  echo "DB_PASSWORD=${DB_PASSWORD}"         >> /etc/sysconfig/httpd
+
+
+# set conf for apache
 ADD vhost.conf.tmp ./
 
 RUN RAILS_ENV=${RAILS_ENV} cat vhost.conf.tmp | envsubst > /etc/httpd/conf.d/vhost.conf \
 &&  sed -i -e "s/Require all granted/#&/" /etc/httpd/conf.d/vhost.conf \
-&&  echo "RAILS_ENV=${RAILS_ENV}"        >> /etc/sysconfig/httpd \
-&&  echo "SECRET_KEY_BASE=${SECRET_KEY_BASE}" >> /etc/sysconfig/httpd \
 &&  echo "export RAILS_ENV=${RAILS_ENV}" >> /etc/profile.d/rails_conf.sh
 
 
