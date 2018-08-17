@@ -112,9 +112,13 @@ $ docker exec -it rails_prd_web_1 bash -c 'sh /tmp/setup.sh'
 
 #### デプロイ
 
-not yet
+deploy/deploy.shの以下パラメータを設定して実行
+* BRANCH
+* REPOSITORY
+* REMOTE_USER
+* REMOTE_SERVER
+* SECRET_KEY
 
-
-
-
-
+```
+$ ./deploy.sh
+```
