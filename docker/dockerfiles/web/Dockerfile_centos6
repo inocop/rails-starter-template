@@ -93,9 +93,13 @@ ADD install_adminer.sh ./
 RUN if [ "${RAILS_ENV}" = "development" ] ; then ./install_adminer.sh ; fi
 
 
-# set use service
-RUN chkconfig  httpd on \
-&&  chkconfig  crond on
+# Docker上のCentOS6でcrondを動かす用の設定
+RUN sudo sed -i.bak -e 's/^\(session.*pam_loginuid.so\)$/#\1/' /etc/pam.d/crond
+
+# set use service (rsyslog for crond)
+RUN chkconfig httpd on \
+&&  chkconfig rsyslog on \
+&&  chkconfig crond on
 
 
 # create user
@@ -113,5 +117,6 @@ WORKDIR /var/rails_app
 
 
 CMD sudo service httpd start \
+&&  sudo service rsyslog start \
 &&  sudo service crond start \
 &&  /usr/bin/tail -f /dev/null
