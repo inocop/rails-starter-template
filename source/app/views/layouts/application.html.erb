@@ -5,6 +5,26 @@
   </head>
 
   <body>
+    <div class="fixed-top m-3">
+      <% if notice.present? %>
+      <p class="alert alert-info alert-dismissible fade show" role="alert">
+        <span><%= notice %></span>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </p>
+      <% end %>
+
+      <% if alert.present? %>
+      <p class="alert alert-danger" role="alert">
+        <span><%= alert %></span>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </p>
+      <% end %>
+    </div>
+
     <%= yield %>
   </body>
 </html>
