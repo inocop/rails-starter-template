@@ -26,7 +26,11 @@ module RailsApp
     # -- all .rb files in that directory are automatically loaded.
 
 
-    # 追加分
+
+    #####################
+    # change config     #
+    #####################
+    # 日本語化設定
     config.i18n.default_locale = :ja
     config.i18n.fallbacks = [:ja, :en]
   end

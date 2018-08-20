@@ -45,9 +45,12 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
-  
-  # 追加分
 
+
+  #####################
+  # change config     #
+  #####################
+  # メール送信元
   config.action_mailer.default_url_options = { host: 'localhost', port: 8888 }
   # 変更が無くてもクラスファイルをreloadする (Docker等の共有フォルダの場合、file_watcherのEventedFileUpdateCheckerでファイル変更が検出できないらしい)
   config.reload_classes_only_on_change = false
