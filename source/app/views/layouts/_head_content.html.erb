@@ -1,0 +1,22 @@
+<title>RailsApp</title>
+<link rel="icon" href="/favicon.ico">
+
+
+<%# meta tag %>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<%= csrf_meta_tags %>
+<%= yield(:meta) if content_for?(:meta) %>
+
+
+<%# load css %>
+<link rel="stylesheet" media="all" href="/node_modules/bootstrap/dist/css/bootstrap.css">
+<%= stylesheet_link_tag 'application', media: 'all' %>
+<%= yield(:head_css) if content_for?(:head_css) %>
+
+
+<%# load javascript %>
+<script src="/node_modules/jquery/dist/jquery.js"></script>
+<script src="/node_modules/bootstrap/dist/js/bootstrap.js"></script>
+<%= javascript_include_tag 'application' %>
+<%= yield(:head_js) if content_for?(:head_js) %>

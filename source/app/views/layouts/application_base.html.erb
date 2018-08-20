@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <%= render(:partial => "layouts/head") %>
+    <%= render(:partial => "layouts/head_content") %>
   </head>
 
   <body>
@@ -47,16 +47,24 @@
     </nav>
 
     <main role="main" class="container" style="padding: 3rem 1.5rem;">
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
+      <div>
+        <select>
+          <option>aaa</option>
+          <option>bbb</option>
+          <option>ccc</option>
+        </select>
+        <%= yield :sidemenu %>
+      </div>
 
-      <select>
-        <option>aaa</option>
-        <option>bbb</option>
-        <option>ccc</option>
-      </select>
+      <div>
+        <div>
+          <p class="notice"><%= notice %></p>
+          <p class="alert"><%= alert %></p>
+        </div>
 
-      <%= yield %>
+        <%= yield %>
+      </div>
+
     </main><!-- /.container -->
   </body>
 </html>
