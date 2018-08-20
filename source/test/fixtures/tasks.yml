@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  project_id: 1
+  name: 
+  work_type: 
+  work_time: 
+  work_day: 
+  tanto_user_id: 1
+
+two:
+  project_id: 1
+  name: 
+  work_type: 
+  work_time: 
+  work_day: 
+  tanto_user_id: 1
