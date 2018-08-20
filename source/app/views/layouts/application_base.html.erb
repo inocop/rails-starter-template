@@ -2,6 +2,14 @@
 <html>
   <head>
     <%= render(:partial => "layouts/head_content") %>
+
+    <style>
+      body {
+        padding-top: 5rem;
+        padding-left: 2.5rem;
+        padding-right: 2.5rem;
+      }
+    </style>
   </head>
 
   <body>
@@ -46,23 +54,50 @@
       </div>
     </nav>
 
-    <main role="main" class="container" style="padding: 3rem 1.5rem;">
-      <div>
-        <select>
-          <option>aaa</option>
-          <option>bbb</option>
-          <option>ccc</option>
-        </select>
-        <%= yield :sidemenu %>
-      </div>
+    <main role="main" class="container-fluent">
+      <div class="row">
+        <!-- sidemenu -->
+        <div class="col-md-3">
+          <!-- select project -->
+          <div class="card">
+            <h5 class="card-header">プロジェクト</h5>
+            <div class="card-body">
+              <select class="form-control form-control-sm">
+                <option>aaa</option>
+                <option>bbb</option>
+                <option>ccc</option>
+              </select>
+            </div>
+          </div>
 
-      <div>
-        <div>
-          <p class="notice"><%= notice %></p>
-          <p class="alert"><%= alert %></p>
+          <!-- other menu -->
+          <%= yield :sidemenu %>
         </div>
 
-        <%= yield %>
+        <!-- main content -->
+        <div class="col-md-9">
+          <div>
+            <% if notice.present? %>
+            <p class="alert alert-info alert-dismissible fade show" role="alert">
+              <span><%= notice %></span>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </p>
+            <% end %>
+
+            <% if alert.present? %>
+            <p class="alert alert-danger" role="alert">
+              <span><%= alert %></span>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </p>
+            <% end %>
+          </div>
+
+          <%= yield %>
+        </div>
       </div>
 
     </main><!-- /.container -->
