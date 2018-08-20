@@ -112,13 +112,20 @@ $ docker exec -it rails_prd_web_1 bash -c 'sh /tmp/setup.sh'
 
 #### デプロイ
 
-deploy/deploy.shの以下パラメータを設定して実行
+config.sampleをコピー
+```
+$ cd deploy
+$ cp config.sample config
+```
+
+configの以下パラメータを設定
 * BRANCH
 * REPOSITORY
 * REMOTE_USER
 * REMOTE_SERVER
 * SECRET_KEY
 
+デプロイ実行
 ```
 $ ./deploy.sh
 ```

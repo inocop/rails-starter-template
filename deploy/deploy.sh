@@ -2,12 +2,7 @@
 
 set -eux
 
-BRANCH=master
-REPOSITORY=http://xxx/yyy.git
-
-REMOTE_USER=xxx
-REMOTE_SERVER=aaa.bbb.ccc.ddd
-SECRET_KEY=/z/keystore
+source ./config
 
 git clone --depth 1 --single-branch -b $BRANCH $REPOSITORY rails_app
 rm -rf rails_app/.git
