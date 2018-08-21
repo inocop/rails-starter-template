@@ -33,5 +33,11 @@ module RailsApp
     # 日本語化設定
     config.i18n.default_locale = :ja
     config.i18n.fallbacks = [:ja, :en]
+
+    # scaffoldでassetsを生成しない
+    config.generators do |g|
+      g.assets false
+    end
+
   end
 end
