@@ -11,6 +11,7 @@
       }
     </style>
 
+    <!-- 選択プロジェクトのchangeイベントを取得してsubmit -->
     <script type="text/javascript">
       $(document).ready(function(){
         $('#project_id').on('change', function(){
@@ -23,7 +24,7 @@
 
   <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-      <a class="navbar-brand" href="#">RailsApp</a>
+      <a class="navbar-brand" href="<%= dashboard_path %>">RailsApp</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#header-navbars" aria-controls="header-navbars" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -31,16 +32,16 @@
       <div class="collapse navbar-collapse" id="header-navbars">
         <!-- 左寄せメニュー -->
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Dashboard</a>
+          <li class="nav-item <%= "active" if controller_name == "dashboard" %>">
+            <a class="nav-link" href="<%= dashboard_path %>">Dashboard</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Project</a>
+          <li class="nav-item  <%= "active" if controller_name == "projects" %>">
+            <a class="nav-link" href="<%= projects_path %>">Project</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item  <%= "active" if controller_name == "task" %>">
             <a class="nav-link" href="#">Task</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item  <%= "active" if controller_name == "admin" %>">
             <a class="nav-link disabled" href="#">Admin</a>
           </li>
         </ul>
@@ -51,7 +52,7 @@
             <span class="nav-link text-white"><%= current_user.email %></span>
           </li>
           <li class="nav-item">
-              <%= link_to('Logout', users_sign_out_path, {:method => :get, :class => "btn btn-primary"}) %>
+              <%= link_to('Logout', destroy_user_session_path, {:method => :delete, :class => "btn btn-primary"}) %>
           </li>
         </ul>
       </div>
@@ -68,7 +69,7 @@
               <%= form_tag({:controller => 'auth', :action => 'switch_project'}, { :id => 'switch_project_form'}) do %>
                 <input id="controller_name" name="controller_name" type="hidden" value="<%= controller.controller_path %>">
                 <select id="project_id" name="project_id" class="form-control form-control-sm">
-                    <% @projects.each do |project| %>
+                    <% @select_projects.each do |project| %>
                       <option value="<%= project.id %>" <%= "selected" if project.id == current_project_id %> > <%= project.name %></option>
                     <% end %>
                 </select>
