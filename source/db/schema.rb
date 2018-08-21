@@ -13,7 +13,7 @@
 ActiveRecord::Schema.define(version: 20180820154311) do
 
   create_table "projects", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string "name"
+    t.string "name", null: false
     t.date "start_day"
     t.date "end_day"
     t.datetime "created_at", null: false
@@ -21,12 +21,12 @@ ActiveRecord::Schema.define(version: 20180820154311) do
   end
 
   create_table "tasks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "project_id"
-    t.string "name"
+    t.integer "project_id", null: false
+    t.string "name", null: false
     t.integer "work_type"
     t.time "work_time"
     t.date "work_day"
-    t.integer "tanto_user_id"
+    t.integer "tanto_user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

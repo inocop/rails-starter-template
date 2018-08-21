@@ -7,8 +7,13 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
+# 初期ユーザー
+User.create!(:email => "rails@example.com", :password => "password")
+
 # 開発用seed
 if Rails.env.development?
-  # 初期ユーザー
-  User.create!(:email => "rails@example.com", :password => "password")
+  # Projectデータ
+  Project.create!(:name => 'テストプロジェクト1', :start_day => '2018-8-11')
+  Project.create!(:name => 'テストプロジェクト2', :start_day => '2018-8-21')
+  Project.create!(:name => 'テストプロジェクト3', :start_day => '2018-8-31')
 end
