@@ -3,13 +3,22 @@
   <head>
     <%= render(:partial => "layouts/head_content") %>
 
-    <style>
+    <style type="text/css">
       body {
         padding-top: 5rem;
         padding-left: 2rem;
         padding-right: 2rem;
       }
     </style>
+
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $('#project_id').on('change', function(){
+          $('#switch_project_form').submit();
+        });
+      });
+    </script>
+
   </head>
 
   <body>
@@ -56,11 +65,14 @@
           <div class="card mb-3">
             <h5 class="card-header">Project</h5>
             <div class="card-body">
-              <select class="form-control form-control-sm">
-                <option>aaa</option>
-                <option>bbb</option>
-                <option>ccc</option>
-              </select>
+              <%= form_tag({:controller => 'auth', :action => 'switch_project'}, { :id => 'switch_project_form'}) do %>
+                <input id="controller_name" name="controller_name" type="hidden" value="<%= controller.controller_path %>">
+                <select id="project_id" name="project_id" class="form-control form-control-sm">
+                    <% @projects.each do |project| %>
+                      <option value="<%= project.id %>" <%= "selected" if project.id == current_project_id %> > <%= project.name %></option>
+                    <% end %>
+                </select>
+              <% end %>
             </div>
           </div>
 
