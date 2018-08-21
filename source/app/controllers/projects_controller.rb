@@ -70,6 +70,6 @@ class ProjectsController < AuthController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.fetch(:project, {}).permit(:name, :start_day, :end_day)
+      params.require(:project).permit(:name, :start_day, :end_day)
     end
 end
