@@ -11,5 +11,7 @@ Rails.application.routes.draw do
 
   post 'auth/switch_project', :to => 'auth#switch_project'
 
+  resources :projects
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

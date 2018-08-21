@@ -22,10 +22,10 @@ class AuthController < ApplicationController
     # プロジェクト一覧を取得し、
     # 選択プロジェクトが無ければリストの先頭を選択
     def check_current_project_id
-      @projects = Project.all
+      @select_projects = Project.all
 
       if current_project_id.blank?
-        current_project_id = @projects.first&.id
+        current_project_id = @select_projects.first&.id
       end
     end
 
