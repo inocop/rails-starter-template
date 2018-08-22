@@ -4,21 +4,6 @@ class AuthController < ApplicationController
   before_action :authenticate_user!
   before_action :check_current_project_id
 
-  # POST /auth/switch_project
-  # プロジェクト切り替え
-  def switch_project
-    project_id = params[:project_id]
-    controller = params[:controller_name] || root_path
-
-    unless project_id.nil?
-      session[:current_project] = project_id.to_i
-      redirect_to(:controller => controller, :action => 'index')
-    else
-      raise 'project_id is nil'
-    end
-  end
-
-
   private
     # adminユーザでなければroot_pathへリダイレクト
     def authenticate_admin_user!

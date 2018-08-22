@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   root 'dashboard#index'
   get 'dashboard', :to => 'dashboard#index'
 
-  post 'auth/switch_project', :to => 'auth#switch_project'
+  post 'api/select_project', :to => 'api#select_project'
 
   resources :projects
 
