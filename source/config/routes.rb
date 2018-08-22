@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   post 'api/select_project', :to => 'api#select_project'
 
   resources :projects
+  resources :tickets
 
   namespace :admin do
     get 'top', :to => 'top#index'

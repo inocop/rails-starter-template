@@ -42,7 +42,7 @@ http://localhost:8888
 
 |key |value|
 |:---|:----|
-|id  |rails@example.com|
+|id  |admin@example.com|
 |pw  |password|
 
 

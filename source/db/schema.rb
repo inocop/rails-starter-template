@@ -10,23 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180820154311) do
+ActiveRecord::Schema.define(version: 20180820153230) do
 
   create_table "projects", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name", null: false
-    t.date "start_day"
-    t.date "end_day"
+    t.date "start_date"
+    t.date "end_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "tasks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "project_id", null: false
+  create_table "tickets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name", null: false
-    t.integer "work_type"
+    t.string "comment"
+    t.integer "status", default: 0, null: false
     t.time "work_time"
-    t.date "work_day"
-    t.integer "tanto_user_id", null: false
+    t.date "start_date"
+    t.date "end_date"
+    t.bigint "project_id", null: false
+    t.bigint "assigned_user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -1,0 +1,38 @@
+<h1>Tickets</h1>
+
+<div class="table-responsive">
+  <table class="table table-striped table-sm">
+    <thead>
+      <tr>
+        <th><%= t("activerecord.attributes.ticket.name") %></th>
+        <th><%= t("activerecord.attributes.ticket.comment") %></th>
+        <th><%= t("activerecord.attributes.ticket.status") %></th>
+        <th><%= t("activerecord.attributes.ticket.work_time") %></th>
+        <th><%= t("activerecord.attributes.ticket.start_date") %></th>
+        <th><%= t("activerecord.attributes.ticket.end_date") %></th>
+        <th>担当ユーザ</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @tickets.each do |ticket| %>
+        <tr>
+          <td><%= ticket.name %></td>
+          <td><%= ticket.comment %></td>
+          <td><%= Ticket::STATUS_LIST[ticket.status] %></td>
+          <td><%= ticket.work_time %></td>
+          <td><%= ticket.start_date %></td>
+          <td><%= ticket.end_date %></td>
+          <td><%= ticket.user.email %></td>
+          <td><%= link_to 'Show', ticket %></td>
+          <td><%= link_to 'Edit', edit_ticket_path(ticket) %></td>
+          <td><%= link_to 'Destroy', ticket, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<br>
+
+<%= link_to 'New Ticket', new_ticket_path %>

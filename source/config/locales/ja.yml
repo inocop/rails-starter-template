@@ -36,7 +36,15 @@ ja:
     attributes:
       project:
         name: "プロジェクト名"
-        start_day: "プロジェクト開始日"
-        end_day: "プロジェクト終了日"
+        start_date: "プロジェクト開始日"
+        end_date: "プロジェクト終了日"
+      ticket:
+        name: "チケット名"
+        comment: "内容"
+        status: "ステータス"
+        work_time: "作業時間"
+        start_date: "着手日"
+        end_date: "完了日"
     models:
       project: "プロジェクト"
+      ticket: "チケット"

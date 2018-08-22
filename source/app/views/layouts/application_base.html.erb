@@ -38,11 +38,11 @@
           <li class="nav-item  <%= "active" if controller_name == "projects" %>">
             <a class="nav-link" href="<%= projects_path %>">Project</a>
           </li>
-          <li class="nav-item  <%= "active" if controller_name == "task" %>">
-            <a class="nav-link" href="#">Task</a>
+          <li class="nav-item  <%= "active" if controller_name == "tickets" %>">
+            <a class="nav-link" href="<%= tickets_path %>">Ticket</a>
           </li>
           <li class="nav-item  <%= "active" if controller_name == "setting" %>">
-            <a class="nav-link" href="#">Setting</a>
+            <a class="nav-link disabled" href="#">Setting</a>
           </li>
           <% if current_user.admin %>
           <li class="nav-item  <%= "active" if controller_path.start_with?("admin") %>">

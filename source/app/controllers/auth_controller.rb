@@ -18,7 +18,7 @@ class AuthController < ApplicationController
       @select_projects = Project.all
 
       if current_project_id.blank?
-        current_project_id = @select_projects.first&.id
+        session[:current_project] = @select_projects.first&.id
       end
     end
 

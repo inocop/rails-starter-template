@@ -1,0 +1,47 @@
+<%= form_with(model: ticket, local: true) do |form| %>
+  <% if ticket.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(ticket.errors.count, "error") %> prohibited this ticket from being saved:</h2>
+
+      <ul>
+      <% ticket.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form.hidden_field :project_id, value: current_project_id %>
+
+  <div class="field">
+    <%= form.label :name %><br />
+    <%= form.text_field :name %>
+  </div>
+  <div class="field">
+    <%= form.label :comment %><br />
+    <%= form.text_area :comment %>
+  </div>
+  <div class="field">
+    <%= form.label :status %><br />
+    <%= form.select :status, Ticket::STATUS_LIST.invert %>
+  </div>
+  <div class="field">
+    <%= form.label :work_time %><br />
+    <%= form.time_field :work_time %>
+  </div>
+  <div class="field">
+    <%= form.label :start_date %><br />
+    <%= form.date_field :start_date %>
+  </div>
+  <div class="field">
+    <%= form.label :end_date %><br />
+    <%= form.date_field :end_date %>
+  </div>
+  <div class="field">
+    <%= form.label :assigned_user_id %><br />
+    <%= form.text_field :assigned_user_id %>
+  </div>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
