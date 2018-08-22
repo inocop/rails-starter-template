@@ -30,7 +30,7 @@ bundle exec rake db:seed
 ###########################
 # bundle exec rails g devise:install
 # bundle exec rails g controller Dashboard index --skip-assets
-# bundle exec rails g devise User users
+# bundle exec rails g devise User
 # bundle exec rails g devise:views
 # bundle exec rails g devise:i18n:locale ja
 
