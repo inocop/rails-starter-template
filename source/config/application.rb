@@ -26,13 +26,15 @@ module RailsApp
     # -- all .rb files in that directory are automatically loaded.
 
 
-
     #####################
-    # change config     #
+    # add config        #
     #####################
     # 日本語化設定
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s] # config/locales/**/*.ymlもload対象に追加
     config.i18n.default_locale = :ja
-    config.i18n.fallbacks = [:ja, :en]
+    config.i18n.fallbacks = [:ja, :en] # :ja -> :en の順にテキストを探す
+    config.time_zone = 'Tokyo'
+    config.active_record.default_timezone = :utc # DBはUTC時間を保存。 日本時間を保存する場合は、time_zoneがTokyoの状態で:localを指定
 
     # scaffoldでassetsを生成しない
     config.generators do |g|

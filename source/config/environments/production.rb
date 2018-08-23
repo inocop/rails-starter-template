@@ -60,7 +60,10 @@ Rails.application.configure do
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
-  config.i18n.fallbacks = true
+  #####################
+  # change config     #
+  #####################
+  #config.i18n.fallbacks = true  # application.rbの方で設定
 
   # Send deprecation notices to registered listeners.
   config.active_support.deprecation = :notify
@@ -80,4 +83,11 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+
+  #####################
+  # add config        #
+  #####################
+  # action_mailer内でurlヘルパー(link_toなど)使用時のデフォルトのドメイン名
+  config.action_mailer.default_url_options = { host: 'localhost' }
 end

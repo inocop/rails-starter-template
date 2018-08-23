@@ -43,16 +43,17 @@ Rails.application.configure do
 
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
-  config.file_watcher = ActiveSupport::EventedFileUpdateChecker
-
-
-
   #####################
   # change config     #
   #####################
-  # メール送信元
+  #config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+  config.file_watcher  = ActiveSupport::FileUpdateChecker  # Docker等の共有フォルダの場合、EventedFileUpdateCheckerでファイル更新を検出できないため
+  #config.reload_classes_only_on_change = false            # 更新が無くてもクラスファイルをreloadする(上記の設定があればたぶん不要)
+
+
+  #####################
+  # add config        #
+  #####################
+  # action_mailer内でurlヘルパー(link_toなど)使用時のデフォルトのドメイン名
   config.action_mailer.default_url_options = { host: 'localhost', port: 8888 }
-  # 変更が無くてもクラスファイルをreloadする (Docker等の共有フォルダの場合、file_watcherのEventedFileUpdateCheckerでファイル変更が検出できないらしい)
-  config.reload_classes_only_on_change = false
-  #config.file_watcher = ActiveSupport::FileUpdateChecker # これでも良い
 end
