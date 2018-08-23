@@ -85,7 +85,13 @@ $ usermod -u 1000 railsdev && groupmod -g 1000 railsdev
 
 #### production用の変数設定
 
-docker/rails_prd/docker-compose.yml
+.env.sampleをコピー
+```
+$ cd docker/rails_prd/
+$ cp .env.sample .env
+```
+
+.envの以下パラメータを設定
 * SECRET_KEY_BASE
 * DB_HOST
 * DB_USERNAME
