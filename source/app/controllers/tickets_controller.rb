@@ -1,11 +1,11 @@
 class TicketsController < AuthController
-  layout 'application_base'
+  layout 'tickets'
   before_action :set_ticket, only: [:show, :edit, :update, :destroy]
 
   # GET /tickets
   # GET /tickets.json
   def index
-    @tickets = Ticket.all
+    @tickets = Ticket.where("project_id = ?", current_project_id)
   end
 
   # GET /tickets/1
@@ -16,10 +16,12 @@ class TicketsController < AuthController
   # GET /tickets/new
   def new
     @ticket = Ticket.new
+    @users = User.all
   end
 
   # GET /tickets/1/edit
   def edit
+    @users = User.all
   end
 
   # POST /tickets
