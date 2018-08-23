@@ -16,7 +16,7 @@ services:
       dockerfile: "Dockerfile_centos7"
       args:
         - RAILS_ENV=production
-      env_file: .env   # .env.sampleをコピーして編集
+    env_file: .env   # .env.sampleをコピーして編集
     ports:
       - "80:80"
     volumes:
