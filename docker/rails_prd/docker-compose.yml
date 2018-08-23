@@ -16,7 +16,10 @@ services:
       dockerfile: "Dockerfile_centos7"
       args:
         - RAILS_ENV=production
-    env_file: .env   # .env.sampleをコピーして編集
+        - SECRET_KEY_BASE=xxxyyyzzz
+        - DB_HOST=db
+        - DB_USERNAME=root
+        - DB_PASSWORD=root
     ports:
       - "80:80"
     volumes:
