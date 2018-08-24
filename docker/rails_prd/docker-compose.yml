@@ -24,9 +24,18 @@ services:
       - "80:80"
     volumes:
       - ../../source:/var/rails_app
+      - applog:/var/rails_app/log
+      - rubygems:/var/rails_app/vendor
+      - node_modules:/var/rails_app/public/node_modules
     privileged: true
     restart: always
 
 volumes:
   rails_db:
+    driver: 'local'
+  applog:
+    driver: 'local'
+  rubygems:
+    driver: 'local'
+  node_modules:
     driver: 'local'

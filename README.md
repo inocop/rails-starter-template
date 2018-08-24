@@ -91,7 +91,8 @@ docker/rails_prd/docker-compose.ymlの以下パラメータを設定
 * DB_USERNAME
 * DB_PASSWORD
 
-開発環境等で以下コマンドからSECRET_KEY_BASEを生成。
+SECRET_KEY_BASEにはsha512のハッシュ値をセットする。
+開発環境等で以下コマンドからSECRET_KEY_BASEを生成可能。
 ```
 $ bin/rake secret
 ```
