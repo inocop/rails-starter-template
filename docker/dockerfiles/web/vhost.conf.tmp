@@ -2,9 +2,9 @@ NameVirtualHost *:80
 <VirtualHost *:80>
   ServerName localhost.localdomain
   RackEnv ${RAILS_ENV}
-  DocumentRoot /var/rails_app/public
+  DocumentRoot /var/rails_app/current/public
 
-  <Directory /var/rails_app/public>
+  <Directory /var/rails_app/current/public>
     # Relax Apache security settings
     AllowOverride all
     # MultiViews must be turned off

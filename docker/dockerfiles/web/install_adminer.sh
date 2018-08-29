@@ -1,6 +1,8 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 
 set -eux
+
 
 # add db tools
 yum install -y wget unzip php php-mysqli php-mbstring mysql

@@ -1,19 +1,25 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 set -eux
-
 source ./config
 
-git clone --depth 1 --single-branch -b $BRANCH $REPOSITORY rails_app
-# .gitとdeployフォルダは不要なので削除
-rm -rf rails_app/.git deploy
 
-# tar.gzに圧縮して転送 (tar前の情報は含めない)
+# 前処理
+rm -rf rails_app \
+       rails_app.tar.gz
+
+
+git clone --depth 1 --single-branch -b $BRANCH $REPOSITORY rails_app
+rm -rf rails_app/.git \
+       rails_app/deploy
+
+
+# 所有者情報を含まないtar.gzを作成して転送
 tar -zcvf rails_app.tar.gz --no-same-owner --no-same-permissions rails_app
 scp -i ${SECRET_KEY} rails_app.tar.gz ${REMOTE_USER}@${REMOTE_SERVER}:/tmp/
 
-# デプロイタスクのshellをsshで流し込み
-ssh -i ${SECRET_KEY} ${REMOTE_USER}@${REMOTE_SERVER} bash -s < update_app.sh
 
-# 後処理のファイル削除
-rm -rf rails_app rails_app.tar.gz
+# デプロイ
+ssh -i ${SECRET_KEY} ${REMOTE_USER}@${REMOTE_SERVER} \
+       OPTION=$1 \
+       bash < update_app.sh

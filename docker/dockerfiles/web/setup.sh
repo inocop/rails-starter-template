@@ -1,8 +1,11 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 set -eux
 
-cd /var/rails_app
+
+APP_DIR=/var/rails_app/current
+cd ${APP_DIR}
+
 
 ###########################
 #  create project         #
@@ -35,9 +38,8 @@ bundle exec rake db:seed
 # bundle exec rails g devise:i18n:locale ja
 
 
-cd /var/rails_app/public
+cd ${APP_DIR}/public
 npm install
-
 
 
 # puma (rails defautl)

@@ -1,3 +1,10 @@
-/**/vendor/bundle
-/**/node_modules/*
-!/**/node_modules/.keep
+!/**/.keep
+
+source/**/vendor/bundle/*
+source/**/node_modules/*
+source/**/log/*
+source/**/tmp/*
+
+deploy/config
+deploy/rails_app
+deploy/rails_app.tar.gz

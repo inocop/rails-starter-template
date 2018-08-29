@@ -63,23 +63,27 @@ not yet
 
 ## 環境構築(production)
 
-#### Dockerのインストール(CentOS7)
+#### Docker、docker-composeのインストール(CentOS7)
 ```
 $ yum install -y yum-utils device-mapper-persistent-data lvm2
 $ yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 $ yum install -y docker-ce
 $ systemctl enable docker
 $ systemctl start docker
-$ curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
-$ chmod +x /usr/local/bin/docker-compose
+$ curl -L https://github.com/docker/compose/releases/download/1.22.0/docker-compose-$(uname -s)-$(uname -m) -o /usr/bin/docker-compose
+$ chmod +x /usr/bin/docker-compose
 ```
+
+**参考**
+* https://docs.docker.com/install/linux/docker-ce/centos/
+* https://docs.docker.com/compose/install/
 
 
 #### ホスト & コンテナ間の共通ユーザー作成
 
-railsdev(uid:1000)
+railsdev(uid:gid 1000:1000)
 ```
-$ useradd -s /sbin/nologin railsdev
+$ useradd railsdev
 $ usermod -u 1000 railsdev && groupmod -g 1000 railsdev
 ```
 
@@ -101,6 +105,7 @@ $ bin/rake secret
 
 
 #### コンテナビルド
+
 ```
 $ cd /home/railsdev
 $ git clone https://github.com/inocop/docker-ror
@@ -109,6 +114,8 @@ $ docker-compose build
 $ docker-compose up -d
 $ docker exec -it rails_prd_web_1 bash -c 'sh /tmp/setup.sh'
 ```
+
+※メモリ1GB以下の環境だとbuildに失敗するのでswapで対応。
 
 
 #### デプロイ

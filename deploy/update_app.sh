@@ -1,28 +1,107 @@
+#sudo su
 set -eux
 
-sudo su
-cd /home/railsdev
+
+############################
+#  変数定義                #
+############################
+APP_DIR=/home/railsdev/rails_app
+
+declare -A SHARED_DIRS
+SHARED_DIRS["tmp"]="../shared"
+SHARED_DIRS["log"]="../shared"
+SHARED_DIRS["vendor"]="../shared"
+SHARED_DIRS["public/node_modules"]="../../shared"
 
 
-# 転送した圧縮ファイルを展開
-if [ -e rails_app ]; then 
-  mv rails_app rails_app_$(date +%Y%m%d_%H%M%S)
+############################
+# docker exec用の関数      #
+############################
+function docker_exec() {
+  sudo docker exec rails_prd_web_1 bash -l -c "$1"
+}
+
+
+############################
+# deployフォルダ           #
+############################
+mkdir -p ${APP_DIR}/source/current
+mkdir -p ${APP_DIR}/source/shared
+mkdir -p ${APP_DIR}/docker
+
+
+############################
+# rails_app.tar.gzを展開   #
+############################
+rm -rf /tmp/rails_app \
+       ${APP_DIR}/source/deploying \
+       ${APP_DIR}/docker
+
+tar -zxf /tmp/rails_app.tar.gz -C /tmp
+sudo chown -R railsdev:railsdev /tmp/rails_app
+
+# sourceはマイグレーション等が完了するまでdeployingに展開
+mv /tmp/rails_app/source/current ${APP_DIR}/source/deploying
+mv /tmp/rails_app/docker         ${APP_DIR}/docker
+
+# sharedフォルダへのシンボリックリンクを設定
+for key in "${!SHARED_DIRS[@]}"; do
+  mkdir -p   ${APP_DIR}/source/shared/${key}
+  rm    -rf  ${APP_DIR}/source/deploying/${key}
+  ln    -snf ${SHARED_DIRS[$key]}/${key} ${APP_DIR}/source/deploying/${key}
+done
+
+
+############################
+#  dockeビルド(オプション)  #
+############################
+if [ $OPTION = "docker" ]; then
+  pushd ${APP_DIR}/docker/rails_prd/
+    sudo docker-compose build
+    sudo docker-compose up -d
+  popd
 fi
-tar -zxvf /tmp/rails_app.tar.gz
-chown -R railsdev:railsdev rails_app
 
 
-# dockerをリスタートして共有フォルダを再マウント
-cd /home/railsdev/rails_app/docker/rails_prd
-docker-compose restart web
+############################
+#  gem、npmの更新          #
+############################
+docker_exec 'cd /var/rails_app/deploying/public && npm    install'
+docker_exec 'cd /var/rails_app/deploying        && bundle install'
 
 
-# db、パッケージマネージャを更新
-docker exec rails_prd_web_1 bash -c    'cd public && npm install'
-docker exec rails_prd_web_1 bash -l -c 'bundle install'
-docker exec rails_prd_web_1 bash -l -c 'bundle exec rake db:migrate RAILS_ENV=production'
-#docker exec rails_prd_web_1 bash -l -c 'bundle exec rake assets:precompile'
+############################
+#  テスト実行               #
+############################
+docker_exec 'cd /var/rails_app/deploying && bin/rails db:migrate RAILS_ENV=test'
+docker_exec 'cd /var/rails_app/deploying && bin/rails test'
 
 
-# 5世代分残して削除
-ls -t | grep rails_app_ | tail -n+6 | xargs rm -rf
+############################
+#  DBマイグレーション       #
+############################
+docker_exec 'cd /var/rails_app/deploying && bin/rails db:migrate RAILS_ENV=production'
+
+
+############################
+#  source切り替え          #
+############################
+mv ${APP_DIR}/source/current   ${APP_DIR}/source/release_$(date +%Y%m%d_%H%M%S)
+mv ${APP_DIR}/source/deploying ${APP_DIR}/source/current
+
+
+############################
+#  passenger再起動         #
+############################
+docker_exec 'passenger-config restart-app /var/rails_app/current'
+
+
+#############################
+#  sourceを5世代分残して削除  #
+#############################
+pushd ${APP_DIR}/source
+  ls | grep release_ | head -n -5 | xargs rm -rf
+popd
+
+set +x
+echo "Successfully deployed"
