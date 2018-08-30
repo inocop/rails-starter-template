@@ -22,11 +22,16 @@ services:
         - DB_PASSWORD=root
     ports:
       - "8888:80"
+      - "1233:1233"
+      - "3003:3003"
     volumes:
       - ../../source:/var/rails_app
+      - os_log:/var/log
     privileged: true
 
 
 volumes:
   rails_db:
+    driver: 'local'
+  os_log:
     driver: 'local'
