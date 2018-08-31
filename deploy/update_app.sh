@@ -58,7 +58,7 @@ done
 if [ $OPTION = "docker" ]; then
   pushd ${APP_DIR}/docker/rails_prd/
     sudo docker-compose build
-    sudo docker-compose up -d
+    sudo docker-compose up --no-start
   popd
 fi
 
@@ -93,8 +93,10 @@ mv ${APP_DIR}/source/deploying ${APP_DIR}/source/current
 ############################
 #  passenger再起動         #
 ############################
-docker_exec 'passenger-config restart-app /var/rails_app/current'
-
+#docker_exec 'passenger-config restart-app /var/rails_app/current'
+pushd ${APP_DIR}/docker/rails_prd/
+  sudo docker-compose restart
+popd
 
 #############################
 #  sourceを5世代分残して削除  #
