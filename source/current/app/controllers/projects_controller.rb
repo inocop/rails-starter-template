@@ -5,7 +5,7 @@ class ProjectsController < AuthController
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.all
+    @projects = Project.page(params[:page]).per(5)
   end
 
   # GET /projects/1

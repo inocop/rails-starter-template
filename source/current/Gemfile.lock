@@ -196,7 +196,7 @@ DEPENDENCIES
   devise (~> 4.4.3)
   devise-i18n (~> 1.6.4)
   jbuilder (~> 2.5)
-  kaminari (~> 1.1)
+  kaminari (~> 1.1.1)
   listen (>= 3.0.5, < 3.2)
   mysql2 (>= 0.3.18, < 0.6.0)
   puma (~> 3.7)
