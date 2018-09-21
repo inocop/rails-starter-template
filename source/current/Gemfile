@@ -47,8 +47,16 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'devise', '~> 4.4.3'
 gem 'devise-i18n', '~> 1.6.4'
+##### settting devise #####
+# bundle exec rails g devise:install
+# bundle exec rails g controller Dashboard index --skip-assets
+# bundle exec rails g devise User
+# bundle exec rails g devise:views
+# bundle exec rails g devise:i18n:locale ja
+
 gem 'kaminari', '~> 1.1'
 gem 'carrierwave', '~> 1.2.3'
+
 
 group :development do
   gem 'ruby-debug-ide'

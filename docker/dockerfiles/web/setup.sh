@@ -28,16 +28,6 @@ bundle exec rake db:schema:load # or bundle exec rake db:migrate
 bundle exec rake db:seed
 
 
-###########################
-#  settting devise        #
-###########################
-# bundle exec rails g devise:install
-# bundle exec rails g controller Dashboard index --skip-assets
-# bundle exec rails g devise User
-# bundle exec rails g devise:views
-# bundle exec rails g devise:i18n:locale ja
-
-
 cd ${APP_DIR}/public
 npm install
 
