@@ -6,6 +6,7 @@
     "jquery": "^3.3.1",
     "chart.js": "^2.7.2",
     "@fortawesome/fontawesome-free": "latest",
-    "rails-ujs": "5.1.6"
+    "rails-ujs": "5.1.6",
+    "flatpickr": "latest"
   }
 }
