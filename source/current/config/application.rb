@@ -29,6 +29,9 @@ module RailsApp
     #####################
     # add config        #
     #####################
+    # レスポンスヘッダ追加
+    config.action_dispatch.default_headers['X-Download-Options'] = 'noopen'
+
     # 日本語化設定
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s] # config/locales/**/*.ymlもload対象に追加
     config.i18n.default_locale = :ja

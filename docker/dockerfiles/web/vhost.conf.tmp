@@ -40,3 +40,7 @@ Header always unset "X-Powered-By"
 Header always unset "X-Rack-Cache"
 Header always unset "X-Content-Digest"
 Header always unset "X-Runtime"
+
+# Server情報のバージョンを隠す
+ServerSignature Off
+ServerTokens Prod
