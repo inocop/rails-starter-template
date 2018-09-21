@@ -4,6 +4,7 @@ class CreateProjects < ActiveRecord::Migration[5.1]
       t.string :name, :null => false
       t.date   :start_date
       t.date   :end_date
+      t.datetime :deleted_at, default: nil
 
       t.timestamps
     end

@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 20180820153230) do
     t.string "name", null: false
     t.date "start_date"
     t.date "end_date"
+    t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -29,6 +30,7 @@ ActiveRecord::Schema.define(version: 20180820153230) do
     t.date "end_date"
     t.bigint "project_id", null: false
     t.bigint "assigned_user_id", null: false
+    t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -45,9 +47,10 @@ ActiveRecord::Schema.define(version: 20180820153230) do
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
     t.boolean "admin", default: false, null: false
+    t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["email", "deleted_at"], name: "index_users_on_email_and_deleted_at", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
