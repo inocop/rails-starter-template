@@ -1,17 +1,26 @@
-<p>
-  <b><%= t('activerecord.attributes.project.name') %>:</b>
-  <%= @project.name %>
-</p>
- 
-<p>
-  <b><%= t('activerecord.attributes.user.start_date') %>:</b>
-  <%= @project.start_date %>
-</p>
- 
-<p>
-  <b><%= t('activerecord.attributes.user.end_date') %>:</b>
-  <%= @project.end_date %>
-</p>
+<h1>Show Project</h1>
 
-<%= link_to 'Edit', edit_project_path(@project) %> |
-<%= link_to 'Back', projects_path %>
+<div class="form-group row border-bottom">
+  <p class="col-3 col-md-2">
+    <%= t('activerecord.attributes.project.name') %>
+  </p>
+  <p class="col-8"><%= @project.name %></p>
+</div>
+
+<div class="form-group row border-bottom">
+  <p class="col-3 col-md-2">
+    <%= t('activerecord.attributes.project.start_date') %>
+  </p>
+  <p class="col-8"><%= @project.start_date %></p>
+</div>
+
+<div class="form-group row border-bottom">
+  <p class="col-3 col-md-2">
+    <%= t('activerecord.attributes.project.end_date') %>
+  </p>
+  <p class="col-8"><%= @project.end_date %></p>
+</div>
+
+
+<%= link_to 'Edit', edit_project_path(@project), :class => "btn btn-primary" %>
+<%= link_to 'Back', :back, :class => "btn btn-primary ml-3" %>

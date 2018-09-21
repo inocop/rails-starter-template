@@ -11,19 +11,43 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :name %><br />
-    <%= form.text_field :name %>
+  <div class="form-group row">
+    <%= form.label :name, :class => "col-form-label col-md-2" %>
+    <div class="col-md-8">
+      <%= form.text_field :name, :class => "form-control" %>
+    </div>
   </div>
-  <div class="field">
-    <%= form.label :start_date %><br />
-    <%= form.date_field :start_date %>
+  <div class="form-group row">
+    <%= form.label :start_date, :class => "col-form-label col-md-2" %>
+    <div class="col-md-8">
+      <div class="input-group date-by-flatpickr">
+        <%= form.text_field :start_date, :style => "background-color:#fff", :class => "form-control", :data => { :input => "" } %>
+        <div class="input-group-append" data-toggle>
+          <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+        </div>
+        <div class="input-group-append" data-clear>
+          <span class="input-group-text"><i class="fas fa-times"></i></span>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="field">
-    <%= form.label :end_date %><br />
-    <%= form.date_field :end_date %>
+  <div class="form-group row">
+    <%= form.label :end_date, :class => "col-form-label col-md-2" %>
+    <div class="col-md-8">
+      <div class="input-group date-by-flatpickr">
+        <%= form.text_field :end_date, :style => "background-color:#fff", :class => "form-control", :data => { :input => "" } %>
+        <div class="input-group-append" data-toggle>
+          <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+        </div>
+        <div class="input-group-append" data-clear>
+          <span class="input-group-text"><i class="fas fa-times"></i></span>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="actions">
-    <%= form.submit %>
+
+  <div class="actions mt-4">
+    <%= form.submit :class => "btn btn-primary" %>
+    <%= link_to '戻る', :back, :class => "ml-3 btn btn-primary" %>
   </div>
 <% end %>

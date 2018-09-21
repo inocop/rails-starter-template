@@ -11,7 +11,8 @@
 
 <%# load css %>
 <link rel="stylesheet" media="all" href="/node_modules/bootstrap/dist/css/bootstrap.css">
-<link rel="stylesheet" media="all" href="/node_modules/@fortawesome/fontawesome-free/css/fontawesome.css">
+<link rel="stylesheet" media="all" href="/node_modules/@fortawesome/fontawesome-free/css/all.css">
+<link rel="stylesheet" media="all" href="/node_modules/flatpickr/dist/flatpickr.css">
 <%= stylesheet_link_tag 'application', media: 'all' %>
 <%= yield(:head_css) if content_for?(:head_css) %>
 
@@ -20,5 +21,25 @@
 <script src="/node_modules/jquery/dist/jquery.js"></script>
 <script src="/node_modules/bootstrap/dist/js/bootstrap.js"></script>
 <script src="/node_modules/rails-ujs/lib/assets/compiled/rails-ujs.js"></script>
+<script src="/node_modules/flatpickr/dist/flatpickr.js"></script>
+<script src="/node_modules/flatpickr/dist/l10n/ja.js"></script>
+<script>
+  // flatpickrのローカライズ
+  flatpickr.localize(flatpickr.l10ns.ja);
+  $(document).ready(function(){
+    flatpickr(".date-by-flatpickr",
+              {
+                wrap: true
+              });
+    flatpickr(".time-by-flatpickr",
+              {
+                wrap: true,
+                enableTime: true,
+                noCalendar: true,
+                time_24hr: true
+              });
+  });
+</script>
+
 <%= javascript_include_tag 'application' %>
 <%= yield(:head_js) if content_for?(:head_js) %>
