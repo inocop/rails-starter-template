@@ -63,7 +63,7 @@
       </div>
     </nav>
 
-    <main role="main" class="container-fluent">
+    <main role="main" class="container-fluid">
       <div class="row">
         <!-- sidemenu -->
         <div class="col-md-3">
@@ -88,25 +88,23 @@
 
         <!-- main content -->
         <div class="col-md-9">
-          <div>
-            <% if notice.present? %>
-            <p class="alert alert-info alert-dismissible fade show" role="alert">
-              <span><%= notice %></span>
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </p>
-            <% end %>
+          <% if notice.present? %>
+          <p class="alert alert-info alert-dismissible fade show" role="alert">
+            <span><%= notice %></span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </p>
+          <% end %>
 
-            <% if alert.present? %>
-            <p class="alert alert-danger" role="alert">
-              <span><%= alert %></span>
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </p>
-            <% end %>
-          </div>
+          <% if alert.present? %>
+          <p class="alert alert-danger" role="alert">
+            <span><%= alert %></span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </p>
+          <% end %>
 
           <%= yield %>
         </div>
