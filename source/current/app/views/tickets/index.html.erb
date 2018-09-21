@@ -21,7 +21,7 @@
           <td><%= ticket.name %></td>
           <td><%= ticket.comment %></td>
           <td><%= Ticket::STATUS_LIST[ticket.status] %></td>
-          <td><%= ticket.work_time %></td>
+          <td><%= l(ticket.work_time, :format => :time) if ticket.work_time.present? %></td>
           <td><%= ticket.start_date %></td>
           <td><%= ticket.end_date %></td>
           <td><%= ticket.user.email %></td>
@@ -35,4 +35,4 @@
 </div>
 <br>
 
-<%= link_to 'New Ticket', new_ticket_path %>
+<%= link_to 'New Ticket', new_ticket_path, class: "btn btn-primary" %>
