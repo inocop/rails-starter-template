@@ -32,6 +32,10 @@ module RailsApp
     # config.x -> カスタム設定用にrailsが用意してくれている名前空間
     config.x.myconf = ActiveSupport::InheritableOptions.new(Rails.application.config_for(:myconf).symbolize_keys)
 
+    # sendfileでの送信をwebサーバで処理する
+    config.action_dispatch.x_sendfile_header = 'X-Sendfile' # for Apache
+    config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for NGINX
+
     # action_mailer内でurlヘルパー(link_toなど)使用時のデフォルトのドメイン名
     config.action_mailer.default_url_options = config.x.myconf.default_url_options
 
