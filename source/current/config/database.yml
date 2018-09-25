@@ -12,21 +12,26 @@
 default: &default
   adapter: mysql2
   encoding: utf8
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: <%= ENV.fetch("DB_USERNAME") { "root" } %>
-  password: <%= ENV.fetch("DB_PASSWORD") { "root" } %>
-  host: <%= ENV.fetch("DB_HOST") { "db" } %>
+  #pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  #username: <%= ENV.fetch("DB_USERNAME") { "root" } %>
+  #password: <%= ENV.fetch("DB_PASSWORD") { "root" } %>
+  #host: <%= ENV.fetch("DB_HOST") { "db" } %>
+  pool:     <%= Rails.application.config.x.myconf.db_max_threads %>
+  username: <%= Rails.application.config.x.myconf.db_username %>
+  password: <%= Rails.application.config.x.myconf.db_password %>
+  host:     <%= Rails.application.config.x.myconf.db_host %>
+  database: <%= Rails.application.config.x.myconf.db_database %>
 
 development:
   <<: *default
-  database: rails_app_dev
+  #database: rails_app_dev
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: rails_app_test
+  #database: rails_app_test
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -49,4 +54,4 @@ test:
 #
 production:
   <<: *default
-  database: rails_app_prd
+  #database: rails_app_prd

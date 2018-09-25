@@ -16,10 +16,6 @@ services:
       dockerfile: "Dockerfile_centos7"
       args:
         - RAILS_ENV=development
-        - SECRET_KEY_BASE=xxxyyyzzz
-        - DB_HOST=db
-        - DB_USERNAME=root
-        - DB_PASSWORD=root
     ports:
       - "8888:80"
       - "1233:1233"

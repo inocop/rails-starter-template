@@ -4,6 +4,7 @@ source/**/vendor/bundle/*
 source/**/node_modules/*
 source/**/log/*
 source/**/tmp/*
+source/**/config/myconf.yml
 
 deploy/config
 deploy/rails_app

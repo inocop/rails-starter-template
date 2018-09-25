@@ -66,22 +66,10 @@ RUN ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 
 # get build-arg
 ARG RAILS_ENV
-ARG SECRET_KEY_BASE
-ARG DB_HOST
-ARG DB_USERNAME
-ARG DB_PASSWORD
-
-ENV RAILS_ENV       ${RAILS_ENV}
-ENV SECRET_KEY_BASE ${SECRET_KEY_BASE}
-
+ENV RAILS_ENV ${RAILS_ENV}
 
 # set env for apache
-RUN echo "RAILS_ENV=${RAILS_ENV}"             >> /etc/sysconfig/httpd \
-&&  echo "SECRET_KEY_BASE=${SECRET_KEY_BASE}" >> /etc/sysconfig/httpd \
-&&  echo "DB_HOST=${DB_HOST}"                 >> /etc/sysconfig/httpd \
-&&  echo "DB_USERNAME=${DB_USERNAME}"         >> /etc/sysconfig/httpd \
-&&  echo "DB_PASSWORD=${DB_PASSWORD}"         >> /etc/sysconfig/httpd
-
+RUN echo "RAILS_ENV=${RAILS_ENV}" >> /etc/sysconfig/httpd
 
 # set conf for apache
 ADD vhost.conf.tmp ./
@@ -107,7 +95,7 @@ RUN useradd -s /sbin/nologin railsdev \
 
 
 ADD setup.sh /tmp/setup.sh
-WORKDIR /var/rails_app
-
-
 CMD /sbin/init
+
+
+WORKDIR /var/rails_app

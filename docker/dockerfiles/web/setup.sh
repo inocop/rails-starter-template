@@ -16,8 +16,20 @@ cd ${APP_DIR}
 ###########################
 #  change file            #
 ###########################
-# config/database.yml -> use env params
-
+# edit config/database.yml
+#        use myconf.yml
+#
+# edit config/secrets.yml
+#        use myconf.yml
+#
+# edit config/application.rb
+#        use myconf.yml
+#
+# edit config/environments/development.rb
+#        config.file_watcher: ActiveSupport::EventedFileUpdateChecker -> ActiveSupport::FileUpdateChecker（Dockerの共有フォルダでファイル更新を検出するため）
+#
+# edit config/environments/production.rb
+#        config.i18n.fallbacks: コメントアウト（application.rbで設定）
 
 bundle config --local build.nokogiri --use-system-libraries
 bundle install --path vendor/bundle

@@ -1,0 +1,28 @@
+default: &default
+  secret_key_base: xxxyyyzzz
+  db_max_threads: 5
+  db_username: root
+  db_password: root
+  db_host: db
+  db_database: rails_app_dev
+  default_url_options:
+    protocol: http
+    host: localhost
+    port: 8888
+  smtp_settings:
+    host: localhost
+    port: 25
+  mail_from: from@example.com
+
+production:
+  <<: *default
+  #secret_key_base:
+  db_database: rails_app_prd
+
+development:
+  <<: *default
+  db_database: rails_app_dev
+
+test:
+  <<: *default
+  db_database: rails_app_test

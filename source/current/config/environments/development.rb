@@ -49,11 +49,4 @@ Rails.application.configure do
   #config.file_watcher = ActiveSupport::EventedFileUpdateChecker
   config.file_watcher  = ActiveSupport::FileUpdateChecker  # Docker等の共有フォルダの場合、EventedFileUpdateCheckerでファイル更新を検出できないため
   #config.reload_classes_only_on_change = false            # 更新が無くてもクラスファイルをreloadする(上記の設定があればたぶん不要)
-
-
-  #####################
-  # add config        #
-  #####################
-  # action_mailer内でurlヘルパー(link_toなど)使用時のデフォルトのドメイン名
-  config.action_mailer.default_url_options = { host: 'localhost', port: 8888 }
 end
