@@ -35,6 +35,10 @@ module RailsApp
     # action_mailer内でurlヘルパー(link_toなど)使用時のデフォルトのドメイン名
     config.action_mailer.default_url_options = config.x.myconf.default_url_options
 
+    # メールサーバ設定(config/environmensで個別に設定した方が良いかも)
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = config.x.myconf.smtp_settings
+
     # レスポンスヘッダ追加
     config.action_dispatch.default_headers['X-Download-Options'] = 'noopen'
 

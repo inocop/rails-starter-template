@@ -16,12 +16,31 @@ default: &default
 
 production:
   <<: *default
-  #secret_key_base:
+  # must change
+  secret_key_base: xxxyyyzzz
   db_database: rails_app_prd
+  # use gmail（gmail側で安全性の低いアプリからのアクセスを許可）
+  # https://myaccount.google.com/lesssecureapps
+  smtp_settings:
+    enable_starttls_auto: true
+    address: smtp.gmail.com
+    port: 587
+    domain: smtp.gmail.com
+    authentication: plain
+    user_name: xxx
+    password: xxx
 
 development:
   <<: *default
   db_database: rails_app_dev
+  # use mailtrap
+  smtp_settings:
+    user_name: xxx
+    password: xxx
+    address: smtp.mailtrap.io
+    domain: smtp.mailtrap.io
+    port: 2525
+    authentication: cram_md5
 
 test:
   <<: *default
