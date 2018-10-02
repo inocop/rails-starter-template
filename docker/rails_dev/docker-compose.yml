@@ -26,6 +26,11 @@ services:
     privileged: true
 
 
+  mail: # 開発環境用のメールサーバ
+    image: sj26/mailcatcher
+    ports:
+      - "1080:1080"
+
 volumes:
   rails_db:
     driver: 'local'
