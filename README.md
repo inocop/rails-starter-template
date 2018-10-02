@@ -79,6 +79,10 @@ http://localhost:8888
 
 http://localhost:8888/tools
 
+#### メールツール(MailCatcher)
+
+http://localhost:1080
+
 
 #### デバッグ
 
