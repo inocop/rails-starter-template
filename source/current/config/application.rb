@@ -30,7 +30,7 @@ module RailsApp
     # add config        #
     #####################
     # config.x -> カスタム設定用にrailsが用意してくれている名前空間
-    config.x.myconf = ActiveSupport::InheritableOptions.new(Rails.application.config_for(:myconf).symbolize_keys)
+    config.x.myconf = ActiveSupport::InheritableOptions.new(Rails.application.config_for(:myconf).deep_symbolize_keys)
 
     # sendfileでの送信をwebサーバで処理する
     config.action_dispatch.x_sendfile_header = 'X-Sendfile' # for Apache
@@ -42,6 +42,7 @@ module RailsApp
     # メールサーバ設定(config/environmensで個別に設定した方が良いかも)
     config.action_mailer.delivery_method = :smtp
     config.action_mailer.smtp_settings = config.x.myconf.smtp_settings
+    config.action_mailer.raise_delivery_errors = true
 
     # レスポンスヘッダ追加
     config.action_dispatch.default_headers['X-Download-Options'] = 'noopen'
