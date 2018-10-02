@@ -5,43 +5,42 @@ default: &default
   db_password: root
   db_host: db
   db_database: rails_app_dev
-  default_url_options:
-    protocol: http
-    host: localhost
-    port: 8888
-  smtp_settings:
-    host: localhost
-    port: 25
-  mail_from: from@example.com
+
 
 production:
   <<: *default
-  # must change
-  secret_key_base: xxxyyyzzz
+  secret_key_base: xxxyyyzzz # must change
   db_database: rails_app_prd
-  # use gmail（gmail側で安全性の低いアプリからのアクセスを許可）
-  # https://myaccount.google.com/lesssecureapps
+  # use gmail(gmail側で安全性の低いアプリからのアクセスを許可) https://myaccount.google.com/lesssecureapps
   smtp_settings:
     enable_starttls_auto: true
+    domain: smtp.gmail.com
     address: smtp.gmail.com
     port: 587
-    domain: smtp.gmail.com
     authentication: plain
     user_name: xxx
     password: xxx
+  mail_from: from@example.com
+  default_url_options:
+    protocol: https
+    host: xxx # production domain
+
 
 development:
   <<: *default
   db_database: rails_app_dev
-  # use mailtrap
+  # use MailCatcher
   smtp_settings:
-    user_name: xxx
-    password: xxx
-    address: smtp.mailtrap.io
-    domain: smtp.mailtrap.io
-    port: 2525
-    authentication: cram_md5
+    address: mail
+    domain: mail
+    port: 1025
+  mail_from: from@example.dev.com
+  default_url_options:
+    protocol: http
+    host: localhost
+
 
 test:
   <<: *default
   db_database: rails_app_test
+  mail_from: from@example.test.com
