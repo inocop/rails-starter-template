@@ -8,11 +8,11 @@
 
 
 # 初期ユーザー
-User.create!(:email => "admin@example.com", :password => "password", admin: true)
+User.create!(:user_name => "管理者", :email => "admin@example.com", :password => "password", admin: true)
 # 開発用seed
 if Rails.env.development?
-  User.create!(:email => "user1@example.com", :password => "password")
-  User.create!(:email => "user2@example.com", :password => "password")
-  User.create!(:email => "user3@example.com", :password => "password")
+  User.create!(:user_name => "ユーザー１", :email => "user1@example.com", :password => "password")
+  User.create!(:user_name => "ユーザー２", :email => "user2@example.com", :password => "password")
+  User.create!(:user_name => "ユーザー３", :email => "user3@example.com", :password => "password")
 end
 

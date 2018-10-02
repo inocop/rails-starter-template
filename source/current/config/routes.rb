@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
-  devise_for :users
+  devise_for :users,
+             :controllers => { :registrations => 'users/registrations' }
 
   # === deviseのルーティング制限
   # devise_for :users, skip: :all
