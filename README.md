@@ -122,11 +122,9 @@ $ usermod -u 1000 railsdev && groupmod -g 1000 railsdev
 
 #### 設定ファイル編集
 
-developmentと同様  
-※secret_key_baseの値はdevelopmentと同じにしないこと
+developmentと同様。
 
-SECRET_KEY_BASEにはsha512のハッシュ値をセットする。  
-開発環境等で以下コマンドからSECRET_KEY_BASEを生成可能。
+以下コマンドでハッシュ値(sha512)を生成してsecret_key_baseを変更。
 ```
 $ bin/rake secret
 ```
