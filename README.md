@@ -13,9 +13,9 @@
 #### 追加ライブラリ
 
 **gem**
-- rails 5.1.6
-- devise 4.4.3
-- devise-i18n 1.6.4
+- rails
+- devise
+- devise-i18n
 - kaminari
 - carrierwave
 - delayed_job
@@ -25,10 +25,10 @@
 - debase
 
 **npm**
-- bootstrap 4.1.3
-- jquery 3.3.1
-- chart.js 2.7.2
-- rails-ujs 5.1.6
+- bootstrap
+- jquery
+- chart.js
+- rails-ujs
 - flatpickr
 - fontawesome-free
 
@@ -122,10 +122,10 @@ $ usermod -u 1000 railsdev && groupmod -g 1000 railsdev
 
 #### 設定ファイル編集
 
-developmentと同様
+developmentと同様  
 ※secret_key_baseの値はdevelopmentと同じにしないこと
 
-SECRET_KEY_BASEにはsha512のハッシュ値をセットする。
+SECRET_KEY_BASEにはsha512のハッシュ値をセットする。  
 開発環境等で以下コマンドからSECRET_KEY_BASEを生成可能。
 ```
 $ bin/rake secret
