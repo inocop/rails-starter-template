@@ -35,7 +35,8 @@ RUN yum install -y sudo \
                    mysql-devel \
                    git \
                    nodejs \
-                   gettext
+                   gettext \
+                   ImageMagick
 
 
 # ruby install
