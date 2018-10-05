@@ -37,6 +37,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.1]
       ## Add column   ##
       ##################
       t.string   :user_name,  null: false
+      t.string   :user_image_path
       t.boolean  :admin,      default: false, null: false
       t.datetime :deleted_at, default: nil
 

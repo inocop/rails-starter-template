@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 20180820153230) do
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
     t.string "user_name", null: false
+    t.string "user_image_path"
     t.boolean "admin", default: false, null: false
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
