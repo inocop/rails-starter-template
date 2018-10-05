@@ -93,7 +93,7 @@
         <!-- sidemenu -->
         <div class="col-md-3">
           <!-- select project -->
-          <div class="card mb-3">
+          <div class="card mb-3 <%= "d-none" if defined?(hidden_project) %>">
             <h5 class="card-header">Project</h5>
             <div class="card-body">
               <%= form_tag({:controller => '/api', :action => 'select_project'}, { :id => 'select_project_form'}) do %>
@@ -115,19 +115,19 @@
         <div class="col-md-9">
           <% if notice.present? %>
           <p class="alert alert-info alert-dismissible fade show" role="alert">
-            <span><%= notice %></span>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
+            <%= simple_format(notice, {}, {wrapper_tag: "span"}) %>
           </p>
           <% end %>
 
           <% if alert.present? %>
           <p class="alert alert-danger" role="alert">
-            <span><%= alert %></span>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
+            <%= simple_format(alert, {}, {wrapper_tag: "span"}) %>
           </p>
           <% end %>
 

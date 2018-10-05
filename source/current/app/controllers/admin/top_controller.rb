@@ -1,5 +1,5 @@
 class Admin::TopController < AuthController
-  layout "admin"
+  layout "admin/admin_base"
 
   before_action :authenticate_admin_user!
 
