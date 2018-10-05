@@ -38,7 +38,7 @@ development:
   default_url_options:
     protocol: http
     host: localhost
-
+    port: 8888
 
 test:
   <<: *default
