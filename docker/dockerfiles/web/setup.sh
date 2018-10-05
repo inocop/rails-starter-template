@@ -24,19 +24,15 @@ cd ${APP_DIR}
 #
 # edit config/application.rb
 #        use myconf.yml
-#
-# edit config/environments/development.rb
-#        config.file_watcher: ActiveSupport::EventedFileUpdateChecker -> ActiveSupport::FileUpdateChecker（Dockerの共有フォルダでファイル更新を検出するため）
-#
-# edit config/environments/production.rb
-#        config.i18n.fallbacks: コメントアウト（application.rbで設定）
 
 bundle config --local build.nokogiri --use-system-libraries
 bundle install --path vendor/bundle
 
-bundle exec rake db:create:all
+bundle exec rake db:create RAILS_ENV=production
+bundle exec rake db:create RAILS_ENV=development
+bundle exec rake db:create RAILS_ENV=test
 bundle exec rake db:environment:set RAILS_ENV=$RAILS_ENV
-bundle exec rake db:schema:load # or bundle exec rake db:migrate
+bundle exec rake db:schema:load # or bundle exec rake db:migrate:reset
 bundle exec rake db:seed
 
 
@@ -44,9 +40,10 @@ cd ${APP_DIR}/public
 npm install
 
 
+# passenger
+$ passenger-config restart-app
+
+
 # puma (rails defautl)
 # $ cd /var/rails_app
 # $ bundle exec rails s -b 0.0.0.0 -p 8888
-
-# passenger
-# $ passenger-config restart-app
