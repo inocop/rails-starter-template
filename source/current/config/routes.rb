@@ -15,9 +15,9 @@ Rails.application.routes.draw do
 
   namespace :users do
     get  'profile/edit', :to => 'profile#edit'
-    post 'profile/update', :to => 'profile#update'
+    post 'profile/edit', :to => 'profile#update'
     get  'profile/edit_password', :to => 'profile#edit_password'
-    post 'profile/update_password', :to => 'profile#update_password'
+    post 'profile/edit_password', :to => 'profile#update_password'
   end
 
   post 'api/select_project', :to => 'api#select_project'
