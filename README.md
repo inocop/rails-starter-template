@@ -44,22 +44,11 @@
 
 ## 環境構築(development)
 
-#### 設定ファイル編集
-```
-$ git clone https://github.com/inocop/docker-ror
-$ cd docker-ror/source/current/config
-$ cp myconf.yml.sample myconf.yml
-
-# myconf.ymlの値を編集
-```
-
 #### コンテナビルド
 
 ```
-$ cd docker-ror/docker/rails_dev
-$ docker-compose build
-$ docker-compose up -d
-$ docker exec -it rails_dev_web_1 bash -c 'sh /tmp/setup.sh'
+$ git clone https://github.com/inocop/docker-ror
+$ ./build.sh
 ```
 
 #### アクセス
@@ -122,12 +111,15 @@ $ usermod -u 1000 railsdev && groupmod -g 1000 railsdev
 
 #### 設定ファイル編集
 
-developmentと同様。
+myconf.ymlのproductionを変更
 
-以下コマンドでハッシュ値(sha512)を生成してsecret_key_baseを変更。
-```
-$ bin/rake secret
-```
+* ドメインやメールサーバの設定など。
+* secret_key_baseは必須。
+
+  以下コマンドでハッシュ値(sha512)を生成
+  ```
+  $ bin/rake secret
+  ```
 
 #### コンテナビルド
 
@@ -137,7 +129,7 @@ $ git clone https://github.com/inocop/docker-ror rails_app
 $ cd rails_app/docker/rails_prd
 $ docker-compose build
 $ docker-compose up -d
-$ docker exec -it rails_prd_web_1 bash -c 'sh /tmp/setup.sh'
+$ docker exec -it rails_prd_web_1 bash setup.sh
 ```
 
 ※メモリ1GB以下の環境だとbuildに失敗するのでswapで対応。

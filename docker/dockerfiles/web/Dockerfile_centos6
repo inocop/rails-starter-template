@@ -101,7 +101,6 @@ RUN sed -i.org -e "s|secure_path =.*|&:/usr/local/bin|" /etc/sudoers \
 &&  echo "railsdev ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 
-ADD setup.sh /tmp/setup.sh
 CMD service httpd start \
 &&  service rsyslog start \
 &&  service crond start \

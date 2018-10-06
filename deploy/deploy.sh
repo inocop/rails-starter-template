@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 set -eux
+cd `dirname $0`
 source ./config
 
 
@@ -12,6 +13,10 @@ rm -rf rails_app \
 git clone --depth 1 --single-branch -b $BRANCH $REPOSITORY rails_app
 rm -rf rails_app/.git \
        rails_app/deploy
+
+
+# 本番用のmyconf.ymlをセット
+cp $MYCONF_YML rails_app/source/current/config/myconf.yml
 
 
 # 所有者情報を含まないtar.gzを作成して転送

@@ -95,7 +95,6 @@ RUN useradd -s /sbin/nologin railsdev \
 &&  groupmod -g 1000 railsdev
 
 
-ADD setup.sh /tmp/setup.sh
 CMD /sbin/init
 
 

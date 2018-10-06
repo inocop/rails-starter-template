@@ -1,5 +1,15 @@
 #!/usr/bin/env bash
 
+
+echo "Reset database"
+read -p "OK? [y/N]: " answer
+
+if [[ $answer != [yY] ]]; then
+  echo "Interruption"
+  exit
+fi
+
+
 set -eux
 
 
