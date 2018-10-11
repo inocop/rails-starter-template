@@ -19,7 +19,7 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ../../source:/var/rails_app
+      - ../../source:/var/www/app
       - os_log:/var/log
     privileged: true
     restart: always

@@ -98,4 +98,4 @@ RUN useradd -s /sbin/nologin railsdev \
 CMD /sbin/init
 
 
-WORKDIR /var/rails_app
+WORKDIR /var/www/app

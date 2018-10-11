@@ -3,8 +3,12 @@
 set -eux
 cd $(dirname $0)
 
-cp -i ../../source/current/config/myconf.yml.sample \
-      ../../source/current/config/myconf.yml
+
+MYCONF_YML="../../source/rails_app/config/myconf.yml"
+if [ ! -f $MYCONF_YML ]; then
+  cp "${MYCONF_YML}.sample" $MYCONF_YML
+fi
+
 
 docker-compose build
 docker-compose up -d

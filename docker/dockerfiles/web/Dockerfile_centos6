@@ -108,4 +108,4 @@ CMD service httpd start \
 
 
 USER railsdev
-WORKDIR /var/rails_app
+WORKDIR /var/www/app

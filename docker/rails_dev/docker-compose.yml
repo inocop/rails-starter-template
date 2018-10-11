@@ -21,7 +21,7 @@ services:
       - "1233:1233"
       - "3003:3003"
     volumes:
-      - ../../source:/var/rails_app
+      - ../../source:/var/www/app
       - os_log:/var/log
     privileged: true
 

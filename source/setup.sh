@@ -13,7 +13,7 @@ fi
 set -eux
 
 
-APP_DIR=/var/rails_app/current
+APP_DIR=/var/www/app/rails_app
 cd ${APP_DIR}
 
 
@@ -55,5 +55,5 @@ $ passenger-config restart-app
 
 
 # puma (rails defautl)
-# $ cd /var/rails_app
+# $ cd $APP_DIR
 # $ bundle exec rails s -b 0.0.0.0 -p 8888
