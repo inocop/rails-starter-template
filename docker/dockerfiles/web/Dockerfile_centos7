@@ -95,7 +95,16 @@ RUN useradd -s /sbin/nologin railsdev \
 &&  groupmod -g 1000 railsdev
 
 
+# === node_app
+# for chromium
+RUN yum install -y gtk3 \
+                   libXcomposite-devel \
+                   libXScrnSaver \
+                   libXss \
+                   alsa-lib-devel-1.1.4.1-2.el7 \
+                   \ # ja font
+                   ipa-gothic-fonts \
+                   ipa-mincho-fonts
+
 CMD /sbin/init
-
-
 WORKDIR /var/www/app
