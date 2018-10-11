@@ -1,0 +1,13 @@
+ja:
+  text:
+    action:
+      new: 新規作成
+      edit: 編集
+      show: 表示
+      create: 登録
+      update: 更新
+      delete: 削除
+      login: ログイン
+      logout: ログアウト
+    modal:
+      close: 閉じる

@@ -1,6 +1,0 @@
-ja:
-  projects: # app/views/projects
-    index:  # app/views/projects/index.html.erb
-      title: "プロジェクト一覧"
-    form:  # app/views/_form.html.erb
-      error_message: "プロジェクトの保存に失敗しました。"

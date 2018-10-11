@@ -2,42 +2,42 @@
 
 <div class="form-group row border-bottom">
   <p class="col-3 col-md-2">
-    <%= t('activerecord.attributes.ticket.name') %>
+    <%= t('.name') %>
   </p>
   <p class="col-8"><%= @ticket.name %></p>
 </div>
 
 <div class="form-group row border-bottom">
   <p class="col-3 col-md-2">
-    <%= t('activerecord.attributes.ticket.comment') %>
+    <%= t('.comment') %>
   </p>
   <p class="col-8"><%= @ticket.comment %></p>
 </div>
 
 <div class="form-group row border-bottom">
   <p class="col-3 col-md-2">
-    <%= t('activerecord.attributes.ticket.status') %>
+    <%= t('.status') %>
   </p>
   <p class="col-8"><%= Ticket::STATUS_LIST[@ticket.status] %></p>
 </div>
 
 <div class="form-group row border-bottom">
   <p class="col-3 col-md-2">
-    <%= t('activerecord.attributes.ticket.work_time') %>
+    <%= t('.work_time') %>
   </p>
   <p class="col-8"><%= l(@ticket.work_time, :format => :time) if @ticket.work_time.present? %></p>
 </div>
 
 <div class="form-group row border-bottom">
   <p class="col-3 col-md-2">
-    <%= t('activerecord.attributes.ticket.start_date') %>
+    <%= t('.start_date') %>
   </p>
   <p class="col-8"><%= @ticket.start_date %></p>
 </div>
 
 <div class="form-group row border-bottom">
   <p class="col-3 col-md-2">
-    <%= t('activerecord.attributes.ticket.end_date') %>
+    <%= t('.end_date') %>
   </p>
   <p class="col-8"><%= @ticket.end_date %></p>
 </div>

@@ -1,17 +1,18 @@
 ja:
   activerecord:
     models:
-      project: "プロジェクト"
       ticket: "チケット"
     attributes:
-      project:
-        name: "プロジェクト名"
-        start_date: "プロジェクト開始日"
-        end_date: "プロジェクト終了日"
-      ticket:
+      ticket: &item_name
         name: "チケット名"
         comment: "内容"
         status: "ステータス"
         work_time: "作業時間"
         start_date: "着手日"
         end_date: "完了日"
+  tickets:
+    index:
+      <<: *item_name
+      title: "チケット一覧"
+    form:
+      error_message: "チケットの保存に失敗しました。"

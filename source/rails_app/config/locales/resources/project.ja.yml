@@ -1,0 +1,16 @@
+ja:
+  activerecord:
+    models:
+      project: "プロジェクト"
+    attributes:
+      project: &item_name
+        name: "プロジェクト名"
+        start_date: "プロジェクト開始日"
+        end_date: "プロジェクト終了日"
+  # app/views/projects
+  projects: 
+    index:  # app/views/projects/index.html.erb
+      <<: *item_name
+      title: "プロジェクト一覧"
+    form:  # app/views/_form.html.erb
+      error_message: "プロジェクトの保存に失敗しました。"
