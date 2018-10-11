@@ -17,34 +17,9 @@
       <%= form.text_field :name, :class => "form-control" %>
     </div>
   </div>
-  <div class="form-group row">
-    <%= form.label :start_date, :class => "col-form-label col-md-2" %>
-    <div class="col-md-8">
-      <div class="input-group date-by-flatpickr">
-        <%= form.text_field :start_date, :style => "background-color:#fff", :class => "form-control", :data => { :input => "" } %>
-        <div class="input-group-append" data-toggle>
-          <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-        </div>
-        <div class="input-group-append" data-clear>
-          <span class="input-group-text"><i class="fas fa-times"></i></span>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="form-group row">
-    <%= form.label :end_date, :class => "col-form-label col-md-2" %>
-    <div class="col-md-8">
-      <div class="input-group date-by-flatpickr">
-        <%= form.text_field :end_date, :style => "background-color:#fff", :class => "form-control", :data => { :input => "" } %>
-        <div class="input-group-append" data-toggle>
-          <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-        </div>
-        <div class="input-group-append" data-clear>
-          <span class="input-group-text"><i class="fas fa-times"></i></span>
-        </div>
-      </div>
-    </div>
-  </div>
+
+   <%= render(partial: "template_parts/input/input_date", locals: {form: form, field_name: :start_date, field_label: :start_date}) %>
+   <%= render(partial: "template_parts/input/input_date", locals: {form: form, field_name: :end_date,   field_label: :end_date}) %>
 
   <div class="actions mt-4">
     <%= form.submit :class => "btn btn-primary" %>

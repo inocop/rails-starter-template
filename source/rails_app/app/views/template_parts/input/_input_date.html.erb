@@ -1,0 +1,21 @@
+<%
+# 日付け選択
+# @params form        [form helper]
+# @params field_name  [string]
+# @params field_label [string]
+%>
+
+<div class="form-group row">
+  <%= form.label(field_label, :class => "col-form-label col-md-2") %>
+  <div class="col-md-8">
+    <div class="input-group date-by-flatpickr">
+      <%= form.text_field(field_name, :style => "background-color:#fff", :class => "form-control", :data => { :input => "" }) %>
+      <div class="input-group-append" data-toggle>
+        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+      </div>
+      <div class="input-group-append" data-clear>
+        <span class="input-group-text"><i class="fas fa-times"></i></span>
+      </div>
+    </div>
+  </div>
+</div>
