@@ -7,7 +7,7 @@ class Users::ProfileController < AuthController
   def update
     @user = User.find_by_id(current_user.id)
     
-    if @user.update_attributes(profile_params)
+    if @user.update(profile_params)
       flash[:notice] = 'Profile was successfully updated.'
       redirect_to action: :edit
     else
