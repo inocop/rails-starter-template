@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 
-echo "Reset database"
+echo -e "\nReset database"
 read -p "OK? [y/N]: " answer
 
 if [[ $answer != [yY] ]]; then
@@ -41,7 +41,7 @@ bundle install --path vendor/bundle
 bundle exec rake db:create RAILS_ENV=production
 bundle exec rake db:create RAILS_ENV=development
 bundle exec rake db:create RAILS_ENV=test
-bundle exec rake db:environment:set RAILS_ENV=$RAILS_ENV
+bundle exec rake db:environment:set RAILS_ENV=${RAILS_ENV}
 bundle exec rake db:schema:load # or bundle exec rake db:migrate:reset
 bundle exec rake db:seed
 
@@ -54,6 +54,6 @@ npm install
 $ passenger-config restart-app
 
 
-# puma (rails defautl)
-# $ cd $APP_DIR
+# puma
+# $ cd ${APP_DIR}
 # $ bundle exec rails s -b 0.0.0.0 -p 8888

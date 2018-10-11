@@ -8,10 +8,10 @@
       "name": "Listen for rdebug-ide",
       "type": "Ruby",
       "request": "attach",
-      "cwd": "${workspaceRoot}/source/current",
+      "cwd": "${workspaceRoot}/source/rails_app",
       "remoteHost": "127.0.0.1",
       "remotePort": "1233",
-      "remoteWorkspaceRoot": "/var/rails_app/current"
+      "remoteWorkspaceRoot": "/var/www/app/rails_app"
     }
   ]
 }

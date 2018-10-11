@@ -36,11 +36,8 @@
 ## アプリ名
 
 アプリ名を変更する場合は以下を編集
-- docker-ror/source/current/config/application.rb
+- docker-ror/source/rails_app/config/application.rb
   - module RailsApp -> module XxxYyy
-- docker-ror/docker/  （コンテナ名が重複する場合）
-  - rails_dev/ -> xxx_dev/
-  - rails_prd/ -> xxx_prd/
 
 ## 環境構築(development)
 
@@ -48,6 +45,7 @@
 
 ```
 $ git clone https://github.com/inocop/docker-ror
+$ cd docker-ror/docker/rails_dev
 $ ./build.sh
 ```
 
@@ -111,7 +109,7 @@ $ usermod -u 1000 railsdev && groupmod -g 1000 railsdev
 
 #### 設定ファイル編集
 
-myconf.ymlのproductionを変更
+myconf.ymlのproductionを編集。
 
 * ドメインやメールサーバの設定など。
 * secret_key_baseは必須。
@@ -149,6 +147,7 @@ configの以下パラメータを設定
 * REMOTE_USER
 * REMOTE_SERVER
 * SECRET_KEY
+* MYCONF_YML (本番用のmyconf.yml)
 
 デプロイ実行
 ```

@@ -2,10 +2,11 @@ source/**/vendor/bundle/*
 source/**/node_modules/*
 source/**/log/*
 source/**/tmp/*
+source/**/uploads/*
 source/**/config/myconf.yml
 
 deploy/config
-deploy/rails_app
-deploy/rails_app.tar.gz
+deploy/my_app
+deploy/my_app.tar.gz
 
 !/**/.keep
