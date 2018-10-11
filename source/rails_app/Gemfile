@@ -50,13 +50,13 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'devise', '~> 4.4.3'
 gem 'devise-i18n', '~> 1.6.4'
-##### settting devise #####
+# === settting devise
 # bundle exec rails g devise:install
 # bundle exec rails g devise User
 # bundle exec rails g devise:views
 # bundle exec rails g devise:i18n:locale ja
-
-##### create root path #####
+#
+# === create root path
 # bundle exec rails g controller Dashboard index --skip-assets --skip-helper
 # edit config/routes.rb
 #        >> devise_for :users
@@ -64,13 +64,13 @@ gem 'devise-i18n', '~> 1.6.4'
 
 
 gem 'kaminari', '~> 1.1.1'
-##### pagenation custom template
+# === pagenation custom template
 # bundle exec rails g kaminari:views default
 # edit app/views/kaminari/*
 
 
 gem 'carrierwave', '~> 1.2.3'
-##### settting carrierwave #####
+# === settting carrierwave
 # bundle exec rails g uploader UserImage
 
 gem 'delayed_job', '~> 4.1.5'
