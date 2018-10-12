@@ -38,9 +38,8 @@ cd ${APP_DIR}
 bundle config --local build.nokogiri --use-system-libraries
 bundle install --path vendor/bundle
 
-bundle exec rake db:create RAILS_ENV=production
-bundle exec rake db:create RAILS_ENV=development
 bundle exec rake db:create RAILS_ENV=test
+bundle exec rake db:create RAILS_ENV=${RAILS_ENV}
 bundle exec rake db:environment:set RAILS_ENV=${RAILS_ENV}
 bundle exec rake db:schema:load # or bundle exec rake db:migrate:reset
 bundle exec rake db:seed

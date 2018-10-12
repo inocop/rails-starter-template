@@ -46,7 +46,7 @@
 ```
 $ git clone https://github.com/inocop/docker-ror
 $ cd docker-ror/docker/rails_dev
-$ ./build.sh
+$ ./dev_build.sh
 ```
 
 #### アクセス
