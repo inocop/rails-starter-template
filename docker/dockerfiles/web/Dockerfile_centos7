@@ -102,8 +102,8 @@ RUN yum install -y gtk3 \
                    libXScrnSaver \
                    libXss \
                    alsa-lib-devel-1.1.4.1-2.el7 \
-                   \ # ja font
-                   ipa-gothic-fonts \
+                   # ja font \
+                   ipa-gothic-fonts \ 
                    ipa-mincho-fonts
 
 CMD /sbin/init
