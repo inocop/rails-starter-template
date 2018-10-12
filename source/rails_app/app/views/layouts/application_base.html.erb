@@ -19,18 +19,16 @@
         vertical-align: middle;
         font-size: 25px;
       }
-
     </style>
 
-    <!-- 選択プロジェクトのchangeイベントを取得してsubmit -->
     <script type="text/javascript">
+      // 選択プロジェクトのchangeイベントを取得してsubmit
       $(document).ready(function(){
         $('#project_id').on('change', function(){
           $('#select_project_form').submit();
         });
       });
     </script>
-
   </head>
 
   <body>

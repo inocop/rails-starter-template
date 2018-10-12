@@ -19,6 +19,7 @@
 
 <%# load javascript %>
 <script src="/node_modules/jquery/dist/jquery.js"></script>
+<script src="/node_modules/jquery-ui-dist/jquery-ui.js"></script>
 <script src="/node_modules/bootstrap/dist/js/bootstrap.js"></script>
 <script src="/node_modules/rails-ujs/lib/assets/compiled/rails-ujs.js"></script>
 <script src="/node_modules/flatpickr/dist/flatpickr.js"></script>
@@ -26,17 +27,14 @@
 <script>
   // flatpickrのローカライズ
   flatpickr.localize(flatpickr.l10ns.ja);
+  // 指定タグにイベントセット
   $(document).ready(function(){
-    flatpickr(".date-by-flatpickr",
-              {
-                wrap: true
-              });
+    flatpickr(".date-by-flatpickr", { wrap: true });
     flatpickr(".time-by-flatpickr",
-              {
-                wrap: true,
+              { wrap: true,
                 enableTime: true,
                 noCalendar: true,
-                time_24hr: true
+                time_24hr: true 
               });
   });
 </script>
