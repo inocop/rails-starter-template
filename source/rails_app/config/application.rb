@@ -34,7 +34,7 @@ module RailsApp
 
     # sendfileでの送信をwebサーバで処理する
     config.action_dispatch.x_sendfile_header = 'X-Sendfile' # for Apache
-    config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for NGINX
+    #config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for NGINX
 
     # action_mailer内でurlヘルパー(link_toなど)使用時のデフォルトのドメイン名
     config.action_mailer.default_url_options = config.x.myconf.default_url_options
