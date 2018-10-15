@@ -2,10 +2,10 @@
 
 one:
   name: MyString
-  start_day: 
-  end_day: 2018-08-21
+  start_date: 
+  end_date: 2018-08-21
 
 two:
   name: MyString
-  start_day: 
-  end_day: 2018-08-21
+  start_date: 
+  end_date: 2018-08-21
