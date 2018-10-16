@@ -14,5 +14,6 @@ ja:
     index:
       <<: *item_name
       title: "チケット一覧"
-    form:
+    show:
+      <<: *item_name
       error_message: "チケットの保存に失敗しました。"

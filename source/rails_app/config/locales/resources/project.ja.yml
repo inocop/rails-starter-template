@@ -12,5 +12,6 @@ ja:
     index:  # app/views/projects/index.html.erb
       <<: *item_name
       title: "プロジェクト一覧"
-    form:  # app/views/_form.html.erb
+    show:
+      <<: *item_name
       error_message: "プロジェクトの保存に失敗しました。"
