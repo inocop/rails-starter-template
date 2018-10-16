@@ -67,16 +67,13 @@ RUN ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 
 # get build-arg
 ARG RAILS_ENV
-ENV RAILS_ENV ${RAILS_ENV}
 
 # set env for apache
 RUN echo "RAILS_ENV=${RAILS_ENV}" >> /etc/sysconfig/httpd
 
 # set conf for apache
 ADD vhost.conf.tmp ./
-
-RUN RAILS_ENV=${RAILS_ENV} cat vhost.conf.tmp | envsubst > /etc/httpd/conf.d/vhost.conf \
-&&  echo "export RAILS_ENV=${RAILS_ENV}" >> /etc/profile.d/rails_conf.sh
+RUN RAILS_ENV=${RAILS_ENV} cat vhost.conf.tmp | envsubst > /etc/httpd/conf.d/vhost.conf
 
 
 # install db tools for development

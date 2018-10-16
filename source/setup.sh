@@ -1,10 +1,14 @@
 #!/usr/bin/env bash
 
 
-echo -e "\nReset database"
-read -p "OK? [y/N]: " answer
+echo -e "\nReset DB!"
+read -p "tartget? [dev/production]: " answer
 
-if [[ $answer != [yY] ]]; then
+if   [ "$answer" = "dev" ]; then
+  RAILS_ENV=development
+elif [ "$answer" = "production" ]; then
+  RAILS_ENV=production
+else
   echo "Interruption"
   exit
 fi
@@ -12,9 +16,9 @@ fi
 
 set -eux
 
-
-APP_DIR=/var/www/app/rails_app
-cd ${APP_DIR}
+RAILS_APP_DIR=/var/www/app/rails_app
+NODE_APP_DIR=/var/www/app/node_app
+cd ${RAILS_APP_DIR}
 
 
 ###########################
@@ -38,19 +42,23 @@ cd ${APP_DIR}
 bundle config --local build.nokogiri --use-system-libraries
 bundle install --path vendor/bundle
 
-bundle exec rake db:create RAILS_ENV=test
-bundle exec rake db:create RAILS_ENV=${RAILS_ENV}
+bundle exec rake db:create          RAILS_ENV=${RAILS_ENV}
+bundle exec rake db:schema:load     RAILS_ENV=${RAILS_ENV} # or bundle exec rake db:migrate
+bundle exec rake db:seed            RAILS_ENV=${RAILS_ENV}
 bundle exec rake db:environment:set RAILS_ENV=${RAILS_ENV}
-bundle exec rake db:schema:load # or bundle exec rake db:migrate:reset
-bundle exec rake db:seed
+
+bundle exec rake db:create          RAILS_ENV=test
+bundle exec rake db:environment:set RAILS_ENV=test
 
 
-cd ${APP_DIR}/public
+cd ${RAILS_APP_DIR}/public
 npm install
 
+cd ${NODE_APP_DIR}
+npm install
 
 # passenger
-$ passenger-config restart-app
+passenger-config restart-app /var/www/app/rails_app
 
 
 # puma
