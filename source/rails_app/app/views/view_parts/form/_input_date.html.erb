@@ -1,14 +1,16 @@
 <%
 # 日付け選択
-# @params form        [form helper]
+# @params form        [form_helper]
 # @params field_name  [string]
-# @params field_label [string]
+# @params label_name  [string]
+
+label_name = field_name if label_name.nil?
 %>
 
 <div class="form-group row">
-  <%= form.label(field_label, :class => "col-form-label col-md-2") %>
+  <%= form.label(label_name, :class => "col-form-label col-md-2") %>
   <div class="col-md-8">
-    <div class="input-group date-by-flatpickr">
+    <div class="input-group view_parts_form_input_date">
       <%= form.text_field(field_name, :style => "background-color:#fff", :class => "form-control", :data => { :input => "" }) %>
       <div class="input-group-append" data-toggle>
         <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
@@ -19,3 +21,14 @@
     </div>
   </div>
 </div>
+
+
+<% unless defined?(@view_form_parts_input_date) %>
+  <% @view_form_parts_input_date = true %>
+
+  <script>
+    $(document).ready(function(){
+      flatpickr(".view_parts_form_input_date", { wrap: true });
+    });
+  </script>
+<% end %>

@@ -1,53 +1,21 @@
 <h2>Edit Profile</h2>
 
-<%= form_for(@user, url: users_profile_edit_path, html: {method: :post, multipart: true}) do |f| %>
+<%= form_for(@user, url: users_profile_edit_path, html: {method: :post, multipart: true}) do |form| %>
+
+   <%= render(partial: "view_parts/form/input_file", locals: {form: form, field_name: :user_image_path}) %>
 
   <div class="form-group">
-    <%= f.label :user_image_path, "for": nil %>
-    <div class="input-group">
-      <div class="custom-file">
-          <%= f.file_field :user_image_path, class: "custom-file-input", lang: "ja", autofocus: true %>
-          <label class="custom-file-label" for="user_user_image_path">ファイル選択...</label>
-      </div>
-      <div class="input-group-append">
-          <button type="button" class="btn btn-outline-secondary reset">取消</button>
-      </div>
-    </div>
+    <%= form.label :user_name %><br />
+    <%= form.text_field :user_name, autocomplete: "off", :class => "form-control" %>
   </div>
 
   <div class="form-group">
-    <%= f.label :user_name %><br />
-    <%= f.text_field :user_name, autocomplete: "off", :class => "form-control" %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autocomplete: "email", :class => "form-control" %>
+    <%= form.label :email %><br />
+    <%= form.email_field :email, autocomplete: "email", :class => "form-control" %>
   </div>
 
   <div class="actions">
-    <%= f.submit "Update", :class => "btn btn-primary" %>
+    <%= form.submit "Update", :class => "btn btn-primary" %>
     <%= link_to "Back", 'javascript:void(0);', onclick: "history.back();", :class => "ml-3 btn btn-primary" %>
   </div>
 <% end %>
-
-
-<style>
-.custom-file-input:lang(ja) ~ .custom-file-label::after {
-  content: "参照";
-}
-</style>
-
-<script>
-  //ファイル選択
-  $('.custom-file-input').on('change',function(){
-    $(this).next('.custom-file-label').html($(this)[0].files[0].name);
-  })
-
-  //ファイルの取消
-  $('.reset').click(function(){
-    $(this).parent().prev().children('.custom-file-label').html('ファイル選択...');
-    $('.custom-file-input').val('');
-  })
-</script>
-
