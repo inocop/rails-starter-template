@@ -1,7 +1,13 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
+  before_action :view_parts_initialize
 
   private
+
+  # view_partsでjsやcssの二重ロード対策用の変数
+  def view_parts_initialize
+    @view_parts = {}
+  end
 
   # [devise] ログアウト後、ログインページにリダイレクト
   # 「ログインしてください。」のメッセージを出さなくするため。

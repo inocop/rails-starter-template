@@ -1,0 +1,47 @@
+<%
+# ファイル選択
+# @params form        [form_helper]
+# @params field_name  [string]
+# @params label_name  [string]
+
+label_name = field_name if label_name.nil?
+%>
+
+<div class="form-group row view_parts_form_row">
+  <%= form.label(label_name, :class => "col-form-label col-md-2") %>
+  <div class="col-md-10">
+    <div class="input-group">
+      <div class="custom-file">
+          <%= form.file_field(field_name, class: "custom-file-input", lang: "ja") %>
+          <label class="custom-file-label">ファイル選択...</label>
+      </div>
+      <div class="input-group-append">
+          <button type="button" class="btn btn-outline-secondary reset">取消</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<% if @view_parts[__FILE__].nil? %>
+  <% @view_parts[__FILE__] = true %>
+
+  <style>
+    .view_parts_form_row .custom-file-input:lang(ja) ~ .view_parts_form_row .custom-file-label::after {
+      content: "参照";
+    }
+  </style>
+
+  <script>
+    //ファイル選択
+    $('.view_parts_form_row .custom-file-input').on('change',function(){
+      $(this).next('.view_parts_form_row .custom-file-label').html($(this)[0].files[0].name);
+    })
+
+    //ファイルの取消
+    $('.reset').click(function(){
+      $(this).parent().prev().children('.view_parts_form_row .custom-file-label').html('ファイル選択...row');
+      $('.view_parts_form_row .custom-file-input').val('');
+    })
+  </script>
+<% end %>

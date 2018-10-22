@@ -21,8 +21,9 @@ label_name = field_name if label_name.nil?
 </div>
 
 
-<% unless defined?(@view_parts_input_file) %>
-  <% @view_parts_input_file = true %>
+<% if @view_parts[__FILE__].nil? %>
+  <% @view_parts[__FILE__] = true %>
+
   <style>
     .custom-file-input:lang(ja) ~ .custom-file-label::after {
       content: "参照";
