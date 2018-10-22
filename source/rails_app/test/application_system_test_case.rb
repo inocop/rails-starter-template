@@ -51,6 +51,22 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     end
   end
 
+  def wait_loading
+    unless block_given?
+      raise "There is no block"
+    end
+
+    10.times do
+      result = yield
+      if result.instance_of?(TrueClass)
+        return
+      else
+        sleep(1)
+      end
+    end
+    raise "wati timeover"
+  end
+
   def get_cookie(name:)
     cookies = page.driver.browser.manage.all_cookies
     cookie = cookies.find { |c| c[:name] == name }
@@ -60,5 +76,4 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   def set_cookie(name:, value:)
     page.driver.browser.manage.add_cookie(name: name, value: value.to_s)
   end
-
 end
