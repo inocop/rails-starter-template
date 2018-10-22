@@ -1,8 +1,6 @@
 <h2>Edit Profile</h2>
 
-<%= form_for(@user, url: users_profile_edit_path, html: {method: :post, multipart: true}) do |form| %>
-
-   <%= render(partial: "view_parts/form/input_file", locals: {form: form, field_name: :user_image_path}) %>
+<%= form_for(@user, url: users_profile_edit_path, html: {method: :post}) do |form| %>
 
   <div class="form-group">
     <%= form.label :user_name %><br />
