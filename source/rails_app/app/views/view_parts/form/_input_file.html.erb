@@ -7,7 +7,7 @@
 label_name = field_name if label_name.nil?
 %>
 
-<div class="form-group">
+<div class="form-group view_parts__form__input_file">
   <%= form.label(label_name) %>
   <div class="input-group">
     <div class="custom-file">
@@ -25,21 +25,24 @@ label_name = field_name if label_name.nil?
   <% @view_parts[__FILE__] = true %>
 
   <style>
-    .custom-file-input:lang(ja) ~ .custom-file-label::after {
+    .view_parts__form__input_file .custom-file-input:lang(ja) ~ .custom-file-label::after {
       content: "参照";
     }
   </style>
 
   <script>
-    //ファイル選択
-    $('.custom-file-input').on('change',function(){
-      $(this).next('.custom-file-label').html($(this)[0].files[0].name);
-    })
+    (function(){
+      var input_file = $('.view_parts__form__input_file')
 
-    //ファイルの取消
-    $('.reset').click(function(){
-      $(this).parent().prev().children('.custom-file-label').html('ファイル選択...');
-      $('.custom-file-input').val('');
-    })
+      //ファイル選択
+      input_file.find('.custom-file-input').on('change', function(){
+        $(this).next('.custom-file-label').html($(this)[0].files[0].name);
+      })
+      //ファイルの取消
+      input_file.find('.reset').click(function(){
+        $(this).parent().prev().children('.custom-file-label').html('ファイル選択...');
+        $('.custom-file-input').val('');
+      })
+    })();
   </script>
 <% end %>

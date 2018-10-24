@@ -10,7 +10,7 @@ label_name = field_name if label_name.nil?
 <div class="form-group row">
   <%= form.label(:label_name, :class => "col-form-label col-md-2") %>
   <div class="col-md-5">
-    <div class="input-group view_parts_form_row_input_time">
+    <div class="input-group view_parts__form_row__input_time">
       <%= form.time_field(:field_name, :style => "background-color:#fff", :class => "form-control", :data => { :input => "" }) %>
       <div class="input-group-append" data-toggle>
         <span class="input-group-text"><i class="far fa-clock"></i></span>
@@ -28,7 +28,7 @@ label_name = field_name if label_name.nil?
 
   <script>
     $(document).ready(function(){
-      flatpickr(".view_parts_form_row_input_time",
+      flatpickr(".view_parts__form_row__input_time",
                 { wrap: true,
                   enableTime: true,
                   noCalendar: true,
