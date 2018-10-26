@@ -1,17 +1,14 @@
 class Users::ProfileController < AuthController
 
   def edit
-    @user = User.find_by_id(current_user.id)
   end
 
   def update
-    @user = User.find_by_id(current_user.id)
-    
-    if @user.update(profile_params)
+    if current_user.update(profile_params)
       flash[:notice] = 'Profile was successfully updated.'
       redirect_to action: :edit
     else
-      flash.now[:alert] = @user.errors.full_messages.join("\n")
+      flash.now[:alert] = current_user.errors.full_messages.join("\n")
       render :edit
     end
   end
@@ -19,18 +16,16 @@ class Users::ProfileController < AuthController
   # ユーザーアイコン編集
   # GET /users/profile/edit_images
   def edit_image
-    @user = User.find_by_id(current_user.id)
   end
 
   # ユーザーアイコン更新
   # POST /users/profile/edit_images
   def update_image
-    @user = User.find_by_id(current_user.id)
-    if @user.update(profile_image_params)
+    if current_user.update(profile_image_params)
       flash[:notice] = 'Profile image was successfully updated.'
       redirect_to action: :edit_image
     else
-      flash.now[:alert] = @user.errors.full_messages.join("\n")
+      flash.now[:alert] = current_user.errors.full_messages.join("\n")
       render :edit_image
     end
   end

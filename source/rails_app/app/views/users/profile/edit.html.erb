@@ -1,6 +1,6 @@
 <h2>Edit Profile</h2>
 
-<%= form_for(@user, url: users_profile_edit_path, html: {method: :post}) do |form| %>
+<%= form_for(current_user, url: users_profile_edit_path, html: {method: :post}) do |form| %>
 
   <div class="form-group">
     <%= form.label :user_name %><br />
@@ -14,5 +14,13 @@
 
   <div class="actions">
     <%= form.submit "Update", :class => "btn btn-primary" %>
+  </div>
+<% end %>
+
+
+
+<%= form_for(current_user, url: destroy_user_registration_path, html: {method: :post}) do |form| %>
+  <div class="actions">
+    <%= form.submit "Destroy", :class => "btn btn-danger" %>
   </div>
 <% end %>
