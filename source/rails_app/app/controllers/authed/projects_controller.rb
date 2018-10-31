@@ -1,5 +1,5 @@
-class ProjectsController < AuthController
-  layout 'application_base'
+class Authed::ProjectsController < AuthController
+
   before_action :set_project, only: [:show, :edit, :update, :destroy]
 
   # GET /projects

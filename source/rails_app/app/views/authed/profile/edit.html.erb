@@ -1,6 +1,6 @@
 <h2>Edit Profile</h2>
 
-<%= form_for(current_user, url: users_profile_edit_path, html: {method: :post}) do |form| %>
+<%= form_for(current_user, url: profile_edit_path, html: {method: :post}) do |form| %>
 
   <div class="form-group">
     <%= form.label :user_name %><br />

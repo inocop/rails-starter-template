@@ -1,4 +1,5 @@
 class AuthController < ApplicationController
+  layout 'application_base'
 
   # checked login
   before_action :authenticate_user!

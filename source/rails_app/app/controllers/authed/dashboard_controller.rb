@@ -1,5 +1,5 @@
-class DashboardController < AuthController
-  layout "dashboard"
+class Authed::DashboardController < AuthController
+  layout 'authed/dashboard'
 
   def index
     # ユーザー一覧

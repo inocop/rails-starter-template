@@ -1,5 +1,6 @@
 # 画面を持たない処理用のクラス
-class ApiController < AuthController
+class Authed::ApiController < AuthController
+  layout false
 
   # POST /api/select_project
   # プロジェクト切り替え

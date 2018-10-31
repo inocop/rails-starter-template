@@ -1,5 +1,6 @@
-class TicketsController < AuthController
-  layout 'tickets'
+class Authed::TicketsController < AuthController
+  layout 'authed/tickets'
+
   before_action :set_ticket, only: [:show, :edit, :update, :destroy]
 
   # GET /tickets

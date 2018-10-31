@@ -1,4 +1,9 @@
-class Users::ProfileController < AuthController
+class Authed::ProfileController < AuthController
+  layout 'authed/profile'
+
+  def index
+    redirect_to action: :edit
+  end
 
   def edit
   end

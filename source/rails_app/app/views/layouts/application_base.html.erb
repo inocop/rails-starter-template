@@ -73,7 +73,7 @@
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
               <span class="dropdown-header" href="#">Sign in as <%= current_user.user_name %></span>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="<%= users_profile_edit_path %>">Profile</a>
+              <a class="dropdown-item" href="<%= profile_edit_path %>">Profile</a>
               <a class="dropdown-item disabled" href="#">Settings</a>
             </div>
           </li>
@@ -92,7 +92,7 @@
           <div class="card mb-3 <%= "d-none" if defined?(hidden_project) %>">
             <h5 class="card-header">Project</h5>
             <div class="card-body">
-              <%= form_tag({:controller => '/api', :action => 'select_project'}, { :id => 'select_project_form'}) do %>
+              <%= form_tag({:controller => '/authed/api', :action => 'select_project'}, { :id => 'select_project_form'}) do %>
                 <input id="controller_name" name="controller_name" type="hidden" value="<%= controller.controller_path %>">
                 <select id="project_id" name="project_id" class="form-control form-control-sm">
                     <% @select_projects.each do |project| %>

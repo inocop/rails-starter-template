@@ -1,5 +1,5 @@
 <h2>Edit Icon</h2>
-<%= form_for(current_user, url: users_profile_edit_image_url, html: {method: :post, multipart: true}) do |form| %>
+<%= form_for(current_user, url: profile_edit_image_url, html: {method: :post, multipart: true}) do |form| %>
 
   <%= render(partial: "view_parts/form/input_file", locals: {form: form, field_name: :user_image_path}) %>
 
