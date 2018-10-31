@@ -21,11 +21,4 @@ class AuthController < ApplicationController
         session[:current_project] = @select_projects.first&.id
       end
     end
-
-    # 現在選択しているproject_idを取得
-    # viewからも呼べるようにhelper_methodとして登録
-    def current_project_id
-      session[:current_project]
-    end
-    helper_method :current_project_id
 end
