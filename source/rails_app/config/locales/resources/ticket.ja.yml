@@ -10,10 +10,11 @@ ja:
         work_time: "作業時間"
         start_date: "着手日"
         end_date: "完了日"
-  tickets:
-    index:
-      <<: *item_name
-      title: "チケット一覧"
-    show:
-      <<: *item_name
-      error_message: "チケットの保存に失敗しました。"
+  authed:
+    tickets:
+      index:
+        <<: *item_name
+        title: "チケット一覧"
+      show:
+        <<: *item_name
+        error_message: "チケットの保存に失敗しました。"

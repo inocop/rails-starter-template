@@ -7,11 +7,12 @@ ja:
         name: "プロジェクト名"
         start_date: "プロジェクト開始日"
         end_date: "プロジェクト終了日"
-  # app/views/projects
-  projects: 
-    index:  # app/views/projects/index.html.erb
-      <<: *item_name
-      title: "プロジェクト一覧"
-    show:
-      <<: *item_name
-      error_message: "プロジェクトの保存に失敗しました。"
+  authed:
+    # app/views/projects
+    projects: 
+      index:  # app/views/projects/index.html.erb
+        <<: *item_name
+        title: "プロジェクト一覧"
+      show:
+        <<: *item_name
+        error_message: "プロジェクトの保存に失敗しました。"
