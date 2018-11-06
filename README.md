@@ -73,7 +73,29 @@ http://localhost:1080
 
 #### デバッグ
 
-not yet
+1. Visual Studio Codeをインストール
+
+    https://code.visualstudio.com/
+
+    拡張機能: ruby を追加
+
+1. ホストPCにrubyとデバッグ用gemのインストール
+
+    - rubyインストール
+      - Windows  
+          Ruby+Devkitをダウンロードしてインストール実行  
+          https://rubyinstaller.org/downloads/
+      - Mac  
+          標準でインストールされているrubyでOK
+
+    - デバッグ用gemのインストール
+      ```
+      $ gem install debase -v '~> 0.2.1'
+      $ gem install ruby-debug-ide -v '~> 0.6.1'
+      ```
+
+1. vscodeツールバーの[ターミナル] > [タスクの実行] > [exec-rdebug-ide]
+1. vscodeツールバーの[デバッグ] > [デバッグの開始]
 
 
 #### テスト
