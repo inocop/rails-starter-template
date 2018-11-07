@@ -5,9 +5,9 @@
 #### アーキテクチャ
 |#    |name / version|
 |:----|--------------|
-|Lang |Ruby 2.4.4    |
-|Web  |Apache 2.4 + Passenger 5.3.2|
-|DB   |MySQL 5.6     |
+|Lang |Ruby 2.4.5    |
+|Web  |Apache 2.4 + Passenger 5.3.6|
+|DB   |MySQL 5.7     |
 
 
 #### 追加ライブラリ
