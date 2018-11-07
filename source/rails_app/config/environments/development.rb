@@ -49,12 +49,17 @@ Rails.application.configure do
   #####################
   # override config   #
   #####################
-
   # Docker等の共有フォルダの場合、EventedFileUpdateCheckerでファイル更新を検出できないため
   config.file_watcher  = ActiveSupport::FileUpdateChecker
   # 更新が無くてもクラスファイルをreloadする(上記の設定があればたぶん不要)
   #config.reload_classes_only_on_change = false
-
-  # MailCatcherを使うので、メール送信失敗時はエラーにする
+ 
+  # MailCatcherを使うので、メールの送信失敗はエラーにする
   config.action_mailer.raise_delivery_errors = true
+ 
+  #####################
+  # add config        #
+  #####################
+  # Dockerだとアクセス元IPが127.0.0.1ではないため
+  config.web_console.whitelisted_ips = '0.0.0.0/0'
 end

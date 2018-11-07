@@ -28,12 +28,8 @@ Rails.application.configure do
   # config.action_controller.asset_host = 'http://assets.example.com'
 
   # Specifies the header that your server uses for sending files.
-  #####################
-  # change config     #
-  #####################
-  # sendfileでの送信をwebサーバで処理する
-  config.action_dispatch.x_sendfile_header = 'X-Sendfile' # for Apache
-  config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for NGINX
+  # config.action_dispatch.x_sendfile_header = 'X-Sendfile' # for Apache
+  # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for NGINX
 
   # Mount Action Cable outside main process or domain
   # config.action_cable.mount_path = nil
@@ -64,10 +60,7 @@ Rails.application.configure do
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
-  #####################
-  # change config     #
-  #####################
-  #config.i18n.fallbacks = true  # application.rbで設定
+  config.i18n.fallbacks = true
 
   # Send deprecation notices to registered listeners.
   config.active_support.deprecation = :notify
@@ -87,4 +80,17 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+
+  #####################
+  # override config   #
+  #####################
+  config.i18n.fallbacks = [:ja, :en]
+
+  #####################
+  # add config        #
+  #####################
+  # sendfileでの送信をwebサーバで処理する
+  config.action_dispatch.x_sendfile_header = 'X-Sendfile' # for Apache
+  config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for NGINX
 end

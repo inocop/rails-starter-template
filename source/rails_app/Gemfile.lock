@@ -202,7 +202,7 @@ DEPENDENCIES
   capybara (~> 2.13)
   carrierwave (~> 1.2.3)
   chromedriver-helper
-  debase
+  debase (~> 0.2.1)
   delayed_job (~> 4.1.5)
   devise (~> 4.4.3)
   devise-i18n (~> 1.6.4)
@@ -213,7 +213,7 @@ DEPENDENCIES
   mysql2 (>= 0.3.18, < 0.6.0)
   puma (~> 3.7)
   rails (~> 5.1.6)
-  ruby-debug-ide
+  ruby-debug-ide (~> 0.6.1)
   selenium-webdriver
   spring
   spring-watcher-listen (~> 2.0.0)
@@ -221,4 +221,4 @@ DEPENDENCIES
   web-console (>= 3.3.0)
 
 BUNDLED WITH
-   1.16.5
+   1.16.6

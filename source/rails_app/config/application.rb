@@ -60,7 +60,7 @@ module RailsApp
       g.helper false
     end
 
-    # ログファイルのローテーション設定（14日以上経過したファイルを削除 + 100MBでローテーション）
-    config.logger = Logger.new("log/#{Rails.env}.log", 14, 100*1024*1024)
+    # ログファイルのローテーション設定（14日以上経過したファイルを削除 + 50MBでローテーション）
+    config.logger = Logger.new("log/#{Rails.env}.log", 14, 50*1024*1024)
   end
 end
