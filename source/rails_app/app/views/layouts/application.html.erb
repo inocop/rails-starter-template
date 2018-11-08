@@ -2,10 +2,19 @@
 <html>
   <head>
     <%= render(:partial => "layouts/head_content") %>
+    <style>
+      body{
+        padding-top:55px;
+      }
+    </style>
   </head>
 
   <body>
-    <div class="fixed-top m-3">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+      <a class="navbar-brand" href="<%= root_path %>"><%= t('text.app_name') %></a>
+    </nav>
+
+    <div class="fixed-top m-3" style="top:55px;">
       <% if notice.present? %>
       <p class="alert alert-info alert-dismissible fade show" role="alert">
         <span><%= notice %></span>
