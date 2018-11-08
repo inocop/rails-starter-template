@@ -18,8 +18,8 @@
     </div>
   </div>
 
-   <%= render(partial: "view_parts/form_row/input_date", locals: {form: form, field_name: "start_date"}) %>
-   <%= render(partial: "view_parts/form_row/input_date", locals: {form: form, field_name: "end_date"}) %>
+   <%= render(partial: "view_parts/form/input_date", locals: {row: true, form: form, field_name: "start_date"}) %>
+   <%= render(partial: "view_parts/form/input_date", locals: {row: true, form: form, field_name: "end_date"}) %>
 
   <div class="actions mt-4">
     <%= form.submit :class => "btn btn-primary" %>

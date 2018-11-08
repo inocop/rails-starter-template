@@ -1,0 +1,36 @@
+<%
+# メールテキストフィールド
+# @params form        [form_helper]
+# @params row         [any]
+# @params field_name  [string]
+# @params label_name  [string]
+# @params placeholder [string]
+# @params autofocus   [any]
+# @params required    [any]
+
+label_name = field_name if label_name.nil?
+
+options = {}
+options[:class] = "form-control"
+options[:autocomplete] = "email"
+options[:placeholder] = placeholder if defined?(placeholder)
+options[:autofocus] = true if defined?(autofocus)
+options[:required] = true if defined?(required)
+%>
+
+<%# ラベル横並び %>
+<% if defined?(row) %>
+  <div class="form-group row">
+    <%= form.label(:name, :class => "col-form-label col-md-2") %>
+    <div class="col-md-10">
+      <%= form.email_field(field_name, options) %>
+    </div>
+  </div>
+
+<%# ラベル縦並び %>
+<% else %>
+  <div class="form-group">
+    <%= form.label(label_name, :class => "col-form-label") %>
+    <%= form.email_field(field_name, options) %>
+  </div>
+<% end %>

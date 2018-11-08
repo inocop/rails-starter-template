@@ -1,25 +1,45 @@
 <%
 # ファイル選択
 # @params form        [form_helper]
+# @params row         [any]
 # @params field_name  [string]
 # @params label_name  [string]
 
 label_name = field_name if label_name.nil?
 %>
 
-<div class="form-group view_parts__form__input_file">
-  <%= form.label(label_name) %>
-  <div class="input-group">
-    <div class="custom-file">
-        <%= form.file_field(field_name, class: "custom-file-input", lang: "ja") %>
-        <label class="custom-file-label">ファイル選択...</label>
-    </div>
-    <div class="input-group-append">
-        <button type="button" class="btn btn-outline-secondary reset">取消</button>
+<%# ラベル横並び %>
+<% if defined?(row) %>
+  <div class="form-group row view_parts__form__input_file">
+    <%= form.label(label_name, :class => "col-form-label col-md-2") %>
+    <div class="col-md-10">
+      <div class="input-group">
+        <div class="custom-file">
+            <%= form.file_field(field_name, class: "custom-file-input", lang: "ja") %>
+            <label class="custom-file-label">ファイル選択...</label>
+        </div>
+        <div class="input-group-append">
+            <button type="button" class="btn btn-outline-secondary reset">取消</button>
+        </div>
+      </div>
     </div>
   </div>
-</div>
 
+<%# ラベル縦並び %>
+<% else %>
+  <div class="form-group view_parts__form__input_file">
+    <%= form.label(label_name) %>
+    <div class="input-group">
+      <div class="custom-file">
+          <%= form.file_field(field_name, class: "custom-file-input", lang: "ja") %>
+          <label class="custom-file-label">ファイル選択...</label>
+      </div>
+      <div class="input-group-append">
+          <button type="button" class="btn btn-outline-secondary reset">取消</button>
+      </div>
+    </div>
+  </div>
+<% end %>
 
 <% if @view_parts[__FILE__].nil? %>
   <% @view_parts[__FILE__] = true %>

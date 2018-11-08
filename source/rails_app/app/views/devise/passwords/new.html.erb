@@ -1,16 +1,28 @@
-<h2>Forgot your password?</h2>
+<div class="mx-auto" style="width: 580px;">
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= devise_error_messages! %>
+  <h2 class="mt-5 border-bottom">
+    <%= t('.forgot_your_password') %>
+  </h2>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: "mt-5" }) do |f| %>
+    <% if resource.errors.present? %>
+      <p class="alert alert-danger" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <%= simple_format(resource.errors.full_messages.join("\n"), {}, {wrapper_tag: "span"}) %>
+      </p>
+    <% end %>
 
-  <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
-  </div>
-<% end %>
+    <div class="form-group">
+      <%= f.label(:email, :class => "col-form-label") %>
+      <%= f.email_field(:email, class: "form-control", autofocus: true, autocomplete: "email") %>
+    </div>
 
-<%= render "devise/shared/links" %>
+    <div class="mt-3">
+      <%= f.submit "Send me reset password instructions", class: "btn btn-info mx-auto d-block" %>
+    </div>
+  <% end %>
+
+  <%#= render "devise/shared/links" %>
+</div>
