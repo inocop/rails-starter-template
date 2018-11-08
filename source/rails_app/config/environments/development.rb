@@ -60,6 +60,6 @@ Rails.application.configure do
   #####################
   # add config        #
   #####################
-  # Dockerだとアクセス元IPが127.0.0.1ではないため
+  # localhost以外からもweb consoleを使うための設定
   config.web_console.whitelisted_ips = '0.0.0.0/0'
 end
