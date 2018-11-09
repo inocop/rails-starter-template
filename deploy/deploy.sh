@@ -26,5 +26,5 @@ scp -i ${SECRET_KEY} my_app.tar.gz ${REMOTE_USER}@${REMOTE_SERVER}:/tmp/
 
 # デプロイ
 ssh -i ${SECRET_KEY} ${REMOTE_USER}@${REMOTE_SERVER} \
-       OPTION=$1 \
+       OPTION="$1" \
        bash < update_app.sh

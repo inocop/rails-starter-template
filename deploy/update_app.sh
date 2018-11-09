@@ -5,7 +5,8 @@ set -eux
 ############################
 #  変数定義                #
 ############################
-DEPLOY_DIR=/home/railsdev/release
+USER_NAME=$(whoami)
+DEPLOY_DIR=/home/${USER_NAME}/release
 DOCKER_APP_DIR=/var/www/app
 
 
@@ -44,7 +45,7 @@ rm -rf /tmp/my_app \
 # my_app.tar.gzを展開      #
 ############################
 tar -zxf /tmp/my_app.tar.gz -C /tmp
-sudo chown -R railsdev:railsdev /tmp/my_app
+sudo chown -R ${USER_NAME}:${USER_NAME} /tmp/my_app
 
 # マイグレーション等が完了するまでdeployingに展開
 mv /tmp/my_app/source/rails_app ${DEPLOY_DIR}/source/deploying
