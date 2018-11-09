@@ -22,7 +22,7 @@ Devise.setup do |config|
   #####################
   # change config     #
   #####################
-  config.mailer_sender = Rails.application.config.x.myconf[:mail_from]
+  config.mailer_sender = "#{MyAppConst::APP_NAME}<#{Rails.application.config.x.myconf[:mail_from]}>"
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'

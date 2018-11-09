@@ -1,6 +1,5 @@
 ja:
   text:
-    app_name: RailsApp
     action:
       new: 新規作成
       edit: 編集
