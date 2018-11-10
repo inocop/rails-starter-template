@@ -129,6 +129,19 @@ $ useradd railsdev
 $ usermod -u 1000 railsdev && groupmod -g 1000 railsdev
 ```
 
+
+#### コンテナビルド
+
+```
+$ git clone https://github.com/inocop/docker-ror /release
+$ chown -R 1000:1000 /release
+$ cd /release/docker/rails_prd
+$ docker-compose build
+```
+
+※メモリ1GB以下の環境だとbuildに失敗するのでswapで対応。
+
+
 #### 設定ファイル編集
 
 myconf.ymlのproductionを編集。
@@ -140,21 +153,6 @@ myconf.ymlのproductionを編集。
   ```
   $ bin/rake secret
   ```
-
-#### コンテナビルド
-
-```
-$ git clone https://github.com/inocop/docker-ror /release
-$ cp /release/source/rails_app/config/myconf.yml.sample /release/source/rails_app/config/myconf.yml
-$ chown -R 1000:1000 release
-$ chmod 2755 release
-$ cd release/docker/rails_prd
-$ docker-compose build
-$ docker-compose up -d
-$ docker exec -it rails_prd_web_1 bash setup.sh
-```
-
-※メモリ1GB以下の環境だとbuildに失敗するのでswapで対応。
 
 
 ## デプロイ
@@ -175,5 +173,5 @@ configの以下パラメータを設定
 
 デプロイ実行
 ```
-$ ./deploy.sh
+$ ./deploy.sh first   # 初回デプロイ時はfirstを付ける(DB初期化)
 ```
