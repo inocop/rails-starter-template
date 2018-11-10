@@ -145,6 +145,7 @@ myconf.ymlのproductionを編集。
 
 ```
 $ git clone https://github.com/inocop/docker-ror /release
+$ cp /release/source/rails_app/config/myconf.yml.sample /release/source/rails_app/config/myconf.yml
 $ chown -R 1000:1000 release
 $ chmod 2755 release
 $ cd release/docker/rails_prd

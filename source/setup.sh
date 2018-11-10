@@ -27,7 +27,7 @@ bundle config --local build.nokogiri --use-system-libraries
 bundle install --path vendor/bundle
 
 npm install --prefix ${RAILS_APP_DIR}/public
-npm install --prefix ${NODE_APP_DIR}
+sudo npm install --prefix ${NODE_APP_DIR}
 
 
 echo -e "\nReset DB!"

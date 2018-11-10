@@ -23,7 +23,6 @@ services:
     volumes:
       - ../../source:/var/www/app
       - os_log:/var/log
-      - node_app_modules:/var/www/app/node_app/node_modules
     privileged: true
     restart: always
 
@@ -32,5 +31,4 @@ volumes:
     driver: 'local'
   os_log:
     driver: 'local'
-  node_app_modules:
-    driver: 'local'
+
