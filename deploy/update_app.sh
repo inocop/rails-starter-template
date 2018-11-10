@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 #sudo su
 set -eux
 
@@ -5,7 +7,7 @@ set -eux
 ############################
 #  変数定義                #
 ############################
-DEPLOY_DIR=/var/www/app
+DEPLOY_DIR=/release
 DOCKER_APP_DIR=/var/www/app
 
 
@@ -31,6 +33,8 @@ mkdir -p ${DEPLOY_DIR}/source/rails_app
 mkdir -p ${DEPLOY_DIR}/source/shared
 mkdir -p ${DEPLOY_DIR}/docker
 sudo chown -R 1000:1000 ${DEPLOY_DIR}
+sudo chmod 2755 ${DEPLOY_DIR}
+
 
 ############################
 # 前回のフォルダ削除       #
