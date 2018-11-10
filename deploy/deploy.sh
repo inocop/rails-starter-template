@@ -24,6 +24,8 @@ tar -zcvf my_app.tar.gz --no-same-owner --no-same-permissions my_app
 scp -i ${SECRET_KEY} my_app.tar.gz ${REMOTE_USER}@${REMOTE_SERVER}:/tmp/
 
 
+# $1が未定義の場合の対応
+set +u
 # デプロイ
 ssh -i ${SECRET_KEY} ${REMOTE_USER}@${REMOTE_SERVER} \
        OPTION="$1" \

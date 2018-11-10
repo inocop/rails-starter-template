@@ -144,9 +144,10 @@ myconf.ymlのproductionを編集。
 #### コンテナビルド
 
 ```
-$ cd /home/railsdev
-$ git clone https://github.com/inocop/docker-ror rails_app
-$ cd rails_app/docker/rails_prd
+$ cd /var/www
+$ git clone https://github.com/inocop/docker-ror app
+$ chown -R 1000:1000 app
+$ cd app/docker/rails_prd
 $ docker-compose build
 $ docker-compose up -d
 $ docker exec -it rails_prd_web_1 bash setup.sh

@@ -5,8 +5,7 @@ set -eux
 ############################
 #  変数定義                #
 ############################
-USER_NAME=$(whoami)
-DEPLOY_DIR=/home/${USER_NAME}/release
+DEPLOY_DIR=/var/www/app
 DOCKER_APP_DIR=/var/www/app
 
 
@@ -31,7 +30,7 @@ function docker_exec() {
 mkdir -p ${DEPLOY_DIR}/source/rails_app
 mkdir -p ${DEPLOY_DIR}/source/shared
 mkdir -p ${DEPLOY_DIR}/docker
-
+sudo chown -R 1000:1000 ${DEPLOY_DIR}
 
 ############################
 # 前回のフォルダ削除       #
@@ -45,7 +44,7 @@ rm -rf /tmp/my_app \
 # my_app.tar.gzを展開      #
 ############################
 tar -zxf /tmp/my_app.tar.gz -C /tmp
-sudo chown -R ${USER_NAME}:${USER_NAME} /tmp/my_app
+sudo chown -R 1000:1000 /tmp/my_app
 
 # マイグレーション等が完了するまでdeployingに展開
 mv /tmp/my_app/source/rails_app ${DEPLOY_DIR}/source/deploying
