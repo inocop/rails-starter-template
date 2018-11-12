@@ -62,5 +62,8 @@ module RailsApp
 
     # ログファイルのローテーション設定（14日以上経過したファイルを削除 + 50MBでローテーション）
     config.logger = Logger.new("log/#{Rails.env}.log", 14, 50*1024*1024)
+
+    # lib/utilsディレクトリもロード対象に追加
+    config.paths.add('lib/utils', eager_load: true)
   end
 end

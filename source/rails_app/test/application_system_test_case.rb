@@ -15,8 +15,8 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
       chromeOptions: {
         # npmのpuppeteerでインストールされるchromiumを指定
-        binary: "/var/www/app/node_app/node_modules/puppeteer/.local-chromium/linux-575458/chrome-linux/chrome",
-        args: %w(headless disable-gpu no-sandbox window-size=1920x1080)
+        binary: MyAppConst::CHROMIUM_PATH,
+        args: %w(headless disable-gpu no-sandbox window-size=1366x768)
       }
     )
     Capybara::Selenium::Driver.new(
