@@ -4,14 +4,14 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  validates :user_name, :presence => true,
+  validates :name, :presence => true,
                         :length => {:maximum => 50},
                         :uniqueness => {:scope => :deleted_at}
 
   validates :email, :length => {:maximum => 244} # 論理削除時のprefix分を確保して制限
                     #:uniqueness => {:scope => :deleted_at, :case_sensible => false}
 
-  mount_uploader :user_image_path, UserImageUploader
+  mount_uploader :image_path, UserImageUploader
 
 
   # instead of deleting, indicate the user requested a delete & timestamp it

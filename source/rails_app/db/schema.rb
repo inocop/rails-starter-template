@@ -36,7 +36,11 @@ ActiveRecord::Schema.define(version: 20180820153230) do
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name", null: false
     t.string "email", default: "", null: false
+    t.boolean "admin", default: false, null: false
+    t.string "image_path"
+    t.datetime "deleted_at"
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -46,10 +50,6 @@ ActiveRecord::Schema.define(version: 20180820153230) do
     t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
-    t.string "user_name", null: false
-    t.string "user_image_path"
-    t.boolean "admin", default: false, null: false
-    t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email", "deleted_at"], name: "index_users_on_email_and_deleted_at", unique: true

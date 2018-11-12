@@ -44,12 +44,12 @@ class Authed::ProfileController < AuthController
   private
     def profile_params
       params.require(:user)
-            .permit(:user_name, :email)
+            .permit(:name, :email)
     end
 
     def profile_image_params
       params.require(:user)
-            .permit(:user_image_path)
+            .permit(:image_path)
     end
 
     def profile_password_params
