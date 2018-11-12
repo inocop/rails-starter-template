@@ -23,7 +23,7 @@ services:
       - "1233:1233"
       - "3003:3003"
     volumes:
-      - ../../source:/var/www/app
+      - ../../source:/var/www/app:cached
       - os_log:/var/log
       - node_app_modules:/var/www/app/node_app/node_modules
     privileged: true
