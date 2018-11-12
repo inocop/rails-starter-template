@@ -16,3 +16,8 @@ if Rails.env.development?
   User.create!(:name => "ユーザー３", :email => "user3@example.com", :password => "password")
 end
 
+
+# 本番運用開始後のマスタデータ変更はmigrate_seedで管理
+Dir.glob("#{Rails.root}/db/migrate_seed/*_seeds.rb").each do |filename|
+  require filename
+end
