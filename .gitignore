@@ -1,12 +1,12 @@
-source/**/vendor/bundle/*
-source/**/node_modules/*
-source/**/log/*
-source/**/tmp/*
-source/**/uploads/*
-source/**/config/myconf.yml
+app/**/vendor/bundle/*
+app/**/node_modules/*
+app/**/log/*
+app/**/tmp/*
+app/**/uploads/*
+app/**/config/myconf.yml
 
 deploy/config
-deploy/my_app
-deploy/my_app.tar.gz
+deploy/src
+deploy/app.tar.gz
 
 !/**/.keep

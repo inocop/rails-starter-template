@@ -1,21 +1,25 @@
 #!/usr/bin/env bash
 
-#sudo su
 set -eux
-
 
 ############################
 #  変数定義                #
 ############################
-DEPLOY_DIR=/release
-DOCKER_APP_DIR=/var/www/app
+# リリース用ディレクトリ
+RELEASE_DIR=/release/app
+SHARED_DIR=/release/shared
 
+# デプロイ用の一時ディレクトリ
+DEPLOY_DIR=/release/deploy
+DOCKER_DEPLOY_DIR=/var/my_dir/deploy
 
-declare -A SHARED_DIRS
-SHARED_DIRS["tmp"]="../shared"
-SHARED_DIRS["log"]="../shared"
-SHARED_DIRS["vendor"]="../shared"
-SHARED_DIRS["public/node_modules"]="../../shared"
+# コンテナ内でもシンボリックリンクが効くように相対パスで指定する
+declare -A LINK_DIRS
+LINK_DIRS["rails_app/tmp"]="../../shared"
+LINK_DIRS["rails_app/log"]="../../shared"
+LINK_DIRS["rails_app/vendor"]="../../shared"
+LINK_DIRS["rails_app/public/node_modules"]="../../../shared"
+LINK_DIRS["node_app/node_modules"]="../../shared"
 
 
 ############################
@@ -27,86 +31,72 @@ function docker_exec() {
 
 
 ############################
-# deployフォルダ           #
+#  前処理                   #
 ############################
-sudo mkdir -p ${DEPLOY_DIR}/source/rails_app
-sudo mkdir -p ${DEPLOY_DIR}/source/shared
-sudo mkdir -p ${DEPLOY_DIR}/docker
-sudo chown -R 1000:1000 ${DEPLOY_DIR}
+# ディレクトリ作成
+sudo mkdir -p ${RELEASE_DIR}
+sudo mkdir -p ${SHARED_DIR}
+sudo mkdir -p ${DEPLOY_DIR}
 
+# 前回のデプロイデータがあれば削除
+sudo rm -rf ${DEPLOY_DIR}/*
 
-############################
-# 前回のフォルダ削除       #
-############################
-rm -rf /tmp/my_app \
-       ${DEPLOY_DIR}/source/deploying \
-       ${DEPLOY_DIR}/docker
+# app.tar.gzを一時ディレクトリにに展開
+sudo tar -zxf /tmp/app.tar.gz -C ${DEPLOY_DIR} --strip-components 1
 
+# sharedディレクトリにシンボリックリンクを設定
+for key in "${!LINK_DIRS[@]}"; do
+  sudo rm    -rf  ${DEPLOY_DIR}/${key} # 既存フォルダを削除
 
-############################
-# my_app.tar.gzを展開      #
-############################
-tar -zxf /tmp/my_app.tar.gz -C /tmp
-sudo chown -R 1000:1000 /tmp/my_app
-
-# マイグレーション等が完了するまでdeployingに展開
-mv /tmp/my_app/source/rails_app ${DEPLOY_DIR}/source/deploying
-mv /tmp/my_app/docker           ${DEPLOY_DIR}/docker
-
-# sharedフォルダへのシンボリックリンクを設定
-for key in "${!SHARED_DIRS[@]}"; do
-  mkdir -p   ${DEPLOY_DIR}/source/shared/${key}
-  rm    -rf  ${DEPLOY_DIR}/source/deploying/${key}
-  ln    -snf ${SHARED_DIRS[$key]}/${key} ${DEPLOY_DIR}/source/deploying/${key}
+  sudo mkdir -p   ${SHARED_DIR}/${key}
+  sudo ln    -snf ${LINK_DIRS[$key]}/${key} ${DEPLOY_DIR}/${key}
 done
+
+# パーミッション変更
+sudo chown -R 1000:1000 ${RELEASE_DIR}/../
 
 
 ############################
 #  dockeビルド             #
 ############################
 pushd ${DEPLOY_DIR}/docker/rails_prd/
+  sudo docker image prune -f # 不要なimageを削除
   sudo docker-compose build
-  sudo docker-compose up --no-start
 popd
 
 
 ############################
-#  初回デプロイ(オプション)  #
+#  初回デプロイ             #
 ############################
-if [ $OPTION = "first" ]; then
-  pushd ${DEPLOY_DIR}/docker/rails_prd/
-    sudo docker-compose up -d
+if [ "$OPTION" = "first" ]; then
+  rm -rf ${RELEASE_DIR}
+  mv ${DEPLOY_DIR} ${RELEASE_DIR}
 
-    docker_exec "cd ${DOCKER_APP_DIR}/deploying \
-                && npm install --prefix ./public \
-                && bundle install"
-    sudo chown -R 1000:1000 ${DEPLOY_DIR}
+  cd ${RELEASE_DIR}/docker/rails_prd/
+  sudo docker-compose up -d
+  docker_exec "bash /var/my_dir/app/setup.sh production"
 
-    docker_exec "cd ${DOCKER_APP_DIR}/deploying \
-                 && bin/rails db:create RAILS_ENV=production \
-                 && bin/rails db:schema:load RAILS_ENV=production DISABLE_DATABASE_ENVIRONMENT_CHECK=1 \
-                 && bin/rails db:seed RAILS_ENV=production \
-                 && bin/rails db:environment:set RAILS_ENV=production"
-
-    docker_exec "cd ${DOCKER_APP_DIR}/deploying \
-                 && bin/rails db:create RAILS_ENV=test \
-                 && bin/rails db:environment:set RAILS_ENV=test"
-  popd
+  sudo chown -R 1000:1000 ${RELEASE_DIR}/../
+  echo "Successfully first deployed"
+  exit # 初回デプロイはここで終了
 fi
 
 
 ############################
-#  gem、npmの更新          #
+#  gem、npmの更新           #
 ############################
-docker_exec "cd ${DOCKER_APP_DIR}/deploying \
+docker_exec "cd ${DOCKER_DEPLOY_DIR}/rails_app \
              && npm install --prefix ./public \
              && bundle install"
+
+docker_exec "cd ${DOCKER_DEPLOY_DIR}/node_app \
+             && npm install"
 
 
 ############################
 #  テスト実行               #
 ############################
-docker_exec "cd ${DOCKER_APP_DIR}/deploying \
+docker_exec "cd ${DOCKER_DEPLOY_DIR}/rails_app \
              && bin/rails db:migrate RAILS_ENV=test"
              #&& bin/rails test
 
@@ -114,30 +104,30 @@ docker_exec "cd ${DOCKER_APP_DIR}/deploying \
 ############################
 #  DBマイグレーション       #
 ############################
-docker_exec "cd ${DOCKER_APP_DIR}/deploying \
+docker_exec "cd ${DOCKER_DEPLOY_DIR}/rails_app \
              && bin/rails db:migrate RAILS_ENV=production"
 
 
 ############################
-#  source切り替え          #
+#  app切り替え             #
 ############################
-mv ${DEPLOY_DIR}/source/rails_app ${DEPLOY_DIR}/source/rails_app_$(date +%Y%m%d_%H%M%S)
-mv ${DEPLOY_DIR}/source/deploying ${DEPLOY_DIR}/source/rails_app
+mv ${RELEASE_DIR} ${RELEASE_DIR}_$(date +%Y%m%d_%H%M%S)
+mv ${DEPLOY_DIR}  ${RELEASE_DIR}
 
 
 ############################
-#  passenger再起動         #
+#  docker再起動            #
 ############################
-#docker_exec "passenger-config restart-app ${DOCKER_APP_DIR}/rails_app"
-pushd ${DEPLOY_DIR}/docker/rails_prd/
+pushd ${RELEASE_DIR}/docker/rails_prd/
   sudo docker-compose restart
 popd
+
 
 #############################
 #  sourceを5世代分残して削除  #
 #############################
-pushd ${DEPLOY_DIR}/source
-  ls | grep rails_app_ | head -n -5 | xargs rm -rf
+pushd ${RELEASE_DIR}/../
+  ls | grep app_ | head -n -5 | xargs rm -rf
 popd
 
 set +x

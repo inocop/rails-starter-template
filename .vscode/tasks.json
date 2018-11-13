@@ -6,7 +6,7 @@
     {
       "label": "exec-rdebug-ide",
       "type": "shell",
-      "command": "docker exec rails_dev_web_1 bash -c 'cd /var/www/app/rails_app && bundle exec rdebug-ide --port 1233 --dispatcher-port 26162 --host 0.0.0.0 -- bin/rails s -p 3003 -b 0.0.0.0'",
+      "command": "docker exec rails_dev_web_1 bash -c 'cd /var/my_dir/app/rails_app && bundle exec rdebug-ide --port 1233 --dispatcher-port 26162 --host 0.0.0.0 -- bin/rails s -p 3003 -b 0.0.0.0'",
       "args": [],
       "dependsOn": ["open-debug-browser"],
       "problemMatcher": []

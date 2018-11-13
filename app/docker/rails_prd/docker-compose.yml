@@ -4,40 +4,31 @@ services:
     build:
       context: ../dockerfiles/db
       dockerfile: "Dockerfile"
-    container_name: "rails_dev_db_1"
+    container_name: "rails_prd_db_1"
     environment: 
       - MYSQL_ROOT_PASSWORD=root
     volumes:
       - rails_db:/var/lib/mysql
-
+    restart: always
 
   web:
     build: 
       context: ../dockerfiles/web
       dockerfile: "Dockerfile_centos7"
       args:
-        - RAILS_ENV=development
-    container_name: "rails_dev_web_1"
+        - RAILS_ENV=production
+    container_name: "rails_prd_web_1"
     ports:
-      - "8888:80"
-      - "1233:1233"
-      - "3003:3003"
+      - "80:80"
     volumes:
-      - ../../source:/var/www/app:cached
+      - ../../../:/var/my_dir
       - os_log:/var/log
-      - node_app_modules:/var/www/app/node_app/node_modules
     privileged: true
-
-
-  mail: # 開発環境用のメールサーバ
-    image: sj26/mailcatcher
-    ports:
-      - "1080:1080"
+    restart: always
 
 volumes:
   rails_db:
     driver: 'local'
   os_log:
     driver: 'local'
-  node_app_modules:
-    driver: 'local'
+

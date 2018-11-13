@@ -100,8 +100,8 @@ RUN yum install -y gtk3 \
                    libXss \
                    alsa-lib-devel-1.1.4.1-2.el7 \
                    # ja font \
-                   ipa-gothic-fonts \ 
+                   ipa-gothic-fonts \
                    ipa-mincho-fonts
 
 CMD /sbin/init
-WORKDIR /var/www/app
+WORKDIR /var/my_dir

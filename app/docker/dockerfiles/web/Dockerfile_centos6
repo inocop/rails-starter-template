@@ -105,4 +105,4 @@ CMD service httpd start \
 
 
 USER railsdev
-WORKDIR /var/www/app
+WORKDIR /var/my_dir

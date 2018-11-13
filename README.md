@@ -36,7 +36,7 @@
 ## アプリ名
 
 アプリ名を変更する場合は以下を編集
-- docker-ror/source/rails_app/config/application.rb
+- docker-ror/app/rails_app/config/application.rb
   - module RailsApp -> module XxxYyy
 
 ## 環境構築(development)
@@ -45,7 +45,7 @@
 
 ```
 $ git clone https://github.com/inocop/docker-ror
-$ cd docker-ror/docker/rails_dev
+$ cd docker-ror/app/docker/rails_dev
 $ ./dev_build.sh
 ```
 
@@ -129,13 +129,15 @@ $ useradd railsdev
 $ usermod -u 1000 railsdev && groupmod -g 1000 railsdev
 ```
 
+※既に1000:1000のユーザーがいれば作成不要
+
 
 #### コンテナビルド
 
 ```
 $ git clone https://github.com/inocop/docker-ror /release
 $ chown -R 1000:1000 /release
-$ cd /release/docker/rails_prd
+$ cd /release/app/docker/rails_prd
 $ docker-compose build
 ```
 
@@ -146,8 +148,7 @@ $ docker-compose build
 
 myconf.ymlのproductionを編集。
 
-* ドメインやメールサーバの設定など。
-* secret_key_baseは必須。
+* secret_key_baseの変更は必須
 
   以下コマンドでハッシュ値(sha512)を生成
   ```

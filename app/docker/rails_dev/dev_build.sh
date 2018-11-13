@@ -4,7 +4,7 @@ set -eux
 cd $(dirname $0)
 
 
-MYCONF_YML="../../source/rails_app/config/myconf.yml"
+MYCONF_YML="../../rails_app/config/myconf.yml"
 if [ ! -f $MYCONF_YML ]; then
   cp "${MYCONF_YML}.sample" $MYCONF_YML
 fi
@@ -12,4 +12,4 @@ fi
 
 docker-compose build
 docker-compose up -d
-docker exec -it rails_dev_web_1 bash setup.sh
+docker exec -it rails_dev_web_1 bash -c 'bash /var/my_dir/app/setup.sh'
