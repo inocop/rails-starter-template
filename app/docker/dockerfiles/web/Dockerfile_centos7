@@ -93,7 +93,7 @@ RUN useradd -s /sbin/nologin railsdev \
 
 
 # === node_app
-# for chromium
+# chromium install for Puppeteer
 RUN yum install -y gtk3 \
                    libXcomposite-devel \
                    libXScrnSaver \
@@ -102,6 +102,7 @@ RUN yum install -y gtk3 \
                    # ja font \
                    ipa-gothic-fonts \
                    ipa-mincho-fonts
+# RUN yum -y install epel-release chromium ipa-gothic-fonts ipa-mincho-fonts    # Puppeteerを使わないならこれだけでOK
 
 CMD /sbin/init
 WORKDIR /var/my_dir
