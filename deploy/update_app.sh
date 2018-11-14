@@ -13,7 +13,7 @@ SHARED_DIR=/release/shared
 DEPLOY_DIR=/release/deploy
 DOCKER_DEPLOY_DIR=/var/my_dir/deploy
 
-# コンテナ内でもシンボリックリンクが効くように相対パスで指定する
+# ホスト、コンテナの両方でシンボリックリンクが効くように相対パス指定
 declare -A LINK_DIRS
 LINK_DIRS["rails_app/tmp"]="../../shared"
 LINK_DIRS["rails_app/log"]="../../shared"
@@ -41,7 +41,7 @@ sudo mkdir -p ${DEPLOY_DIR}
 # 前回のデプロイデータがあれば削除
 sudo rm -rf ${DEPLOY_DIR}/*
 
-# app.tar.gzを一時ディレクトリにに展開
+# app.tar.gzをデプロイ用ディレクトリに展開
 sudo tar -zxf /tmp/app.tar.gz -C ${DEPLOY_DIR} --strip-components 1
 
 # sharedディレクトリにシンボリックリンクを設定
@@ -52,7 +52,7 @@ for key in "${!LINK_DIRS[@]}"; do
   sudo ln    -snf ${LINK_DIRS[$key]}/${key} ${DEPLOY_DIR}/${key}
 done
 
-# パーミッション変更
+# パーミッション変更(passengerがrootで動かせないため)
 sudo chown -R 1000:1000 ${RELEASE_DIR}/../
 
 

@@ -86,7 +86,7 @@ RUN systemctl enable httpd.service \
 &&  systemctl enable crond.service
 
 
-# create user
+# create user for passenger
 RUN useradd -s /sbin/nologin railsdev \
 &&  usermod  -u 1000 railsdev \
 &&  groupmod -g 1000 railsdev

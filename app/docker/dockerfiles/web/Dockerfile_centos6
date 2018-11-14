@@ -89,7 +89,7 @@ RUN chkconfig httpd on \
 &&  chkconfig crond on
 
 
-# create user
+# create user for passenger
 RUN useradd railsdev \
 &&  echo "railsdev:password" | chpasswd \
 &&  usermod  -u 1000 railsdev \
