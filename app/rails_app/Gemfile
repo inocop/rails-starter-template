@@ -48,6 +48,21 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # add gem           #
 #####################
 
+# create project
+# gem install rails -v '5.1.6'
+# rails _5.1.6_ new . --database=mysql --skip-bundle --skip-coffee --skip-turbolinks --skip-sprockets
+#
+# change file
+# edit config/database.yml
+#        use myconf.yml
+#
+# edit config/secrets.yml
+#        use myconf.yml
+#
+# edit config/application.rb
+#        use myconf.yml
+
+
 gem 'devise', '~> 4.4.3'
 gem 'devise-i18n', '~> 1.6.4'
 # === settting devise
