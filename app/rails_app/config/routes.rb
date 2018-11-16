@@ -30,6 +30,7 @@ Rails.application.routes.draw do
 
     namespace :admin do
       get 'top', :to => 'top#index'
+      resources :notifications, :except => [:edit, :update]
     end
   end
 

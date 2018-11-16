@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Notifications</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @notifications.each do |notifications| %>
+      <tr>
+        <td><%= link_to 'Show', admin_notification %></td>
+        <td><%= link_to 'Edit', edit_admin_notification_path(authed_admin_notification) %></td>
+        <td><%= link_to 'Destroy', admin_notification, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Notification', new_admin_notification_path %>
