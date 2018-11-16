@@ -1,4 +1,4 @@
-# Ruby on Rails Starter Project on Docker
+# Ruby on Rails Starter Template
 
 ## 構成
 
@@ -44,8 +44,8 @@
 #### コンテナビルド
 
 ```
-$ git clone https://github.com/inocop/docker-ror
-$ cd docker-ror/app/docker/rails_dev
+$ git clone https://github.com/inocop/rails-starter-template.git
+$ cd rails-starter-template/app/docker/rails_dev
 $ ./dev_build.sh
 ```
 
@@ -129,19 +129,9 @@ $ useradd railsdev
 $ usermod -u 1000 railsdev && groupmod -g 1000 railsdev
 ```
 
-※既に1000:1000のユーザーがいれば作成不要
+※既に1000:1000のユーザーがいれば作成不要。
 
-
-#### コンテナビルド
-
-```
-$ git clone https://github.com/inocop/docker-ror /release
-$ chown -R 1000:1000 /release
-$ cd /release/app/docker/rails_prd
-$ docker-compose build
-```
-
-※メモリ1GB以下の環境だとbuildに失敗するのでswapで対応。
+※メモリ1GB以下の環境だとdocker buildに失敗するのでswapを作成しておく。
 
 
 #### 設定ファイル編集
@@ -172,7 +162,15 @@ configの以下パラメータを設定
 * SECRET_KEY
 * MYCONF_YML (本番用のmyconf.yml)
 
+
 デプロイ実行
 ```
-$ ./deploy.sh first   # 初回デプロイ時はfirstを付ける(DB初期化)
+# 初回デプロイ
+$ ./deploy.sh first
+
+# デプロイ & Docker build（ダウンタイム有り）
+$ ./deploy.sh build
+
+# 通常デプロイ
+$ ./deploy.sh
 ```

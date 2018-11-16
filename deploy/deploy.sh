@@ -7,16 +7,17 @@ cd `dirname $0`
 source ./config
 
 # 前処理
-rm -rf src app.tar.gz
+rm -rf repo \
+       app.tar.gz
 
 # ソースコードclone
-git clone --depth 1 --single-branch -b $BRANCH $REPOSITORY src
+git clone --depth 1 --single-branch -b $BRANCH $REPOSITORY repo
 
 # 本番用のmyconf.ymlをセット
-cp $MYCONF_YML src/app/rails_app/config/myconf.yml
+cp $MYCONF_YML repo/app/rails_app/config/myconf.yml
 
-# 所有者情報を含まないtar.gzを作成して転送
-tar -zcvf app.tar.gz --no-same-owner --no-same-permissions -C src app
+# repo/appを所有者情報を含めずにtar.gzにして転送
+tar -zcvf app.tar.gz --no-same-owner --no-same-permissions -C repo app
 scp -i ${SECRET_KEY} app.tar.gz ${REMOTE_USER}@${REMOTE_SERVER}:/tmp/
 
 # デプロイ

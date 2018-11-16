@@ -6,7 +6,7 @@ app/**/uploads/*
 app/**/config/myconf.yml
 
 deploy/config
-deploy/src
+deploy/repo
 deploy/app.tar.gz
 
 !/**/.keep

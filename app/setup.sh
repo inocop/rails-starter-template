@@ -16,9 +16,6 @@ su -s /bin/bash railsdev -c "bundle config --local build.nokogiri --use-system-l
 su -s /bin/bash railsdev -c "bundle install --path vendor/bundle"
 su -s /bin/bash railsdev -c "npm install --prefix ${RAILS_APP_DIR}/public"
 su -s /bin/bash railsdev -c "npm install --prefix ${NODE_APP_DIR}"
-if [ "${RAILS_ENV}" = "production" ]; then
-  exit
-fi
 
 # db create
 bundle exec rake db:create          RAILS_ENV=${RAILS_ENV}
@@ -32,6 +29,8 @@ bundle exec rake db:environment:set RAILS_ENV=test
 
 # passenger
 passenger-config restart-app ${RAILS_APP_DIR}
+systemctl reload delayed_job
+
 
 # puma
 # $ bundle exec rails s -b 0.0.0.0 -p 8888
