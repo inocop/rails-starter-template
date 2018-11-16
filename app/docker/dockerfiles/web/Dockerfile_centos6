@@ -101,6 +101,7 @@ RUN sed -i.org -e "s|secure_path =.*|&:/usr/local/bin|" /etc/sudoers \
 CMD service httpd start \
 &&  service rsyslog start \
 &&  service crond start \
+&&  cd /var/my_dir/app/rails_app && bin/delayed_job \
 &&  /usr/bin/tail -f /dev/null
 
 

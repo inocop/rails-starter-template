@@ -38,7 +38,6 @@ RUN yum install -y sudo \
                    gettext \
                    ImageMagick
 
-
 # ruby install
 RUN wget http://cache.ruby-lang.org/pub/ruby/2.4/ruby-2.4.5.tar.gz \
 &&  tar zxf ruby-2.4.5.tar.gz \
@@ -81,18 +80,7 @@ ADD install_adminer.sh ./
 RUN if [ "${RAILS_ENV}" = "development" ] ; then ./install_adminer.sh ; fi
 
 
-# set use systemd
-RUN systemctl enable httpd.service \
-&&  systemctl enable crond.service
-
-
-# create user for passenger
-RUN useradd -s /sbin/nologin railsdev \
-&&  usermod  -u 1000 railsdev \
-&&  groupmod -g 1000 railsdev
-
-
-# === node_app
+# for node_app
 # chromium install for Puppeteer
 RUN yum install -y gtk3 \
                    libXcomposite-devel \
@@ -103,6 +91,23 @@ RUN yum install -y gtk3 \
                    ipa-gothic-fonts \
                    ipa-mincho-fonts
 # RUN yum -y install epel-release chromium ipa-gothic-fonts ipa-mincho-fonts    # Puppeteerを使わないならこれだけでOK
+
+
+# create user for passenger
+RUN useradd -s /sbin/nologin railsdev \
+&&  usermod  -u 1000 railsdev \
+&&  groupmod -g 1000 railsdev
+
+
+# delayed_jobのsystemd登録
+ADD delayed_job.service.tmp ./
+RUN RAILS_ENV=${RAILS_ENV} cat delayed_job.service.tmp | envsubst > /etc/systemd/system/delayed_job.service
+
+# set use systemd
+RUN systemctl enable httpd.service \
+&&  systemctl enable crond.service \
+&&  systemctl enable delayed_job.service
+
 
 CMD /sbin/init
 WORKDIR /var/my_dir

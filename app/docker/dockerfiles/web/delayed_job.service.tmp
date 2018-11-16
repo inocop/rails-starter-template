@@ -1,0 +1,22 @@
+[Unit]
+Description = delayed_job
+After=local-fs.target network-online.target
+ConditionPathExists=/var/my_dir/app/rails_app/bin
+
+[Service]
+WorkingDirectory=/var/my_dir/app/rails_app
+ExecStart=/usr/local/bin/ruby   bin/delayed_job start
+ExecStop=/usr/local/bin/ruby    bin/delayed_job stop
+ExecReload=/usr/local/bin/ruby  bin/delayed_job reload
+Restart=always
+RestartSec=30
+Type=forking
+User=railsdev
+PIDFile=/var/my_dir/app/rails_app/tmp/pids/delayed_job.pid
+Environment=RAILS_ENV=${RAILS_ENV}
+Environment=EXEC_SYSTEMD=true
+MemoryAccounting=true
+MemoryLimit=1G
+
+[Install]
+WantedBy=multi-user.target

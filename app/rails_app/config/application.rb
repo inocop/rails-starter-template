@@ -65,5 +65,8 @@ module RailsApp
 
     # lib/utilsディレクトリもロード対象に追加
     config.paths.add('lib/utils', eager_load: true)
+
+    # ActiveJobのバックエンドにdelayed_jobを指定
+    config.active_job.queue_adapter = :delayed_job
   end
 end

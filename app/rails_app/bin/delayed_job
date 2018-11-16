@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+# delayed_jobのプロセスをsystemdで管理するので、systemctlで操作する
+unless ENV['EXEC_SYSTEMD']
+    puts "please exec systemctl {start|stop|restart|reload|status} delayed_job"
+  exit 1
+end
+
+require File.expand_path(File.join(File.dirname(__FILE__), '..', 'config', 'environment'))
+require 'delayed/command'
+Delayed::Command.new(ARGV).daemonize
