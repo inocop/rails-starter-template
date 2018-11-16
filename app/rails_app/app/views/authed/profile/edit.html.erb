@@ -12,7 +12,7 @@
     <%= form.email_field :email, autocomplete: "email", :class => "form-control" %>
   </div>
 
-  <div class="actions">
+  <div>
     <%= form.submit "Update", :class => "btn btn-primary" %>
   </div>
 <% end %>
@@ -20,7 +20,7 @@
 
 
 <%= form_for(current_user, url: destroy_user_registration_path, html: {method: :post}) do |form| %>
-  <div class="actions">
+  <div>
     <%= form.submit "Destroy", :class => "btn btn-danger" %>
   </div>
 <% end %>
