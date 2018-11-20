@@ -5,6 +5,7 @@ ja:
     attributes:
       project: &item_name
         name: "プロジェクト名"
+        summary: "概要"
         start_date: "プロジェクト開始日"
         end_date: "プロジェクト終了日"
   authed:
@@ -15,4 +16,11 @@ ja:
         title: "プロジェクト一覧"
       show:
         <<: *item_name
-        error_message: "プロジェクトの保存に失敗しました。"
+        title: "プロジェクト詳細"
+      new:
+        title: "プロジェクト作成"
+      edit:
+        title: "プロジェクト編集"
+      error_message: "プロジェクトの保存に失敗しました。"
+      created_message: "プロジェクトを作成しました。"
+      updated_message: "プロジェクトを更新しました。"

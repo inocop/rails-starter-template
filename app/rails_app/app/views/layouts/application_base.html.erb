@@ -62,8 +62,8 @@
           <li class="nav-item dropdown">
             <div class="nav-link dropdown-toggle py-0" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor:pointer">
               <div class="d-inline-block text-white">
-                <% if current_user.image_path.present? %>
-                  <img class="user-icon-circle" src="<%= current_user.image_path_url %>">
+                <% if current_user.image.present? %>
+                  <img class="user-icon-circle" src="<%= current_user.image_url %>">
                 <% else %>
                   <span class="user-no-icon"><i class="fas fa-user"></i></span>
                 <% end %>

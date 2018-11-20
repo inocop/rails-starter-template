@@ -17,6 +17,7 @@ Rails.application.routes.draw do
 
     post 'api/select_project', :to => 'api#select_project'
 
+
     get  'profile/index',         :to => 'profile#index'
     get  'profile/edit',          :to => 'profile#edit'
     post 'profile/edit',          :to => 'profile#update'
@@ -26,7 +27,11 @@ Rails.application.routes.draw do
     post 'profile/edit_password', :to => 'profile#update_password'
 
     resources :projects
-    resources :tickets
+    resources :tickets do
+      member do
+        get :download_attachment_file
+      end
+    end
 
     namespace :admin do
       get 'top', :to => 'top#index'

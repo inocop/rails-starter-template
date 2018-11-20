@@ -1,5 +1,5 @@
 <%
-# テキストフィールド
+# テキストエリア
 # @params form        [form_helper]
 # @params row         [any]
 # @params field_name  [string]
@@ -22,7 +22,7 @@ options[:required] = true if defined?(required)
   <div class="form-group row">
     <%= form.label(label_name, :class => "col-form-label col-md-2") %>
     <div class="col-md-10">
-      <%= form.text_field(field_name, options) %>
+      <%= form.text_area(field_name, options) %>
     </div>
   </div>
 
@@ -30,6 +30,6 @@ options[:required] = true if defined?(required)
 <% else %>
   <div class="form-group">
     <%= form.label(label_name, :class => "col-form-label") %>
-    <%= form.text_field(field_name, options) %>
+    <%= form.text_area(field_name, options) %>
   </div>
 <% end %>

@@ -15,7 +15,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     # 追加項目を許可
     def configure_permitted_parameters
       default_attrs = [ :email, :password, :password_confirmation ]
-      added_attrs   = [ :image_path, :name ] | default_attrs
+      added_attrs   = [ :image, :name ] | default_attrs
 
       devise_parameter_sanitizer.permit :sign_in,        keys: added_attrs
       devise_parameter_sanitizer.permit :sign_up,        keys: added_attrs

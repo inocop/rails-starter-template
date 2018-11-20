@@ -19,12 +19,12 @@ class Authed::ProfileController < AuthController
   end
 
   # ユーザーアイコン編集
-  # GET /users/profile/edit_images
+  # GET /profile/edit_images
   def edit_image
   end
 
   # ユーザーアイコン更新
-  # POST /users/profile/edit_images
+  # POST /profile/edit_images
   def update_image
     if current_user.update(profile_image_params)
       flash[:notice] = 'Profile image was successfully updated.'
@@ -43,17 +43,14 @@ class Authed::ProfileController < AuthController
 
   private
     def profile_params
-      params.require(:user)
-            .permit(:name, :email)
+      params.require(:user).permit(:name, :email)
     end
 
     def profile_image_params
-      params.require(:user)
-            .permit(:image_path)
+      params.require(:user).permit(:image)
     end
 
     def profile_password_params
-      params.require(:user)
-            .permit(:user_password)
+      params.require(:user).permit(:user_password)
     end
 end

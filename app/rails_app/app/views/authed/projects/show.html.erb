@@ -9,6 +9,13 @@
 
 <div class="form-group row border-bottom">
   <p class="col-3 col-md-2">
+    <%= t('.summary') %>
+  </p>
+  <p class="col-8"><%= @project.summary %></p>
+</div>
+
+<div class="form-group row border-bottom">
+  <p class="col-3 col-md-2">
     <%= t('.start_date') %>
   </p>
   <p class="col-8"><%= @project.start_date %></p>

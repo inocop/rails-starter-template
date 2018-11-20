@@ -5,8 +5,9 @@ ja:
     attributes:
       ticket: &item_name
         name: "チケット名"
-        comment: "内容"
+        summary: "内容"
         status: "ステータス"
+        attachment_file: "添付ファイル"
         work_time: "作業時間"
         start_date: "着手日"
         end_date: "完了日"

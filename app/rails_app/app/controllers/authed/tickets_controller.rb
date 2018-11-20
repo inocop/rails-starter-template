@@ -29,6 +29,7 @@ class Authed::TicketsController < AuthController
   # POST /tickets.json
   def create
     @ticket = Ticket.new(ticket_params)
+    @users = User.all
 
     respond_to do |format|
       if @ticket.save
@@ -65,6 +66,14 @@ class Authed::TicketsController < AuthController
     end
   end
 
+  # GET /tickets/1/download_attachment_file
+  def download_attachment_file
+    @ticket = Ticket.find(params[:id])
+    filepath = @ticket.attachment_file.current_path
+    stat = File::stat(filepath)
+    send_file(filepath, :filename => @ticket.attachment_file_identifier, :length => stat.size)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_ticket
@@ -75,8 +84,11 @@ class Authed::TicketsController < AuthController
     def ticket_params
       #params.fetch(:ticket, {})
       params.require(:ticket).permit(:name,
-                                     :comment,
+                                     :summary,
                                      :status,
+                                     :attachment_file,
+                                     :attachment_file_cache,
+                                     :remove_attachment_file,
                                      :work_time,
                                      :start_date,
                                      :end_date,

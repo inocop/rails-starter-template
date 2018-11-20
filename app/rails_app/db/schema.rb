@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 30) do
 
   create_table "projects", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name", null: false
+    t.string "summary", null: false
     t.date "start_date"
     t.date "end_date"
     t.datetime "deleted_at"
@@ -38,8 +39,9 @@ ActiveRecord::Schema.define(version: 30) do
 
   create_table "tickets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name", null: false
-    t.string "comment"
+    t.string "summary"
     t.integer "status", default: 0, null: false
+    t.string "attachment_file"
     t.time "work_time"
     t.date "start_date"
     t.date "end_date"
@@ -54,7 +56,7 @@ ActiveRecord::Schema.define(version: 30) do
     t.string "name", null: false
     t.string "email", default: "", null: false
     t.boolean "admin", default: false, null: false
-    t.string "image_path"
+    t.string "image"
     t.datetime "deleted_at"
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"

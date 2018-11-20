@@ -5,7 +5,7 @@
     <thead>
       <tr>
         <th><%= t(".name") %></th>
-        <th><%= t(".comment") %></th>
+        <th><%= t(".summary") %></th>
         <th><%= t(".status") %></th>
         <th><%= t(".work_time") %></th>
         <th><%= t(".start_date") %></th>
@@ -19,7 +19,7 @@
       <% @tickets.each do |ticket| %>
         <tr>
           <td><%= ticket.name %></td>
-          <td><%= ticket.comment %></td>
+          <td><%= ticket.summary %></td>
           <td><%= Ticket::STATUS_LIST[ticket.status] %></td>
           <td><%= l(ticket.work_time, :format => :time) if ticket.work_time.present? %></td>
           <td><%= ticket.start_date %></td>

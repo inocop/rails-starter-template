@@ -5,16 +5,16 @@
 # @params field_name  [string]
 # @params label_name  [string]
 
-label_name = field_name if label_name.nil?
+label_name = field_name.to_s if label_name.nil?
 %>
 
 <%# ラベル横並び %>
 <% if defined?(row) %>
   <div class="form-group row">
-    <%= form.label(:label_name, :class => "col-form-label col-md-2") %>
+    <%= form.label(label_name, :class => "col-form-label col-md-2") %>
     <div class="col-md-5">
       <div class="input-group view_parts__form__input_time">
-        <%= form.time_field(:field_name, :style => "background-color:#fff", :class => "form-control", :data => { :input => "" }) %>
+        <%= form.time_field(field_name, :style => "background-color:#fff", :class => "form-control", :data => { :input => "" }) %>
         <div class="input-group-append" data-toggle>
           <span class="input-group-text"><i class="far fa-clock"></i></span>
         </div>
@@ -28,9 +28,9 @@ label_name = field_name if label_name.nil?
 <%# ラベル縦並び %>
 <% else %>
   <div class="form-group row">
-    <%= form.label(:label_name) %>
+    <%= form.label(label_name) %>
     <div class="input-group view_parts__form__input_time">
-      <%= form.time_field(:field_name, :style => "background-color:#fff", :class => "form-control", :data => { :input => "" }) %>
+      <%= form.time_field(field_name, :style => "background-color:#fff", :class => "form-control", :data => { :input => "" }) %>
       <div class="input-group-append" data-toggle>
         <span class="input-group-text"><i class="far fa-clock"></i></span>
       </div>

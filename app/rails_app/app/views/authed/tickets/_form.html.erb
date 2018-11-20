@@ -1,87 +1,44 @@
 <%= form_with(model: ticket, local: true) do |form| %>
-  <% if ticket.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(ticket.errors.count, "error") %> prohibited this ticket from being saved:</h2>
 
-      <ul>
-      <% ticket.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render(partial: "view_parts/alert/validation", locals: {model: ticket}) %>
 
   <%= form.hidden_field :project_id, value: current_project_id %>
+  <%= render(partial: "view_parts/form/input_text", locals: {row: true, form: form, field_name: "name"}) %>
+  <%= render(partial: "view_parts/form/input_textarea", locals: {row: true, form: form, field_name: "summary"}) %>
+
 
   <div class="form-group row">
-    <%= form.label :name, :class => "col-form-label col-md-2" %>
-    <div class="col-md-8">
-      <%= form.text_field :name, :class => "form-control" %>
-    </div>
-  </div>
-  <div class="form-group row">
-    <%= form.label :comment, :class => "col-form-label col-md-2" %>
-    <div class="col-md-8">
-      <%= form.text_area :comment, :class => "form-control" %>
-    </div>
-  </div>
-  <div class="form-group row">
     <%= form.label :status, :class => "col-form-label col-md-2" %>
-    <div class="col-md-8">
+    <div class="col-md-10">
       <%= form.select :status, Ticket::STATUS_LIST.invert, {}, :class => "form-control" %>
     </div>
   </div>
+
+  <%= render(partial: "view_parts/form/input_file", locals: {row: true, form: form, field_name: "attachment_file"}) %>
+  <% if ticket.attachment_file.file.present? %>
+  <%= form.hidden_field(:attachment_file_cache) %>
   <div class="form-group row">
-    <%= form.label :work_time, :class => "col-form-label col-md-2" %>
-    <div class="col-md-8">
-      <div class="input-group time-by-flatpickr">
-        <%= form.time_field :work_time, :style => "background-color:#fff", :class => "form-control", :data => { :input => "" } %>
-        <div class="input-group-append" data-toggle>
-          <span class="input-group-text"><i class="far fa-clock"></i></span>
-        </div>
-        <div class="input-group-append" data-clear>
-          <span class="input-group-text"><i class="fas fa-times"></i></span>
-        </div>
-      </div>
+    <div class="offset-md-2 col-md-10">
+      <label class="mb-0"><%= form.check_box(:remove_attachment_file) %> <%= ticket.attachment_file.file.original_filename %></label>
+      <br>ファイル削除
     </div>
   </div>
-  <div class="form-group row">
-    <%= form.label :start_date, :class => "col-form-label col-md-2" %>
-    <div class="col-md-8">
-      <div class="input-group date-by-flatpickr">
-        <%= form.text_field :start_date, :style => "background-color:#fff", :class => "form-control", :data => { :input => "" } %>
-        <div class="input-group-append">
-          <span class="input-group-text" data-toggle><i class="far fa-calendar-alt"></i></span>
-        </div>
-        <div class="input-group-append" data-clear>
-          <span class="input-group-text"><i class="fas fa-times"></i></span>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="form-group row">
-    <%= form.label :end_date, :class => "col-form-label col-md-2" %>
-    <div class="col-md-8">
-      <div class="input-group date-by-flatpickr">
-        <%= form.text_field :end_date, :style => "background-color:#fff", :class => "form-control", :data => { :input => "" } %>
-        <div class="input-group-append">
-          <span class="input-group-text" data-toggle><i class="far fa-calendar-alt"></i></span>
-        </div>
-        <div class="input-group-append" data-clear>
-          <span class="input-group-text"><i class="fas fa-times"></i></span>
-        </div>
-      </div>
-    </div>
-  </div>
+  <% end %>
+
+
+  <%= render(partial: "view_parts/form/input_time", locals: {row: true, form: form, field_name: "work_time"}) %>
+  <%= render(partial: "view_parts/form/input_date", locals: {row: true, form: form, field_name: "start_date"}) %>
+  <%= render(partial: "view_parts/form/input_date", locals: {row: true, form: form, field_name: "end_date"}) %>
+
   <div class="form-group row">
     <%= form.label "担当者", :class => "col-form-label col-md-2" %>
-    <div class="col-md-8">
-      <%= form.select :assigned_user_id, @users.map{|u| [u.email, u.id]}, {}, :class => "form-control" %>
+    <div class="col-md-10">
+      <%= form.select :assigned_user_id, @users.map{|u| [u.name, u.id]}, {}, class: "form-control" %>
     </div>
   </div>
 
   <div class="mt-4">
-    <%= form.submit :class => "btn btn-primary" %>
-    <%= link_to "戻る", 'javascript:void(0);', onclick: "history.back();", :class => "ml-3 btn btn-primary" %>
+    <%= form.submit get_action_text, class: "btn btn-primary" %>
+    <%= link_to "戻る", 'javascript:void(0);', onclick: "history.back();", class: "ml-3 btn btn-primary" %>
   </div>
 <% end %>

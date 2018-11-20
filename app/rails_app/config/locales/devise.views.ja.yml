@@ -26,7 +26,7 @@ ja:
         unlock_token: "ロック解除用トークン"
         updated_at: "更新日"
         name: "ユーザー名"
-        image_path: "アイコン"
+        image: "アイコン"
     models:
       user: "ユーザ"
   devise:

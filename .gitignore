@@ -9,4 +9,6 @@ deploy/config
 deploy/repo
 deploy/app.tar.gz
 
+uploads/**
+
 !/**/.keep

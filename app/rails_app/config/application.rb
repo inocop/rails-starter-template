@@ -68,5 +68,8 @@ module RailsApp
 
     # ActiveJobのバックエンドにdelayed_jobを指定
     config.active_job.queue_adapter = :delayed_job
+
+    # バリデーションエラー時のfield_with_errorsの差し込みを無効化
+    config.action_view.field_error_proc = Proc.new { |html_tag, instance| html_tag }
   end
 end

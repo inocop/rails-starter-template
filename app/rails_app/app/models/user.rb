@@ -11,7 +11,7 @@ class User < ApplicationRecord
   validates :email, :length => {:maximum => 244} # 論理削除時のprefix分を確保して制限
                     #:uniqueness => {:scope => :deleted_at, :case_sensible => false}
 
-  mount_uploader :image_path, UserImageUploader
+  mount_uploader :image, UserImageUploader
 
 
   # instead of deleting, indicate the user requested a delete & timestamp it

@@ -5,7 +5,7 @@
 # @params field_name  [string]
 # @params label_name  [string]
 
-label_name = field_name if label_name.nil?
+label_name = field_name.to_s if label_name.nil?
 %>
 
 <%# ラベル横並び %>

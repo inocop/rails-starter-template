@@ -1,4 +1,5 @@
 class Ticket < ApplicationRecord
+  mount_uploader :attachment_file, TicketAttachmentFileUploader
 
   STATUS_LIST = {
     STATUS_DRAFT = 0 => "未設定",
@@ -9,4 +10,6 @@ class Ticket < ApplicationRecord
 
   belongs_to :project
   belongs_to :user, foreign_key: 'assigned_user_id', primary_key: 'id', class_name: "User"
+
+  validates :name,   presence: true
 end
