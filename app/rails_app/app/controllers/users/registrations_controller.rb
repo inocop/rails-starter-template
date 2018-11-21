@@ -4,11 +4,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # @override
   def destroy
-    resource.soft_delete
-    Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name)
-    set_flash_message :notice, :destroyed
-    yield resource if block_given?
-    respond_with_navigational(resource){ redirect_to after_sign_out_path_for(resource_name) }
+    if resource.soft_delete
+      Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name)
+      set_flash_message :notice, :destroyed
+      yield resource if block_given?
+      respond_with_navigational(resource){ redirect_to after_sign_out_path_for(resource_name) }
+    else
+      redirect_to profile_edit_path, alert: "Failed to delete user"
+    end
   end
 
   private
