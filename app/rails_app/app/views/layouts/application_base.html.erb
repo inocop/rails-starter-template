@@ -95,7 +95,7 @@
               <%= form_tag({:controller => '/authed/api', :action => 'select_project'}, { :id => 'select_project_form'}) do %>
                 <input id="controller_name" name="controller_name" type="hidden" value="<%= controller.controller_path %>">
                 <select id="project_id" name="project_id" class="form-control form-control-sm">
-                    <% @select_projects.each do |project| %>
+                    <% @assign_projects.each do |project| %>
                       <option value="<%= project.id %>" <%= "selected" if project.id == current_project_id %>> <%= project.name %></option>
                     <% end %>
                 </select>

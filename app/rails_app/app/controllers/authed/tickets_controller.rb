@@ -1,12 +1,12 @@
 class Authed::TicketsController < AuthController
   layout 'authed/tickets'
 
-  before_action :set_ticket, only: [:show, :edit, :update, :destroy]
+  before_action :set_ticket, only: [:show, :edit, :update, :destroy, :download_attachment_file]
 
   # GET /tickets
   # GET /tickets.json
   def index
-    @tickets = Ticket.where("project_id = ?", current_project_id)
+    @tickets = Ticket.active.where("project_id = ?", current_project_id)
   end
 
   # GET /tickets/1
@@ -17,19 +17,18 @@ class Authed::TicketsController < AuthController
   # GET /tickets/new
   def new
     @ticket = Ticket.new
-    @users = User.all
+    @users = User.active
   end
 
   # GET /tickets/1/edit
   def edit
-    @users = User.all
   end
 
   # POST /tickets
   # POST /tickets.json
   def create
     @ticket = Ticket.new(ticket_params)
-    @users = User.all
+    @users = User.active
 
     respond_to do |format|
       if @ticket.save
@@ -68,7 +67,6 @@ class Authed::TicketsController < AuthController
 
   # GET /tickets/1/download_attachment_file
   def download_attachment_file
-    @ticket = Ticket.find(params[:id])
     filepath = @ticket.attachment_file.current_path
     stat = File::stat(filepath)
     send_file(filepath, :filename => @ticket.attachment_file_identifier, :length => stat.size)
@@ -78,6 +76,12 @@ class Authed::TicketsController < AuthController
     # Use callbacks to share common setup or constraints between actions.
     def set_ticket
       @ticket = Ticket.find(params[:id])
+      @users = User.active
+
+      assign_projects = Project.active
+      unless assign_projects.ids.include?(@ticket.project_id)
+        redirect_to :action => :index
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

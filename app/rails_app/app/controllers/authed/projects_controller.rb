@@ -5,7 +5,7 @@ class Authed::ProjectsController < AuthController
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.page(params[:page]).per(5)
+    @projects = Project.active.page(params[:page]).per(MyAppConst::DISPLAY_COUNT)
   end
 
   # GET /projects/1
@@ -66,6 +66,11 @@ class Authed::ProjectsController < AuthController
     # Use callbacks to share common setup or constraints between actions.
     def set_project
       @project = Project.find(params[:id])
+
+      assign_projects = Project.active
+      unless assign_projects.ids.include?(@project.id)
+        redirect_to :action => :index
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
