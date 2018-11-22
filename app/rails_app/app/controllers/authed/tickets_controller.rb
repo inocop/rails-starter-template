@@ -58,7 +58,8 @@ class Authed::TicketsController < AuthController
   # DELETE /tickets/1
   # DELETE /tickets/1.json
   def destroy
-    @ticket.destroy
+    #@ticket.destroy
+    @ticket.update(deleted_at: Time.current)
     respond_to do |format|
       format.html { redirect_to tickets_url, notice: 'Ticket was successfully destroyed.' }
       format.json { head :no_content }

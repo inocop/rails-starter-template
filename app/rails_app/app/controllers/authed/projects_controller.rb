@@ -55,7 +55,8 @@ class Authed::ProjectsController < AuthController
   # DELETE /projects/1
   # DELETE /projects/1.json
   def destroy
-    @project.destroy
+    #@project.destroy
+    @project.update(deleted_at: Time.current)
     respond_to do |format|
       format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }
       format.json { head :no_content }
