@@ -4,13 +4,9 @@ class AddColumnsUsers < ActiveRecord::Migration[5.1]
     add_column(:users, :admin,      :boolean, null: false, default: false, :after => :email)
     add_column(:users, :image,      :string,  :after => :admin)
     add_column(:users, :deleted_at, :datetime, :after => :image)
-
-    add_index(:users, [:email, :deleted_at], unique: true)
   end
 
   def down
-    remove_index(:users, [:email, :deleted_at])
-
     remove_column(:users, :name)
     remove_column(:users, :admin)
     remove_column(:users, :image)

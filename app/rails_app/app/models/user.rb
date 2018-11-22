@@ -10,10 +10,8 @@ class User < ApplicationRecord
 
   validates :name, :presence => true,
                    :length => {:maximum => 50}
-
   validates :email, :length => {:maximum => 244}, # 論理削除時のprefix分を確保して制限
-                    :uniqueness => {:scope => :deleted_at, :case_sensible => false}
-
+                    :uniqueness => {:case_sensible => false}
 
   # instead of deleting, indicate the user requested a delete & timestamp it
   def soft_delete
