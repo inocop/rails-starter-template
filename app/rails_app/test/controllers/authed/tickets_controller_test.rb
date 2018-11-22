@@ -1,8 +1,12 @@
 require 'test_helper'
 
-class TicketsControllerTest < ActionDispatch::IntegrationTest
+class Authed::TicketsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @ticket = tickets(:one)
+    @project = projects(:project_2)
+    @user_2 = users(:user_2)
+    @ticket = tickets(:ticket_1)
+
+    sign_in(@user_2, @project.id)
   end
 
   test "should get index" do
@@ -17,7 +21,7 @@ class TicketsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create ticket" do
     assert_difference('Ticket.count') do
-      post tickets_url, params: { ticket: {  } }
+      post tickets_url, params: { ticket: { name: "test", project_id: 2, assigned_user_id: @user_2.id } }
     end
 
     assert_redirected_to ticket_url(Ticket.last)
@@ -34,7 +38,7 @@ class TicketsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update ticket" do
-    patch ticket_url(@ticket), params: { ticket: {  } }
+    patch ticket_url(@ticket), params: { ticket: { name: "test" } }
     assert_redirected_to ticket_url(@ticket)
   end
 

@@ -6,7 +6,7 @@ class Authed::ApiController < AuthController
   # プロジェクト切り替え
   def select_project
     project_id = params[:project_id]
-    controller = params[:controller_name] || root_path
+    controller = params[:controller_name].presence || "authed/dashboard"
 
     unless project_id.nil?
       session[:current_project] = project_id.to_i

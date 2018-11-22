@@ -88,7 +88,7 @@ docker_exec "cd /var/my_dir/deploy/node_app \
 ############################
 docker_exec "cd /var/my_dir/deploy/rails_app \
              && bin/rails db:migrate RAILS_ENV=test"
-             #&& bin/rails test
+             #&& bin/rails test:system test
 
 
 ############################

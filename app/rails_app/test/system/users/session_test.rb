@@ -1,6 +1,6 @@
 require "application_system_test_case"
 
-class AuthTest < ApplicationSystemTestCase
+class Users::SessionTest < ApplicationSystemTestCase
   test "visiting the index" do
     visit "users/sign_in"
 

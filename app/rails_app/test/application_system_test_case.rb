@@ -1,7 +1,7 @@
 require "test_helper"
 require 'capybara/rails'
 require 'selenium-webdriver'
-
+require 'chromedriver-helper'
 
 class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   #driven_by :selenium, using: :chrome, screen_size: [1400, 1400]
@@ -25,22 +25,36 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
       desired_capabilities: capabilities
     )
   end
-
   Capybara.default_driver = :headless_chromium
   Capybara.javascript_driver = :headless_chromium
   Capybara.default_max_wait_time = 5
 
 
-  def set_user_and_project(user:, project_id:)
+  def sign_in(user, project_id=nil)
     visit('/users/sign_in')
 
     if page.current_path == '/users/sign_in'
-      fill_in('email',    :with => user.email)
-      fill_in('password', :with => "password")
-      click_button 'ログイン'
+      page.fill_in('user[email]',    :with => user.email)
+      page.fill_in('user[password]', :with => "password")
+      page.click_button 'ログイン'
     end
 
-    find("option[value='#{project_id}']").select_option if project_id
+    select_project(project_id) if project_id.present?
+  end
+
+  def select_project(project_id)
+    page.driver.submit(:post, "/api/select_project", {:project_id => project_id})
+    #page.find("option[value='#{project_id}']").select_option
+  end
+
+  def get_cookie(name:)
+    cookies = page.driver.browser.manage.all_cookies
+    cookie = cookies.find { |c| c[:name] == name }
+    cookie && cookie[:value]
+  end
+
+  def set_cookie(name:, value:)
+    page.driver.browser.manage.add_cookie(name: name, value: value.to_s)
   end
 
   def wait_for_ajax
@@ -65,15 +79,5 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
       end
     end
     raise "wati timeover"
-  end
-
-  def get_cookie(name:)
-    cookies = page.driver.browser.manage.all_cookies
-    cookie = cookies.find { |c| c[:name] == name }
-    cookie && cookie[:value]
-  end
-
-  def set_cookie(name:, value:)
-    page.driver.browser.manage.add_cookie(name: name, value: value.to_s)
   end
 end

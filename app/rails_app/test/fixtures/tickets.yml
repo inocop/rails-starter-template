@@ -1,15 +1,19 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-project_1:
+ticket_1:
   id: 1
-  name: テストプロジェクト1
+  name: テストチケット1
   summary:
+  project_id: 1
+  assigned_user_id: 1
   start_date: 2019-01-01
   end_date: 2020-01-01
 
-project_2:
+ticket_2:
   id: 2
-  name: テストプロジェクト2
+  name: テストチケット2
   summary:
+  project_id: 1
+  assigned_user_id: 1
   start_date: 2019-01-02
   end_date: 2020-01-02

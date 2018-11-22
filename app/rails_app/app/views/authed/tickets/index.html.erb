@@ -24,7 +24,7 @@
           <td><%= l(ticket.work_time, :format => :time) if ticket.work_time.present? %></td>
           <td><%= ticket.start_date %></td>
           <td><%= ticket.end_date %></td>
-          <td><%= ticket.user.email %></td>
+          <td><%= ticket.user.name %></td>
           <td><%= link_to t('text.action.show'), ticket %></td>
           <td><%= link_to t('text.action.edit'), edit_ticket_path(ticket) %></td>
           <td><%= link_to t('text.action.delete'), ticket, method: :delete, data: { confirm: 'Are you sure?' } %></td>

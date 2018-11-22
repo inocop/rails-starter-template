@@ -1,8 +1,11 @@
 require 'test_helper'
 
-class ProjectsControllerTest < ActionDispatch::IntegrationTest
+class Authed::ProjectsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @project = projects(:one)
+    @project = projects(:project_2)
+    @user_2 = users(:user_2)
+
+    sign_in(@user_2, @project.id)
   end
 
   test "should get index" do
@@ -17,7 +20,7 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create project" do
     assert_difference('Project.count') do
-      post projects_url, params: { project: {  } }
+      post projects_url, params: { project: { name: "test" } }
     end
 
     assert_redirected_to project_url(Project.last)
@@ -34,7 +37,7 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update project" do
-    patch project_url(@project), params: { project: {  } }
+    patch project_url(@project), params: { project: { name: "test" } }
     assert_redirected_to project_url(@project)
   end
 
