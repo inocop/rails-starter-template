@@ -2,11 +2,15 @@
 <% end %>
 
 <% content_for :sidemenu do %>
-  <div class="list-group mb-3">
+<div class="card">
+  <div class="card-header">
+    システム管理
+  </div>
+  <div class="list-group list-group-flush">
     <a class="list-group-item" href="#">ユーザー管理</a>
-    <a class="list-group-item" href="#">プロジェクト管理</a>
     <a class="list-group-item <%= "active" if controller_name == "notifications" %>" href="<%= admin_notifications_path %>">お知らせ通知</a>
   </div>
+</div>
 <% end %>
 
 <%= render :template => 'layouts/application_base', locals: {hidden_project: true} %>
