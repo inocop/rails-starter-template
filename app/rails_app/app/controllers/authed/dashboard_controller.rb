@@ -7,17 +7,14 @@ class Authed::DashboardController < AuthController
     # ステータス別にticketを分割
     tickets = Ticket.where("project_id = ?", current_project_id)
 
-    @email_list = []
-    @draft_date_list = []
-    @start_date_list = []
-    @end_date_list   = []
+    @user_list = []
+    @draft_list = []
+    @start_list = []
     users.each do |user|
-      @email_list << user.email
-      @draft_date_list << tickets.select{|item| user.id == item.assigned_user_id && item.status == Ticket::STATUS_DRAFT}.count
-      @start_date_list << tickets.select{|item| user.id == item.assigned_user_id && item.status == Ticket::STATUS_START}.count
-      @end_date_list   << tickets.select{|item| user.id == item.assigned_user_id && item.status == Ticket::STATUS_END}.count
+      @user_list  << user.name
+      @draft_list << tickets.select{|item| user.id == item.assigned_user_id && item.status == Ticket::STATUS_DRAFT}.count
+      @start_list << tickets.select{|item| user.id == item.assigned_user_id && item.status == Ticket::STATUS_START}.count
     end
-
   end
 
 end
