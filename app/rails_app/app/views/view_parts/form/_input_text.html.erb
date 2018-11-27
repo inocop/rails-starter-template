@@ -20,7 +20,7 @@ options[:required] = true if defined?(required)
 <%# ラベル横並び %>
 <% if defined?(row) %>
   <div class="form-group row">
-    <%= form.label(label_name, :class => "col-form-label col-md-2") %>
+    <%= form.label(label_name, :class => "col-form-label col-md-2 #{('required' if options[:required])}") %>
     <div class="col-md-10">
       <%= form.text_field(field_name, options) %>
     </div>
@@ -29,7 +29,7 @@ options[:required] = true if defined?(required)
 <%# ラベル縦並び %>
 <% else %>
   <div class="form-group">
-    <%= form.label(label_name, :class => "col-form-label") %>
+    <%= form.label(label_name, :class => "col-form-label #{('required' if options[:required])}") %>
     <%= form.text_field(field_name, options) %>
   </div>
 <% end %>

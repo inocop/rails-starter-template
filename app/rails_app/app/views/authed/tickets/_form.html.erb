@@ -3,7 +3,7 @@
   <%= render(partial: "view_parts/alert/validation", locals: {model: ticket}) %>
 
   <%= form.hidden_field :project_id, value: current_project_id %>
-  <%= render(partial: "view_parts/form/input_text", locals: {row: true, form: form, field_name: "name"}) %>
+  <%= render(partial: "view_parts/form/input_text", locals: {row: true, form: form, field_name: "name", required: true}) %>
   <%= render(partial: "view_parts/form/input_textarea", locals: {row: true, form: form, field_name: "summary"}) %>
 
 
