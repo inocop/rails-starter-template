@@ -51,7 +51,7 @@ $ ./dev_build.sh
 
 #### アクセス
 
-http://localhost:8888
+http://localhost:8081
 
 
 開発用初期ユーザ
@@ -64,11 +64,11 @@ http://localhost:8888
 
 #### DBツール(adminer)
 
-http://localhost:8888/tools
+http://localhost:8081/tools
 
 #### メールツール(MailCatcher)
 
-http://localhost:1080
+http://localhost:1081
 
 
 #### デバッグ

@@ -10,7 +10,7 @@
       "request": "attach",
       "cwd": "${workspaceRoot}/app/rails_app",
       "remoteHost": "127.0.0.1",
-      "remotePort": "1233",
+      "remotePort": "1231",
       "remoteWorkspaceRoot": "/var/my_dir/app/rails_app"
     }
   ]
