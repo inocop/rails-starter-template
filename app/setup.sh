@@ -15,7 +15,7 @@ cd ${RAILS_APP_DIR}
 su -s /bin/bash railsdev -c "bundle config --local build.nokogiri --use-system-libraries"
 su -s /bin/bash railsdev -c "bundle install --path vendor/bundle"
 su -s /bin/bash railsdev -c "npm install --prefix ${RAILS_APP_DIR}/public"
-su -s /bin/bash railsdev -c "npm install --prefix ${NODE_APP_DIR}"
+npm install --prefix ${NODE_APP_DIR}
 
 # db create
 bundle exec rake db:create          RAILS_ENV=${RAILS_ENV}
