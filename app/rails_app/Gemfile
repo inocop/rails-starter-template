@@ -80,7 +80,8 @@ gem 'devise-i18n', '~> 1.6.4'
 
 gem 'kaminari', '~> 1.1.1'
 # === pagenation custom template
-# bundle exec rails g kaminari:views default
+# bundle exec rails g kaminari:config
+# bundle exec rails g kaminari:views {default|bootstrap4}
 # edit app/views/kaminari/*
 
 
@@ -96,10 +97,11 @@ gem 'daemons', '~> 1.2.6'
 # bundle exec rails g job notification_deliver
 # bundle exec rails g mailer system_mailer send_notification
 gem 'mini_magick', '~> 4.9.2'
-
+gem 'rails_autolink', '~> 1.1.6'
 
 # Rails5.2から標準
 gem 'bootsnap', '>= 1.1.0', require: false
+
 
 group :development, :test do
   gem 'ruby-debug-ide', '~> 0.6.1', require: false

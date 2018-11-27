@@ -152,6 +152,8 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.0.4)
       loofah (~> 2.2, >= 2.2.2)
+    rails_autolink (1.1.6)
+      rails (> 3.1)
     railties (5.1.6)
       actionpack (= 5.1.6)
       activesupport (= 5.1.6)
@@ -223,6 +225,7 @@ DEPENDENCIES
   mysql2 (>= 0.3.18, < 0.6.0)
   puma (~> 3.7)
   rails (~> 5.1.6)
+  rails_autolink (~> 1.1.6)
   ruby-debug-ide (~> 0.6.1)
   selenium-webdriver
   spring
