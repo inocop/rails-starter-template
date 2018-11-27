@@ -7,6 +7,7 @@ class Authed::TicketsController < AuthController
   # GET /tickets.json
   def index
     @tickets = Ticket.active.where("project_id = ?", current_project_id)
+    @tickets = @tickets.page(params[:page])
   end
 
   # GET /tickets/1

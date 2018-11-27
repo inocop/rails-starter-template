@@ -5,7 +5,7 @@ class Authed::ProjectsController < AuthController
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.active.page(params[:page]).per(MyAppConst::DISPLAY_COUNT)
+    @projects = Project.active.page(params[:page])
   end
 
   # GET /projects/1

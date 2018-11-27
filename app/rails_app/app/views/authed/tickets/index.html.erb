@@ -36,3 +36,8 @@
 <br>
 
 <%= link_to t('text.action.new'), new_ticket_path, class: "btn btn-primary" %>
+
+<br>
+<div class="d-flex justify-content-center">
+  <%= paginate @tickets %>
+</div>
