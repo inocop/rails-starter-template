@@ -6,28 +6,28 @@
     var myChart = new Chart(ctx, {
       type: 'bar',
       data: {
-          labels: <%= raw(@project_list.to_json) %>,
+          labels: <%= raw(@email_list.to_json) %>,
           datasets: [
           {
               label: "<%= Ticket::STATUS_LIST[Ticket::STATUS_DRAFT] %>",
               borderWidth:1,
               backgroundColor: "green",
               borderColor: "green",
-              data: <%= raw(@draft_ticket_list.to_json) %>
+              data: <%= raw(@draft_date_list.to_json) %>
            },
            {
               label: "<%= Ticket::STATUS_LIST[Ticket::STATUS_START] %>",
               borderWidth:1,
               backgroundColor: "cornflowerblue",
               borderColor: "cornflowerblue",
-              data: <%= raw(@start_ticket_list.to_json) %>
+              data: <%= raw(@start_date_list.to_json) %>
           },
           {
               label: "<%= Ticket::STATUS_LIST[Ticket::STATUS_END] %>",
               borderWidth:1,
               backgroundColor: "darkorange",
               borderColor: "darkorange",
-              data: <%= raw(@end_ticket_list.to_json) %>
+              data: <%= raw(@end_date_list.to_json) %>
           }]
       },
       options: {
