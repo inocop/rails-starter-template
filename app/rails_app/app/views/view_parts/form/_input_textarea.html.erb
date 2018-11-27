@@ -7,6 +7,7 @@
 # @params placeholder [string]
 # @params autofocus   [any]
 # @params required    [any]
+# @params lines       [int]
 
 label_name = field_name.to_s if label_name.nil?
 
@@ -15,6 +16,7 @@ options[:class] = "form-control"
 options[:placeholder] = placeholder if defined?(placeholder)
 options[:autofocus] = true if defined?(autofocus)
 options[:required] = true if defined?(required)
+options[:rows] = defined?(lines) ? lines : 5
 %>
 
 <%# ラベル横並び %>
