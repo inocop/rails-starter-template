@@ -13,12 +13,17 @@ NameVirtualHost *:80
     Require all granted
   </Directory>
 
-
   Alias /tools /var/www/html/tools
   <Location /tools>
     PassengerEnabled off
   </Location>
 </VirtualHost>
+
+
+<IfModule mod_xsendfile.c>
+  XSendFile on
+  XSendFilePath /var/my_dir/uploads
+</IfModule>
 
 
 # passenger-install-apache2-module --snippet

@@ -14,8 +14,11 @@ RUN yum install -y sudo \
                    cronie \
                    which \
                    wget \
-                   httpd \
+                   epel-release \
+&&  yum install -y httpd \
                    httpd-devel \
+                   mod_xsendfile \
+                   mod_ssl \
                    libcurl-devel \
                    apr-devel \
                    apr-util-devel \
@@ -90,7 +93,8 @@ RUN yum install -y gtk3 \
                    # ja font \
                    ipa-gothic-fonts \
                    ipa-mincho-fonts
-# RUN yum -y install epel-release chromium ipa-gothic-fonts ipa-mincho-fonts    # Puppeteerを使わないならこれだけでOK
+# Puppeteerのchromiumを使わないならこれだけでOK
+# RUN yum -y install chromium ipa-gothic-fonts ipa-mincho-fonts
 
 
 # create user for passenger
