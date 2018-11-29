@@ -21,7 +21,7 @@ services:
       - "1231:1231"
       - "3001:3001"
     volumes:
-      - ../../../:/var/my_dir:cached
+      - ../../../app:/var/my_dir/app:cached
       - os_log:/var/log
       - node_package:/var/my_dir/app/node_app/node_modules
     privileged: true
