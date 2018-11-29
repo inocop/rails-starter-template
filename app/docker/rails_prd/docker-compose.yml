@@ -4,7 +4,6 @@ services:
     build:
       context: ../dockerfiles/db
       dockerfile: "Dockerfile"
-    container_name: "rails_prd_db_1"
     environment: 
       - MYSQL_ROOT_PASSWORD=root
     volumes:
@@ -17,7 +16,6 @@ services:
       dockerfile: "Dockerfile_centos7"
       args:
         - RAILS_ENV=production
-    container_name: "rails_prd_web_1"
     ports:
       - "80:80"
     volumes:

@@ -25,12 +25,20 @@ LINK_DIRS["node_app/node_modules"]="../../shared"
 
 
 ############################
-# docker exec用の関数      #
+# docker_cmd用の関数      #
 ############################
-function docker_exec() {
-  sudo docker exec rails_prd_web_1 bash -l -c "$1"
+function docker_cmd() {
+  pushd ${APP_DIR}/docker/rails_prd/
+    if   [ "$1" = "exec" ]
+      sudo docker-compose exec web bash -l -c "$2"
+    elif [ "$1" = "up" ]
+      sudo docker image prune -f # 不要なimageを削除
+      sudo docker-compose up -d --build
+    else
+      exit
+    fi
+  popd
 }
-
 
 ############################
 #  前処理                   #
@@ -64,9 +72,8 @@ if [ "$OPTION" = "first" ]; then
   rm -rf ${APP_DIR}
   mv ${DEPLOY_DIR} ${APP_DIR}
 
-  cd ${APP_DIR}/docker/rails_prd/
-  sudo docker-compose up -d --build
-  docker_exec "bash /var/my_dir/app/setup.sh production"
+  docker_cmd "up"
+  docker_cmd "exec" "bash /var/my_dir/app/setup.sh production"
   echo "Successfully first deployed"
   exit # 初回デプロイはここで終了
 fi
@@ -75,27 +82,26 @@ fi
 ############################
 #  gem、npmの更新           #
 ############################
-docker_exec "cd /var/my_dir/deploy/rails_app \
-             && su -s /bin/bash railsdev -c \"npm install --prefix ./public\" \
-             && su -s /bin/bash railsdev -c \"bundle install\""
+docker_cmd "exec" "cd /var/my_dir/deploy/rails_app && \
+                   su -s /bin/bash railsdev -c \"npm install --prefix ./public\" && \
+                   su -s /bin/bash railsdev -c \"bundle install\""
 
-docker_exec "cd /var/my_dir/deploy/node_app \
-             && su -s /bin/bash railsdev -c \"npm install\""
+docker_cmd "exec" "cd /var/my_dir/deploy/node_app && \
+                   su -s /bin/bash railsdev -c \"npm install\""
 
 
 ############################
 #  テスト実行               #
 ############################
-docker_exec "cd /var/my_dir/deploy/rails_app \
-             && bin/rails db:migrate RAILS_ENV=test"
-             #&& bin/rails test:system test
+dodocker_cmd "exec" "cd /var/my_dir/deploy/rails_app && \
+                     bin/rails db:migrate RAILS_ENV=test" # && \ bin/rails test:system test
 
 
 ############################
 #  DBマイグレーション       #
 ############################
-docker_exec "cd /var/my_dir/deploy/rails_app \
-             && bin/rails db:migrate RAILS_ENV=production"
+dodocker_cmd "exec" "cd /var/my_dir/deploy/rails_app && \
+                     bin/rails db:migrate RAILS_ENV=production"
 
 
 ############################
@@ -109,14 +115,9 @@ mv ${DEPLOY_DIR} ${APP_DIR}
 #  再起動                  #
 ############################
 if [ "$OPTION" = "build" ]; then
-  pushd ${APP_DIR}/docker/rails_prd/
-    sudo docker image prune -f # 不要なimageを削除
-    sudo docker-compose build
-    sudo docker-compose restart
-  popd
+  docker_cmd "up"
 else
-  docker_exec "passenger-config restart-app /var/my_dir/app/rails_app \
-               && systemctl reload delayed_job"
+  docker_cmd "exec" "systemctl restart puma && systemctl reload delayed_job"
 fi
 
 

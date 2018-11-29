@@ -64,7 +64,7 @@ RUN cp /usr/lib/systemd/system/httpd.service /etc/systemd/system/httpd.service \
 
 # set TimeZone
 RUN ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
-#RUN timedatectl set-timezone Asia/Tokyo
+#RUN timedatectl set-timezone Asia/Tokyo  # build時にtimedatectlを実行できないので上の方法でタイムゾーンを変更。(コンテナ起動後にexecでなら可能)
 
 
 # get build-arg

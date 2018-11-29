@@ -12,4 +12,4 @@ fi
 
 docker-compose build
 docker-compose up -d
-docker exec -it rails_dev_web_1 bash -c 'bash /var/my_dir/app/setup.sh'
+docker-compose exec web bash -c 'bash /var/my_dir/app/setup.sh'
