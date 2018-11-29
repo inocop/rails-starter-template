@@ -10,7 +10,7 @@ module Utils
 
     # screenshot出力
     def html_to_png(html:, save_path:)
-      system(*[MyAppConst::CHROMIUM_PATH,
+      system(*[AppConst::CHROMIUM_PATH,
                "--headless",
                "--disable-gpu",
                "--no-sandbox",
@@ -22,7 +22,7 @@ module Utils
 
     # pdf出力
     def html_to_pdf(html:, save_path:)
-      system(*[MyAppConst::CHROMIUM_PATH,
+      system(*[AppConst::CHROMIUM_PATH,
                "--headless",
                "--disable-gpu",
                "--no-sandbox",

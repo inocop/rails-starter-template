@@ -1,4 +1,4 @@
-module MyAppConst
+module AppConst
 
   APP_NAME = "Rails App"
 
