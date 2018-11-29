@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 30) do
   create_table "tickets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name", null: false
     t.string "summary"
-    t.integer "status", default: 0, null: false
+    t.integer "status", default: 1
     t.string "attachment_file"
     t.time "work_time"
     t.date "start_date"

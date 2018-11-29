@@ -1,5 +1,22 @@
 @charset "utf-8";
 
+body {
+  padding-top: 5rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.user-icon-circle {
+  vertical-align: middle;
+  border-radius: 50%;
+  height: 35px;
+  width: 35px;
+}
+.user-no-icon {
+  vertical-align: middle;
+  font-size: 25px;
+}
+
 label.required::after {
   content: "*";
   color: red

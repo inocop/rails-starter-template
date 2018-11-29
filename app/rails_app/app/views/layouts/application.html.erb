@@ -2,38 +2,26 @@
 <html>
   <head>
     <%= render(:partial => "layouts/head_content") %>
-    <style>
-      body{
-        padding-top:55px;
-      }
-    </style>
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-      <a class="navbar-brand" href="<%= root_path %>"><%= MyAppConst::APP_NAME %></a>
-    </nav>
+    <% if defined?(current_user) && current_user.present? %>
+      <%= render(:partial => "layouts/navigation_bar") %>
+      <div class="mx-3">
+        <%= render(:partial => "layouts/main_alert") %>
+      </div>
+      <main role="main" class="container-fluid">
+        <%= yield %>
+      </main>
 
-    <div class="fixed-top m-3" style="top:55px;">
-      <% if notice.present? %>
-      <p class="alert alert-info alert-dismissible fade show" role="alert">
-        <span><%= notice %></span>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </p>
-      <% end %>
-
-      <% if alert.present? %>
-      <p class="alert alert-danger" role="alert">
-        <span><%= alert %></span>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </p>
-      <% end %>
-    </div>
-
-    <%= yield %>
+    <% else %>
+      <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="<%= root_path %>"><%= AppConst::APP_NAME %></a>
+      </nav>
+      <div class="fixed-top mx-3" style="top:5rem;">
+        <%= render(:partial => "layouts/main_alert") %>
+      </div>
+      <%= yield %>
+    <% end %>
   </body>
 </html>
