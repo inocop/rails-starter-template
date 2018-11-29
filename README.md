@@ -36,8 +36,11 @@
 ## アプリ名
 
 アプリ名を変更する場合は以下を編集
-- docker-ror/app/rails_app/config/application.rb
-  - module RailsApp -> module XxxYyy
+- rails-starter-template/app/rails_app/config/application.rb
+```
+- module RailsApp
++ module MyAppName
+```
 
 ## 環境構築(development)
 
@@ -78,21 +81,6 @@ http://localhost:1081
     https://code.visualstudio.com/
 
     拡張機能: ruby を追加
-
-1. ホストPCにrubyとデバッグ用gemのインストール
-
-    - rubyインストール
-      - Windows  
-          Ruby+Devkitをダウンロードしてインストール実行  
-          https://rubyinstaller.org/downloads/
-      - Mac  
-          標準でインストールされているrubyでOK
-
-    - デバッグ用gemのインストール
-      ```
-      $ gem install debase -v '~> 0.2.1'
-      $ gem install ruby-debug-ide -v '~> 0.6.1'
-      ```
 
 1. vscodeツールバーの[ターミナル] > [タスクの実行] > [exec-rdebug-ide]
 1. vscodeツールバーの[デバッグ] > [デバッグの開始]
@@ -142,7 +130,7 @@ myconf.ymlのproductionを編集。
 
   以下コマンドでハッシュ値(sha512)を生成
   ```
-  $ bin/rake secret
+  $ ./bin/rake secret
   ```
 
 
@@ -166,11 +154,11 @@ configの以下パラメータを設定
 デプロイ実行
 ```
 # 初回デプロイ
-$ ./deploy.sh first
+$ ./deploy.sh init
 
 # デプロイ & Docker build（ダウンタイム有り）
 $ ./deploy.sh build
 
-# 通常デプロイ
+# デプロイ
 $ ./deploy.sh
 ```
