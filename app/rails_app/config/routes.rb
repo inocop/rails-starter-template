@@ -35,6 +35,9 @@ Rails.application.routes.draw do
 
     namespace :admin do
       get 'top', :to => 'top#index'
+      get 'create_pdf', :to => 'top#create_pdf'
+      get 'create_png', :to => 'top#create_png'
+      get 'node_call', :to => 'top#node_call'
       resources :notifications, :except => [:edit, :update]
     end
   end

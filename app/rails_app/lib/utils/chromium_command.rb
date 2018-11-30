@@ -1,5 +1,4 @@
 require 'shellwords'
-require 'timeout'
 
 class ChromiumCommand
 
@@ -10,36 +9,26 @@ class ChromiumCommand
 
   # screenshot出力
   def html_to_png(html:, save_path:)
-    begin
-      Timeout.timeout(5) do
-        system(*[AppConst::CHROMIUM_PATH,
+      system(*[ "timeout 5",
+                AppConst::CHROMIUM_PATH,
                 "--headless",
                 "--disable-gpu",
                 "--no-sandbox",
                 "--window-size=#{@width},#{@height}",
                 "--screenshot=#{Shellwords.escape(save_path)}",
                 html])
-      end
-    rescue Timeout::Error
-      false
-    end
   end
 
   # pdf出力
   def html_to_pdf(html:, save_path:)
-    begin
-      Timeout.timeout(5) do
-        system(*[AppConst::CHROMIUM_PATH,
-                  "--headless",
-                  "--disable-gpu",
-                  "--no-sandbox",
-                  "--window-size=#{@width},#{@height}",
-                  "--print-to-pdf=#{Shellwords.escape(save_path)}",
-                  html])
-      end
-    rescue Timeout::Error
-      false
-    end
+    system(*[ "timeout 5",
+              AppConst::CHROMIUM_PATH,
+              "--headless",
+              "--disable-gpu",
+              "--no-sandbox",
+              "--window-size=#{@width},#{@height}",
+              "--print-to-pdf=#{Shellwords.escape(save_path)}",
+              html])
   end
 
 end

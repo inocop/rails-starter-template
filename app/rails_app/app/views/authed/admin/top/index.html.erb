@@ -1,1 +1,15 @@
 <h1>Admin</h1>
+
+<h2><%= @text if defined?(@text) %></h2>
+
+<div>
+  <%= link_to "create_pdf", admin_create_pdf_path %>
+</div>
+
+<div>
+  <%= link_to "create_png", admin_create_pdf_path %>
+</div>
+
+<div>
+  <%= link_to "node_call",  admin_node_call_path %>
+</div>
