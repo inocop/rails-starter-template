@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  include SharedWithControllerHelper
+  include SharedHelper
 
   protect_from_forgery with: :exception
   before_action :view_parts_initialize
