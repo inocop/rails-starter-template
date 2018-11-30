@@ -55,5 +55,13 @@
 </div>
 
 
-<%= link_to 'Edit', edit_ticket_path(@ticket), :class => "btn btn-primary" %>
-<%= link_to 'Back', tickets_path, :class => "btn btn-primary ml-3" %>
+<%= link_to 'Edit', edit_ticket_path(@ticket), :class => "btn btn-primary mr-3" %>
+<%= link_to 'Back', tickets_path, :class => "btn btn-primary mr-3" %>
+
+<div class="mt-4">
+  <button type="button" class="btn btn-danger mr-3" data-toggle="modal" data-target="#delete_ticket">Delete</button>
+</div>
+
+<% delete_action = link_to("Delete", @ticket, method: :delete, class: "btn btn-danger") %>
+<%= render(partial: "view_parts/modal/alert",
+           locals: { modal_id: "delete_ticket", title: "チケット削除", message: "#{@ticket.name} を削除しますか？", action: delete_action}) %>
