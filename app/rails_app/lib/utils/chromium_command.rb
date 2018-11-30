@@ -8,8 +8,13 @@ class ChromiumCommand
   end
 
   # screenshot出力
+  # @params html [string] url or path/to/*.html
+  # @params save_path [string] filepath
+  #
+  # @return [bool]
   def html_to_png(html:, save_path:)
-      system(*[ "timeout 5",
+      system(*[ "timeout",
+                "5",
                 AppConst::CHROMIUM_PATH,
                 "--headless",
                 "--disable-gpu",
@@ -20,8 +25,13 @@ class ChromiumCommand
   end
 
   # pdf出力
+  # @params html [string] url or path/to/*.html
+  # @params save_path [string] filepath
+  #
+  # @return [bool]
   def html_to_pdf(html:, save_path:)
-    system(*[ "timeout 5",
+    system(*[ "timeout",
+              "5",
               AppConst::CHROMIUM_PATH,
               "--headless",
               "--disable-gpu",

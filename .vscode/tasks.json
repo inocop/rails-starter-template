@@ -6,7 +6,7 @@
     {
       "label": "exec-rdebug-ide",
       "type": "shell",
-      "command": "cd ./app/docker/rails_dev && docker-compose exec -T web bash -c 'cd /var/my_dir/app/rails_app && DEBUG_MODE=1 bundle exec rdebug-ide --port 1231 --dispatcher-port 26162 --host 0.0.0.0 -- bin/rails s -p 3001 -b 0.0.0.0'",
+      "command": "cd ./app/docker/rails_dev && docker-compose exec web bash -c 'cd /var/my_dir/app/rails_app && DEBUG_MODE=1 bundle exec rdebug-ide --port 1231 --dispatcher-port 26162 --host 0.0.0.0 -- bin/rails s -p 3001 -b 0.0.0.0'",
       "args": [],
       "dependsOn": ["open-debug-browser"],
       "problemMatcher": []

@@ -84,7 +84,7 @@ RUN if [ "${RAILS_ENV}" = "development" ] ; then ./install_adminer.sh ; fi
 
 
 # for node_app
-# chromium install for Puppeteer
+# chromium install via Puppeteer
 RUN yum install -y gtk3 \
                    libXcomposite-devel \
                    libXScrnSaver \
@@ -92,8 +92,10 @@ RUN yum install -y gtk3 \
                    alsa-lib-devel-1.1.4.1-2.el7 \
                    # ja font \
                    ipa-gothic-fonts \
-                   ipa-mincho-fonts
-# Puppeteerのchromiumを使わないならこれだけでOK
+                   ipa-mincho-fonts \
+&&  npm install -g puppeteer@~1.6.2 --unsafe-perm=true
+
+# epel-releaseのchromiumを使う場合はこっち
 # RUN yum -y install chromium ipa-gothic-fonts ipa-mincho-fonts
 
 

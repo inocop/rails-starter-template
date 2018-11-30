@@ -21,9 +21,8 @@ services:
       - "1231:1231"
       - "3001:3001"
     volumes:
-      - ../../../app:/var/my_dir/app:cached
+      - ../../../:/var/my_dir:cached
       - os_log:/var/log
-      - node_package:/var/my_dir/app/node_app/node_modules
     privileged: true
 
 
@@ -37,5 +36,4 @@ volumes:
     driver: 'local'
   os_log:
     driver: 'local'
-  node_package:
-    driver: 'local'
+

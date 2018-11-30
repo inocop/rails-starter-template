@@ -7,6 +7,5 @@ module AppConst
   UPLOAD_TMP_DIR = "/var/my_dir/uploads/tmp"
 
   # chromiumのパス(puppeteerでインストールされるchromiumを指定)
-  CHROMIUM_PATH = "/var/my_dir/app/node_app/node_modules/puppeteer/.local-chromium/linux-575458/chrome-linux/chrome"
-
+  CHROMIUM_PATH = "/usr/lib/node_modules/puppeteer/.local-chromium/linux-575458/chrome-linux/chrome"
 end

@@ -21,7 +21,6 @@ LINK_DIRS["rails_app/tmp"]="../../shared"
 LINK_DIRS["rails_app/log"]="../../shared"
 LINK_DIRS["rails_app/vendor"]="../../shared"
 LINK_DIRS["rails_app/public/node_modules"]="../../../shared"
-LINK_DIRS["node_app/node_modules"]="../../shared"
 
 
 ############################
