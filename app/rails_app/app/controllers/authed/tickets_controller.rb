@@ -72,7 +72,7 @@ class Authed::TicketsController < AuthController
   def download_attachment_file
     filepath = @ticket.attachment_file.current_path
     stat = File::stat(filepath)
-    send_file(filepath, :filename => @ticket.attachment_file_identifier, :length => stat.size)
+    send_file(filepath, :filename => filename_encoding(@ticket.attachment_file_identifier), :length => stat.size)
   end
 
   private
