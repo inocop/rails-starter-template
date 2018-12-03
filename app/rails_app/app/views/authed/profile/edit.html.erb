@@ -19,8 +19,8 @@
 
 
 
-<%= form_for(current_user, url: destroy_user_registration_path, html: {method: :post}) do |form| %>
+<%= form_with(model: current_user, url: destroy_user_registration_path, html: {method: :post}, local: true) do |form| %>
   <div class="mt-4">
-    <%= form.submit("Destroy", class: "btn btn-danger") %>
+    <%= form.submit(t('text.action.delete'), class: "btn btn-danger") %>
   </div>
 <% end %>

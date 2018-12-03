@@ -9,5 +9,6 @@ ja:
       delete: 削除
       login: ログイン
       logout: ログアウト
+      back: 戻る
     modal:
       close: 閉じる

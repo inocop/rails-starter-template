@@ -54,14 +54,16 @@
   <p class="col-8"><%= @ticket.user.name %></p>
 </div>
 
-
-<%= link_to 'Edit', edit_ticket_path(@ticket), class: "btn btn-primary mr-3" %>
-<%= link_to 'Back', tickets_path, class: "btn btn-primary mr-3" %>
-
 <div class="mt-4">
-  <button type="button" class="btn btn-danger mr-3" data-toggle="modal" data-target="#delete_ticket">Delete</button>
+  <%= link_to(t('text.action.edit'), edit_ticket_path(@ticket), class: "btn btn-primary mr-3") %>
+  <button type="button" class="btn btn-danger mr-3" data-toggle="modal" data-target="#delete_ticket"><%= t('text.action.delete') %></button>
 </div>
 
-<% delete_action = link_to("Delete", @ticket, method: :delete, class: "btn btn-danger") %>
+<% delete_action = link_to(t('text.action.delete'), @ticket, method: :delete, class: "btn btn-danger") %>
 <%= render(partial: "view_parts/modal/alert",
            locals: { modal_id: "delete_ticket", title: "チケット削除", message: "#{@ticket.name} を削除しますか？", action: delete_action}) %>
+
+
+<div class="mt-4">
+  <%= link_to(t('text.action.back'), tickets_path, class: "btn btn-primary mr-3") %>
+</div>

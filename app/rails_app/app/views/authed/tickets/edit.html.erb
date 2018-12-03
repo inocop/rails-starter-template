@@ -2,7 +2,7 @@
 
 <%= render 'form', ticket: @ticket %>
 
-<!--
-<%= link_to 'Show', @ticket %> |
-<%= link_to 'Back', tickets_path %>
--->
+<div class="mt-4">
+  <%= link_to(t('text.action.back'), tickets_path, class: "btn btn-primary mr-3") %>
+  <%= link_to(t('text.action.show'), ticket_path(@ticket), class: "btn btn-primary mr-3") %>
+</div>

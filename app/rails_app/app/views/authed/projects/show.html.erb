@@ -28,6 +28,16 @@
   <p class="col-8"><%= @project.end_date %></p>
 </div>
 
+<div class="mt-4">
+  <%= link_to t('text.action.edit'), edit_project_path(@project), class: "btn btn-primary mr-3" %>
+  <button type="button" class="btn btn-danger mr-3" data-toggle="modal" data-target="#delete_project"><%= t('text.action.delete') %></button>
+</div>
 
-<%= link_to 'Edit', edit_project_path(@project), class: "btn btn-primary" %>
-<%= link_to "戻る", 'javascript:void(0);', onclick: "history.back();", class: "ml-3 btn btn-primary" %>
+<% delete_action = link_to(t('text.action.delete'), @project, method: :delete, class: "btn btn-danger") %>
+<%= render(partial: "view_parts/modal/alert",
+           locals: { modal_id: "delete_project", title: "プロジェクト削除", message: "#{@project.name} を削除しますか？", action: delete_action}) %>
+
+
+<div class="mt-4">
+  <%= link_to(t('text.action.back'), projects_path, class: "btn btn-primary mr-3") %>
+</div>
