@@ -34,8 +34,8 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     visit('/users/sign_in')
 
     if page.current_path == '/users/sign_in'
-      page.fill_in('user[email]',    :with => user.email)
-      page.fill_in('user[password]', :with => "password")
+      page.fill_in('user[email]',    with: user.email)
+      page.fill_in('user[password]', with: "password")
       page.click_button 'ログイン'
     end
 
@@ -43,7 +43,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   end
 
   def select_project(project_id)
-    page.driver.submit(:post, "/api/select_project", {:project_id => project_id})
+    page.driver.submit(:post, "/api/select_project", {project_id: project_id})
     #page.find("option[value='#{project_id}']").select_option
   end
 

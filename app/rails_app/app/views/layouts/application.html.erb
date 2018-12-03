@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <%= render(:partial => "layouts/head_content") %>
+    <%= render(partial: "layouts/head_content") %>
   </head>
 
   <body>
     <% if defined?(current_user) && current_user.present? %>
-      <%= render(:partial => "layouts/navigation_bar") %>
+      <%= render(partial: "layouts/navigation_bar") %>
       <div class="mx-3">
-        <%= render(:partial => "layouts/main_alert") %>
+        <%= render(partial: "layouts/main_alert") %>
       </div>
       <main role="main" class="container-fluid">
         <%= yield %>
@@ -19,7 +19,7 @@
         <a class="navbar-brand" href="<%= root_path %>"><%= AppConst::APP_NAME %></a>
       </nav>
       <div class="fixed-top mx-3" style="top:5rem;">
-        <%= render(:partial => "layouts/main_alert") %>
+        <%= render(partia: "layouts/main_alert") %>
       </div>
       <%= yield %>
     <% end %>

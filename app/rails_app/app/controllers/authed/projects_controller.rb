@@ -71,7 +71,7 @@ class Authed::ProjectsController < AuthController
 
       assign_projects = Project.active
       unless assign_projects.ids.include?(@project.id)
-        redirect_to :action => :index
+        redirect_to(action: :index)
       end
     end
 

@@ -26,7 +26,7 @@
           <td><%= ticket.name %></td>
           <td><%= truncate(ticket.summary, length: 35) %></td>
           <td><%= Ticket::STATUS_LIST[ticket.status] %></td>
-          <td><%= l(ticket.work_time, :format => :time) if ticket.work_time.present? %></td>
+          <td><%= l(ticket.work_time, format: :time) if ticket.work_time.present? %></td>
           <td><%= ticket.start_date %></td>
           <td><%= ticket.end_date %></td>
           <td><%= ticket.user.name %></td>

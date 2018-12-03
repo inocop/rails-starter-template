@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  #devise_for :users, :controllers => { :registrations => 'users/registrations' }
+  #devise_for :users, controllers: { registrations: 'users/registrations' }
 
   # === deviseのルーティング制限
   # userの更新・削除はprofile_controllerで行うので、registrationsでは新規作成と削除のみ許可
@@ -13,18 +13,16 @@ Rails.application.routes.draw do
 
   scope module: 'authed' do
     root 'dashboard#index'
-    get  'dashboard', :to => 'dashboard#index'
+    get  'dashboard',          to: 'dashboard#index'
+    post 'api/select_project', to: 'api#select_project'
 
-    post 'api/select_project', :to => 'api#select_project'
-
-
-    get  'profile/index',         :to => 'profile#index'
-    get  'profile/edit',          :to => 'profile#edit'
-    post 'profile/edit',          :to => 'profile#update'
-    get  'profile/edit_image',    :to => 'profile#edit_image'
-    post 'profile/edit_image',    :to => 'profile#update_image'
-    get  'profile/edit_password', :to => 'profile#edit_password'
-    post 'profile/edit_password', :to => 'profile#update_password'
+    get  'profile/index',         to: 'profile#index'
+    get  'profile/edit',          to: 'profile#edit'
+    post 'profile/edit',          to: 'profile#update'
+    get  'profile/edit_image',    to: 'profile#edit_image'
+    post 'profile/edit_image',    to: 'profile#update_image'
+    get  'profile/edit_password', to: 'profile#edit_password'
+    post 'profile/edit_password', to: 'profile#update_password'
 
     resources :projects
     resources :tickets do
@@ -34,11 +32,11 @@ Rails.application.routes.draw do
     end
 
     namespace :admin do
-      get 'top', :to => 'top#index'
-      get 'create_pdf', :to => 'top#create_pdf'
-      get 'create_png', :to => 'top#create_png'
-      get 'node_call', :to => 'top#node_call'
-      resources :notifications, :except => [:edit, :update]
+      get 'top',        to: 'top#index'
+      get 'create_pdf', to: 'top#create_pdf'
+      get 'create_png', to: 'top#create_png'
+      get 'node_call',  to: 'top#node_call'
+      resources :notifications, except: [:edit, :update]
     end
   end
 

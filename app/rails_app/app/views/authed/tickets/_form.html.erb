@@ -8,9 +8,9 @@
 
 
   <div class="form-group row">
-    <%= form.label :status, :class => "col-form-label col-md-2" %>
+    <%= form.label :status, class: "col-form-label col-md-2" %>
     <div class="col-md-10">
-      <%= form.select :status, Ticket::STATUS_LIST.invert, {}, :class => "form-control" %>
+      <%= form.select :status, Ticket::STATUS_LIST.invert, {}, class: "form-control" %>
     </div>
   </div>
 
@@ -31,7 +31,7 @@
   <%= render(partial: "view_parts/form/input_date", locals: {row: true, form: form, field_name: "end_date"}) %>
 
   <div class="form-group row">
-    <%= form.label "担当者", :class => "col-form-label col-md-2" %>
+    <%= form.label "担当者", class: "col-form-label col-md-2" %>
     <div class="col-md-10">
       <%= form.select :assigned_user_id, @users.map{|u| [u.name, u.id]}, {}, class: "form-control" %>
     </div>

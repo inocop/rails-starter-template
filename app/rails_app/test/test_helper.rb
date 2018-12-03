@@ -22,6 +22,6 @@ class ActionDispatch::IntegrationTest
   end
 
   def select_project(project_id)
-    post(api_select_project_path, params: {:project_id => project_id})
+    post(api_select_project_path, params: {project_id: project_id})
   end
 end

@@ -6,12 +6,14 @@ class User < ApplicationRecord
 
   mount_uploader :image, UserImageUploader
 
-  scope :active, -> {where(:deleted_at => nil)}
+  scope :active, -> {where(deleted_at: nil)}
 
-  validates :name, :presence => true,
-                   :length => {:maximum => 50}
-  validates :email, :length => {:maximum => 244}, # 論理削除時のprefix分を確保して制限
-                    :uniqueness => {:case_sensible => false}
+  validates :name, presence: true,
+                   length: {maximum: 50}
+
+  validates :email, presence: true,
+                    length: {maximum: 244}, # 論理削除時のprefix分を確保して制限
+                    uniqueness: {case_sensible: false}
 
   # instead of deleting, indicate the user requested a delete & timestamp it
   def soft_delete
@@ -21,7 +23,7 @@ class User < ApplicationRecord
       # 論理削除後に同emailで再登録できるよう、deleted_atをprefixにして更新
       deleted_at_email = "#{current_time.to_i.to_s}_#{self.email.to_s}"
       #self.skip_reconfirmation!   # deviseが送信するメールアドレス更新の通知をskip（confirmable利用時）
-      update(:email => deleted_at_email, :deleted_at => current_time)
+      update(email: deleted_at_email, deleted_at: current_time)
     end
     return true
   rescue => e

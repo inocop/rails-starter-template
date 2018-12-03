@@ -10,7 +10,7 @@ class Authed::ApiController < AuthController
 
     unless project_id.nil?
       session[:current_project] = project_id.to_i
-      redirect_to(:controller => controller, :action => 'index')
+      redirect_to(controller: controller, action: 'index')
     else
       raise 'project_id is nil'
     end

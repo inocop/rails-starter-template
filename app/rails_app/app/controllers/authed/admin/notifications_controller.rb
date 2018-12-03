@@ -23,7 +23,7 @@ class Authed::Admin::NotificationsController < AuthController
   # POST /authed/admin/notifications.json
   def create
     NotificationDeliverJob.perform_later
-    redirect_to(:action => :index, notice: 'Send notification.') and return
+    redirect_to(action: :index, notice: 'Send notification.') and return
   end
 
   # DELETE /authed/admin/notifications/1

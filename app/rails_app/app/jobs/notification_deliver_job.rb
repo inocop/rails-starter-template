@@ -9,7 +9,7 @@ class NotificationDeliverJob < ApplicationJob
 
   # 全ユーザーにメール送信
   def perform
-    users = User.where(:deleted_at => nil)
+    users = User.where(deleted_at: nil)
     users.each do |user|
       SystemMailer.send_notification(user).deliver
     end

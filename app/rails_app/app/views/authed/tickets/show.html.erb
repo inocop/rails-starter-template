@@ -32,7 +32,7 @@
   <p class="col-3 col-md-2">
     <%= t('.work_time') %>
   </p>
-  <p class="col-8"><%= l(@ticket.work_time, :format => :time) if @ticket.work_time.present? %></p>
+  <p class="col-8"><%= l(@ticket.work_time, format: :time) if @ticket.work_time.present? %></p>
 </div>
 
 <div class="form-group row border-bottom">
@@ -55,8 +55,8 @@
 </div>
 
 
-<%= link_to 'Edit', edit_ticket_path(@ticket), :class => "btn btn-primary mr-3" %>
-<%= link_to 'Back', tickets_path, :class => "btn btn-primary mr-3" %>
+<%= link_to 'Edit', edit_ticket_path(@ticket), class: "btn btn-primary mr-3" %>
+<%= link_to 'Back', tickets_path, class: "btn btn-primary mr-3" %>
 
 <div class="mt-4">
   <button type="button" class="btn btn-danger mr-3" data-toggle="modal" data-target="#delete_ticket">Delete</button>
