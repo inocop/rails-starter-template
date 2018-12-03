@@ -22,9 +22,9 @@ module ApplicationHelper
   def get_action_text
     action = controller.action_name
 
-    if action == "new" || action == "create"
+    if action.start_with?("new") || action.start_with?("create")
       t('text.action.create')
-    elsif action == "edit" || action == "update"
+    elsif action.start_with?("edit") || action.start_with?("update")
       t('text.action.update')
     end
   end

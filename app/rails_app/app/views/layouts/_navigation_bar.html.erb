@@ -17,7 +17,7 @@
         <a class="nav-link" href="<%= tickets_path %>">Ticket</a>
       </li>
       <% if current_user.admin %>
-      <li class="nav-item <%= "active" if controller_path.start_with?("admin") %>">
+      <li class="nav-item <%= "active" if controller_path.start_with?("authed/admin") %>">
         <a class="nav-link" href="<%= admin_top_path %>">Admin</a>
       </li>
       <% end %>

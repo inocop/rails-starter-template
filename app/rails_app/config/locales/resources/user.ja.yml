@@ -1,0 +1,28 @@
+ja:
+  activerecord:
+    models:
+      user: "ユーザー"
+    attributes:
+      user: &item_name
+        name: "名前"
+        email: "メールアドレス"
+        admin: "管理者"
+  authed:
+    admin:
+      users:
+        index:
+          <<: *item_name
+          title: "ユーザー一覧"
+    profile:
+      edit:
+        title: プロフィール編集
+      update:
+        success_message: プロフィールを変更しました。
+      edit_image:
+        title: アイコン変更
+      update_image:
+        success_message: アイコンを変更しました。
+      edit_password:
+        title: パスワード変更
+      update_password:
+        success_message: パスワードを変更しました。

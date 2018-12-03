@@ -2,7 +2,7 @@ class Authed::ProfileController < AuthController
   layout 'authed/profile'
 
   def index
-    redirect_to action: :edit
+    redirect_to(action: :edit)
   end
 
   def edit
@@ -10,11 +10,11 @@ class Authed::ProfileController < AuthController
 
   def update
     if current_user.update(profile_params)
-      flash[:notice] = 'Profile was successfully updated.'
-      redirect_to action: :edit
+      flash[:notice] = t('.success_message')
+      redirect_to(action: :edit) and return
     else
       flash.now[:alert] = current_user.errors.full_messages.join("\n")
-      render :edit
+      render(:edit)
     end
   end
 
@@ -27,18 +27,28 @@ class Authed::ProfileController < AuthController
   # POST /profile/edit_images
   def update_image
     if current_user.update(profile_image_params)
-      flash[:notice] = 'Profile image was successfully updated.'
-      redirect_to action: :edit_image
+      flash[:notice] = t('.success_message')
     else
       flash.now[:alert] = current_user.errors.full_messages.join("\n")
-      render :edit_image
     end
+
+    render(:edit_image)
   end
 
+  # パスワード編集
+  # GET /profile/edit_password
   def edit_password
   end
 
+  # パスワード変更
+  # POST /profile/edit_password
   def update_password
+    if current_user.update_with_password(profile_password_params)
+      bypass_sign_in(current_user)
+      flash.now[:notice] = t('.success_message')
+    end
+
+    render(:edit_password)
   end
 
   private
@@ -51,6 +61,8 @@ class Authed::ProfileController < AuthController
     end
 
     def profile_password_params
-      params.require(:user).permit(:user_password)
+      params.require(:user).permit(:current_password,
+                                   :password,
+                                   :password_confirmation)
     end
 end
