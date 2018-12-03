@@ -26,10 +26,11 @@
   </table>
 </div>
 
-<%= link_to t("text.action.new"), new_project_path, class: "btn btn-primary" %>
+<div class="mt-4">
+  <%= link_to t("text.action.new"), new_project_path, class: "btn btn-primary" %>
+</div>
 
 <br>
 <div class="d-flex justify-content-center">
   <%= paginate @projects %>
 </div>
-

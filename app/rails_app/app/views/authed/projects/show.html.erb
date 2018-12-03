@@ -33,7 +33,7 @@
   <button type="button" class="btn btn-danger mr-3" data-toggle="modal" data-target="#delete_project"><%= t('text.action.delete') %></button>
 </div>
 
-<% delete_action = link_to(t('text.action.delete'), @project, method: :delete, class: "btn btn-danger") %>
+<% delete_action = link_to(t('text.action.delete'), project_path(@project), method: :delete, class: "btn btn-danger") %>
 <%= render(partial: "view_parts/modal/alert",
            locals: { modal_id: "delete_project", title: "プロジェクト削除", message: "#{@project.name} を削除しますか？", action: delete_action}) %>
 

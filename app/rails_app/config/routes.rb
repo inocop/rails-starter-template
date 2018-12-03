@@ -6,9 +6,9 @@ Rails.application.routes.draw do
   # userの更新・削除はprofile_controllerで行うので、registrationsでは新規作成と削除のみ許可
   devise_for :users, skip: [:registrations]
   devise_scope :user do
-    get  'users/registrations'         => 'users/registrations#new',     as: :new_user_registration
-    post 'users/registrations'         => 'users/registrations#create',  as: :user_registration
-    post 'users/registrations/destroy' => 'users/registrations#destroy', as: :destroy_user_registration
+    get    'users/registrations'         => 'users/registrations#new',     as: :new_user_registration
+    post   'users/registrations'         => 'users/registrations#create',  as: :user_registration
+    delete 'users/registrations/destroy' => 'users/registrations#destroy', as: :destroy_user_registration
   end
 
   scope module: 'authed' do

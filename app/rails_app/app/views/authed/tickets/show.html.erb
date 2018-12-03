@@ -59,7 +59,7 @@
   <button type="button" class="btn btn-danger mr-3" data-toggle="modal" data-target="#delete_ticket"><%= t('text.action.delete') %></button>
 </div>
 
-<% delete_action = link_to(t('text.action.delete'), @ticket, method: :delete, class: "btn btn-danger") %>
+<% delete_action = link_to(t('text.action.delete'), ticket_path(@ticket), method: :delete, class: "btn btn-danger") %>
 <%= render(partial: "view_parts/modal/alert",
            locals: { modal_id: "delete_ticket", title: "チケット削除", message: "#{@ticket.name} を削除しますか？", action: delete_action}) %>
 
