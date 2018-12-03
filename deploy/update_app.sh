@@ -5,11 +5,12 @@ set -eux
 ############################
 #  変数定義                #
 ############################
-# リリース用ディレクトリ指定
+# リリースディレクトリ
 RELEASE_DIR=/release
 APP_NAME=app
-
 APP_DIR=${RELEASE_DIR}/${APP_NAME}
+
+# 共有ディレクトリ
 SHARED_DIR=${RELEASE_DIR}/shared
 
 # デプロイ用の一時ディレクトリ
