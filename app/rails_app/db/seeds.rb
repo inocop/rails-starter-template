@@ -12,15 +12,15 @@ User.create!(name: "管理者", email: "admin@example.com", password: "password"
 # 開発用seed
 if Rails.env.development?
   user_1 = User.create!(name: "ユーザー１", email: "user1@example.com", password: "password")
-  User.create!(name: "ユーザー２", email: "user2@example.com", password: "password")
-  User.create!(name: "ユーザー３", email: "user3@example.com", password: "password")
+  user_2 = User.create!(name: "ユーザー２", email: "user2@example.com", password: "password")
+  user_3 = User.create!(name: "ユーザー３", email: "user3@example.com", password: "password")
 
   project_1 = Project.create!(name: "テストプロジェクト1")
-  Project.create!(name: "テストプロジェクト2")
-  Project.create!(name: "テストプロジェクト3")
+  project_2 = Project.create!(name: "テストプロジェクト2")
+  project_3 = Project.create!(name: "テストプロジェクト3")
 
-  Ticket.create!(name: "テストチケット1", project_id: project_1.id, assigned_user_id: user_1.id)
-  Ticket.create!(name: "テストチケット2", project_id: project_1.id, assigned_user_id: user_1.id)
+  ticket_1 = Ticket.create!(name: "テストチケット1", project_id: project_1.id, assigned_user_id: user_1.id)
+  ticket_2 = Ticket.create!(name: "テストチケット2", project_id: project_1.id, assigned_user_id: user_1.id)
 end
 
 
