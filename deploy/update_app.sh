@@ -21,6 +21,7 @@ LINK_DIRS["rails_app/tmp"]="../../shared"
 LINK_DIRS["rails_app/log"]="../../shared"
 LINK_DIRS["rails_app/vendor"]="../../shared"
 LINK_DIRS["rails_app/public/node_modules"]="../../../shared"
+LINK_DIRS["rails_app/lib/nodejs/node_modules"]="../../../../shared"
 
 
 ############################
@@ -84,10 +85,8 @@ fi
 #  コンテナ内処理           #
 ############################
 # gem、npmの更新
-docker_cmd "exec" "cd /var/my_dir/deploy/node_app \
-                   && su -s /bin/bash railsdev -c \"npm install\""
-
 docker_cmd "exec" "cd /var/my_dir/deploy/rails_app \
+                   && su -s /bin/bash railsdev -c \"npm install --prefix ./lib/nodejs\" \
                    && su -s /bin/bash railsdev -c \"npm install --prefix ./public\" \
                    && su -s /bin/bash railsdev -c \"bundle install\""
 

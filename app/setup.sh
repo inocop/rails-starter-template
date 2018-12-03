@@ -8,12 +8,15 @@ fi
 
 set -eux
 RAILS_APP_DIR=/var/my_dir/app/rails_app
-cd ${RAILS_APP_DIR}
 
-# package install(railsdevユーザでnpm install)
+
+# package install(railsdevユーザでinstall)
+cd ${RAILS_APP_DIR}
 su -s /bin/bash railsdev -c "bundle config --local build.nokogiri --use-system-libraries"
 su -s /bin/bash railsdev -c "bundle install --path vendor/bundle"
-su -s /bin/bash railsdev -c "npm install --prefix ${RAILS_APP_DIR}/public"
+su -s /bin/bash railsdev -c "npm install --prefix ./public"
+su -s /bin/bash railsdev -c "npm install --prefix ./lib/nodejs"
+
 
 # db create
 bundle exec rake db:create          RAILS_ENV=${RAILS_ENV}
@@ -29,6 +32,3 @@ bundle exec rake db:environment:set RAILS_ENV=test
 passenger-config restart-app ${RAILS_APP_DIR}
 systemctl reload delayed_job
 
-
-# puma
-# $ bundle exec rails s -b 0.0.0.0 -p 8081
