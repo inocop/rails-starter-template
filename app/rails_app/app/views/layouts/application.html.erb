@@ -19,7 +19,7 @@
         <a class="navbar-brand" href="<%= root_path %>"><%= AppConst::APP_NAME %></a>
       </nav>
       <div class="fixed-top mx-3" style="top:5rem;">
-        <%= render(partia: "layouts/main_alert") %>
+        <%= render(partial: "layouts/main_alert") %>
       </div>
       <%= yield %>
     <% end %>
