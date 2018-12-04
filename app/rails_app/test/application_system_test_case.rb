@@ -43,8 +43,8 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   end
 
   def select_project(project_id)
-    page.driver.submit(:post, "/api/select_project", {project_id: project_id})
-    #page.find("option[value='#{project_id}']").select_option
+    #page.driver.submit(:post, "/api/select_project", {project_id: project_id})
+    page.find("option[value='#{project_id}']").select_option
   end
 
   def get_cookie(name:)
