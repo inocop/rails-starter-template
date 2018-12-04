@@ -43,7 +43,7 @@ class Authed::TicketsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should destroy ticket" do
-    assert_difference('Ticket.count', -1) do
+    assert_difference('Ticket.where(deleted_at: nil).count', -1) do
       delete ticket_url(@ticket)
     end
 

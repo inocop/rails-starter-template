@@ -42,7 +42,7 @@ class Authed::ProjectsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should destroy project" do
-    assert_difference('Project.count', -1) do
+    assert_difference('Project.where(deleted_at: nil).count', -1) do
       delete project_url(@project)
     end
 
