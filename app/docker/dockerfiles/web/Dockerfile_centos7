@@ -89,15 +89,25 @@ RUN if [ "${RAILS_ENV}" = "development" ] ; then ./install_adminer.sh ; fi
 # epel-releaseのchromiumを使う場合はこっち
 # RUN yum -y install chromium ipa-gothic-fonts ipa-mincho-fonts
 
-RUN yum install -y gtk3 \
-                   libXcomposite-devel \
+RUN yum -y install libX11 \
+                   libXcomposite \
+                   libXcursor \
+                   libXdamage \
+                   libXext \
+                   libXi \
+                   libXtst \
+                   cups-libs \
                    libXScrnSaver \
-                   libXss \
-                   alsa-lib-devel-1.1.4.1-2.el7 \
+                   libXrandr \
+                   alsa-lib \
+                   pango \
+                   atk \
+                   at-spi2-atk \
+                   gtk3 \ 
                    # ja font \
                    ipa-gothic-fonts \
                    ipa-mincho-fonts
-RUN npm install -g puppeteer@~1.6.2 --unsafe-perm=true
+RUN npm install -g puppeteer@1.6.2 --unsafe-perm=true
 
 
 # create user for passenger
