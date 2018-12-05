@@ -125,7 +125,12 @@ RUN RAILS_ENV=${RAILS_ENV} cat delayed_job.service.tmp | envsubst > /etc/systemd
 # set use systemd
 RUN systemctl enable httpd.service \
 &&  systemctl enable crond.service \
-&&  systemctl enable delayed_job.service
+&&  systemctl enable delayed_job.service \
+# disable no need daemon \
+&&  systemctl disable getty.target \
+&&  systemctl disable systemd-udevd.service \
+&&  rm -f /lib/systemd/system/systemd*udev* \
+&&  rm -f /lib/systemd/system/getty.target
 
 
 CMD /sbin/init
