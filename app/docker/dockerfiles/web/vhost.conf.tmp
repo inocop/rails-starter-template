@@ -26,10 +26,8 @@ NameVirtualHost *:80
 </IfModule>
 
 
-# passenger-install-apache2-module --snippet
-LoadModule passenger_module /usr/local/lib/ruby/gems/2.4.0/gems/passenger-5.3.6/buildout/apache2/mod_passenger.so
 <IfModule mod_passenger.c>
-  PassengerRoot /usr/local/lib/ruby/gems/2.4.0/gems/passenger-5.3.6
+  PassengerRoot /usr/share/ruby/vendor_ruby/phusion_passenger/locations.ini
   PassengerDefaultRuby /usr/local/bin/ruby
 
   # railsdevでPassengerを実行

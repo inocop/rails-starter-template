@@ -5,11 +5,12 @@ MAINTAINER inocop
 WORKDIR /tmp
 
 
-# add nodejs8.x repository
-RUN curl --silent --location https://rpm.nodesource.com/setup_8.x | bash -
+# add nodejs8.x and passenger repository
+RUN curl --silent --location https://rpm.nodesource.com/setup_8.x | bash - \
+&&  curl --fail -sSLo /etc/yum.repos.d/passenger.repo https://oss-binaries.phusionpassenger.com/yum/definitions/el-passenger.repo
 
 
-# yum install 
+# yum install
 RUN yum install -y sudo \
                    cronie \
                    which \
@@ -19,6 +20,7 @@ RUN yum install -y sudo \
                    httpd-devel \
                    mod_xsendfile \
                    mod_ssl \
+                   mod_passenger-5.3.7-1.el7 \
                    libcurl-devel \
                    apr-devel \
                    apr-util-devel \
@@ -50,11 +52,10 @@ RUN wget http://cache.ruby-lang.org/pub/ruby/2.4/ruby-2.4.5.tar.gz \
 &&  make install \
 &&  rm -rf /tmp/ruby-2.4.5*
 
-# passenger install
-RUN bash -l -c 'gem install --no-document bundler -v "1.16.6"' \
-&&  bash -l -c 'gem install --no-document passenger -v "5.3.6"' \
-&&  bash -l -c 'gem install --no-document nokogiri -v "1.8.5"' \
-&&  passenger-install-apache2-module --auto
+
+# global gem install
+RUN bash -l -c 'gem install --no-document bundler  -v "1.16.6"' \
+&&  bash -l -c 'gem install --no-document nokogiri -v "1.8.5"'
 
 
 # apache disable PrivateTmp
@@ -73,9 +74,10 @@ ARG RAILS_ENV
 # set env for apache
 RUN echo "RAILS_ENV=${RAILS_ENV}" >> /etc/sysconfig/httpd
 
-# set conf for apache
+# set conf for apache-passenger
 ADD vhost.conf.tmp ./
-RUN RAILS_ENV=${RAILS_ENV} cat vhost.conf.tmp | envsubst > /etc/httpd/conf.d/vhost.conf
+RUN RAILS_ENV=${RAILS_ENV} cat vhost.conf.tmp | envsubst > /etc/httpd/conf.d/vhost.conf \
+&&  rm -rf /etc/httpd/conf.d/passenger.conf   # mod_passengerインストール時に自動で作られる設定ファイルを削除
 
 
 # install db tools for development
@@ -83,12 +85,12 @@ ADD install_adminer.sh ./
 RUN if [ "${RAILS_ENV}" = "development" ] ; then ./install_adminer.sh ; fi
 
 
-# for node_app
-# chromium install via Puppeteer
-#
-# epel-releaseのchromiumを使う場合はこっち
+# chromium install
+
+## epel-releaseからインストール（バージョンはepel-releaseに依存）
 # RUN yum -y install chromium ipa-gothic-fonts ipa-mincho-fonts
 
+# puppeteer経由でインストール（puppeteerのバージョンでchromiumのバージョンも管理）
 RUN yum -y install libX11 \
                    libXcomposite \
                    libXcursor \
