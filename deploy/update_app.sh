@@ -28,10 +28,9 @@ LINK_DIRS["rails_app/lib/nodejs/node_modules"]="../../../../shared"
 ############################
 # docker_cmd用の関数      #
 ############################
-WEB_CONTAINER_ID=`sudo docker ps -f name=rails_prd_web_1 -q`
-
 function docker_cmd() {
   if [ "$1" = "exec" ]; then
+    WEB_CONTAINER_ID=`sudo docker ps -f name=rails_prd_web_1 -q`
     sudo docker exec $WEB_CONTAINER_ID bash -c "$2"
   elif [ "$1" = "build" ]; then
     pushd ${APP_DIR}/docker/rails_prd/
