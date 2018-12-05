@@ -19,8 +19,11 @@
   <%= form.hidden_field(:attachment_file_cache) %>
   <div class="form-group row">
     <div class="offset-md-2 col-md-10">
-      <label class="mb-0"><%= form.check_box(:remove_attachment_file) %> <%= ticket.attachment_file.file.original_filename %></label>
-      <br>ファイル削除
+      <%= ticket.attachment_file.file.original_filename %>
+      <label class="mb-0 ml-3" for="project_remove_attachment_file">
+        <%= form.check_box(:remove_attachment_file, id: 'project_remove_attachment_file') %>
+        削除
+      </label>
     </div>
   </div>
   <% end %>
