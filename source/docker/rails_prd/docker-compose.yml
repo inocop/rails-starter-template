@@ -16,12 +16,20 @@ services:
       dockerfile: "Dockerfile_centos7"
       args:
         - RAILS_ENV=production
-    ports:
-      - "80:80"
     volumes:
       - ../../../:/var/www/app
       - os_log:/var/log
     privileged: true
+    restart: always
+
+  https-portal:
+    image: steveltn/https-portal:1
+    ports:
+      - '80:80'
+      - '443:443'
+    environment:
+      DOMAINS: "${MY_DOMAIN} -> http://web"
+      STAGE: 'production'
     restart: always
 
 volumes:

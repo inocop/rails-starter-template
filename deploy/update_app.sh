@@ -36,7 +36,7 @@ function docker_cmd() {
   elif [ "$1" = "build" ]; then
     pushd ${RELEASE_DIR}/docker/rails_prd/
       sudo docker image prune -f # 不要なimageを削除
-      sudo docker-compose up -d --build
+      sudo bash -c "MY_DOMAIN=${MY_DOMAIN} docker-compose up -d --build"
     popd
   else
     exit
