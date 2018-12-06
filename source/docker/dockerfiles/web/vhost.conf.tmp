@@ -2,9 +2,9 @@ NameVirtualHost *:80
 <VirtualHost *:80>
   ServerName localhost.localdomain
   RackEnv ${RAILS_ENV}
-  DocumentRoot /var/my_dir/app/rails_app/public
+  DocumentRoot /var/www/app/source/rails_app/public
 
-  <Directory /var/my_dir/app/rails_app/public>
+  <Directory /var//www/app/source/rails_app/public>
     # Relax Apache security settings
     AllowOverride all
     # MultiViews must be turned off
@@ -22,7 +22,7 @@ NameVirtualHost *:80
 
 <IfModule mod_xsendfile.c>
   XSendFile on
-  XSendFilePath /var/my_dir/uploads
+  XSendFilePath /var/www/app/uploads
 </IfModule>
 
 

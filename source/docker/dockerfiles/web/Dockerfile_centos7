@@ -134,4 +134,4 @@ RUN systemctl enable httpd.service \
 
 
 CMD /sbin/init
-WORKDIR /var/my_dir
+WORKDIR /var/www/app

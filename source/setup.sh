@@ -7,7 +7,7 @@ else
 fi
 
 set -eux
-RAILS_APP_DIR=/var/my_dir/app/rails_app
+RAILS_APP_DIR=/var/www/app/source/rails_app
 
 
 # package install(railsdevユーザでinstall)

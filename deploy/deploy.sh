@@ -7,18 +7,18 @@ cd `dirname $0`
 source ./config
 
 # 前処理
-rm -rf repo \
-       app.tar.gz
+rm -rf repository \
+       source.tar.gz
 
 # ソースコードclone
-git clone --depth 1 --single-branch -b $BRANCH $REPOSITORY repo
+git clone --depth 1 --single-branch -b $BRANCH $REPOSITORY repository
 
 # 本番用のmyconf.ymlをセット
-cp $MYCONF_YML repo/app/rails_app/config/myconf.yml
+cp $MYCONF_YML repository/source/rails_app/config/myconf.yml
 
-# repo/appを所有者情報を含めずにtar.gzにして転送
-tar -zcvf app.tar.gz --no-same-owner --no-same-permissions -C repo app
-scp -i ${SECRET_KEY} app.tar.gz ${REMOTE_USER}@${REMOTE_SERVER}:/tmp/
+# repository/sourceを所有者情報を含めずにtar.gzにして転送
+tar -zcvf source.tar.gz --no-same-owner --no-same-permissions -C repository 'source'
+scp -i ${SECRET_KEY} source.tar.gz ${REMOTE_USER}@${REMOTE_SERVER}:/tmp/
 
 # デプロイ
 set +u
