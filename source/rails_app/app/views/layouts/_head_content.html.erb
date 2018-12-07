@@ -9,6 +9,10 @@
 <%= yield(:meta) if content_for?(:meta) %>
 
 
+<%# load webpack bundle.js %>
+<%#= bundle_include_tag("app") %>
+
+
 <%# load css %>
 <link rel="stylesheet" media="all" href="/node_modules/bootstrap/dist/css/bootstrap.css">
 <link rel="stylesheet" media="all" href="/node_modules/@fortawesome/fontawesome-free/css/all.css">

@@ -28,4 +28,16 @@ module ApplicationHelper
       t('text.action.update')
     end
   end
+
+  # webpackでbundleしたdiget付きjsファイルのincludeタグを生成
+  # @params name [String] bundle名
+  #
+  # @return string
+  def bundle_include_tag(name)
+    target_file = Dir.glob("#{Rails.root}/public/dist/#{name}-*.bundle.js").sort_by{|f| File.mtime(f)}
+                                                                           .reverse
+                                                                           .map{|f| File.basename(f)}
+                                                                           .first
+    raw("<script src=\"/dist/#{target_file}\"></script>")
+  end
 end
