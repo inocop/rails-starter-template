@@ -62,4 +62,13 @@ Rails.application.configure do
   #####################
   # localhost以外からもweb consoleを使うための設定
   config.web_console.whitelisted_ips = '0.0.0.0/0'
+
+  # bulletの設定
+  config.after_initialize do
+    Bullet.enable        = true # Bulletプラグインを有効
+    Bullet.alert         = true # JavaScriptでの通知
+    Bullet.bullet_logger = true # log/bullet.logへの出力
+    Bullet.console       = true # ブラウザのコンソールログに記録
+    Bullet.rails_logger  = true # Railsログに出力
+  end
 end

@@ -1,3 +1,22 @@
+# == Schema Information
+#
+# Table name: tickets
+#
+#  id               :bigint(8)        not null, primary key
+#  attachment_file  :string(255)
+#  deleted_at       :datetime
+#  end_date         :date
+#  name             :string(255)      not null
+#  start_date       :date
+#  status           :integer          default(1)
+#  summary          :string(255)
+#  work_time        :time
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  assigned_user_id :bigint(8)        not null
+#  project_id       :bigint(8)        not null
+#
+
 class Ticket < ApplicationRecord
   STATUS_LIST = {
     STATUS_DRAFT  =  1 => "新規",

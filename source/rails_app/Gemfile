@@ -107,4 +107,9 @@ group :development, :test do
   gem 'ruby-debug-ide', '~> 0.6.1', require: false
   gem 'debase', '~> 0.2.1', require: false
   gem 'chromedriver-helper', require: false
+
+  gem 'bullet', '~> 5.9.0'
+  gem 'annotate', '~> 2.7.4'
+  # === task regiseration
+  # ./bin/rails g annotate:install
 end

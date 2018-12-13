@@ -36,7 +36,7 @@
 ## アプリ名
 
 アプリ名を変更する場合は以下を編集
-- rails-starter-template/app/rails_app/config/application.rb
+- rails-starter-template/source/rails_app/config/application.rb
 ```
 - module RailsApp
 + module MyAppName
