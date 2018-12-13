@@ -41,7 +41,9 @@ RUN yum install -y sudo \
                    git \
                    nodejs \
                    gettext \
-                   ImageMagick
+                   ImageMagick \
+&&  yum clean all
+
 
 # ruby install
 RUN wget http://cache.ruby-lang.org/pub/ruby/2.5/ruby-2.5.3.tar.gz \
@@ -108,7 +110,9 @@ RUN yum -y install libX11 \
                    gtk3 \ 
                    # ja font \
                    ipa-gothic-fonts \
-                   ipa-mincho-fonts
+                   ipa-mincho-fonts \
+&&  yum clean all
+
 RUN npm install -g puppeteer@1.6.2 --unsafe-perm=true
 
 

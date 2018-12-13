@@ -39,7 +39,8 @@ RUN yum install -y sudo \
                    git \
                    nodejs \
                    gettext \
-                   ImageMagick
+                   ImageMagick \
+&&  yum clean all
 
 
 # ruby install
