@@ -41,7 +41,9 @@ class Ticket < ApplicationRecord
   validates :name, presence: true
 
   def self.get_tickets(project_id:, completed: false)
-    tickets = Ticket.active.where("project_id = ?", project_id)
+    tickets = Ticket.active
+                    .where("project_id = ?", project_id)
+                    .includes(:user)
 
     if completed
       tickets.completed
