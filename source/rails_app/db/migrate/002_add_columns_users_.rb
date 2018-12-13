@@ -1,4 +1,4 @@
-class AddColumnsUsers < ActiveRecord::Migration[5.1]
+class AddColumnsUsers < ActiveRecord::Migration[5.2]
   def up
     add_column(:users, :name,       :string,  null: false, after: :id)
     add_column(:users, :admin,      :boolean, null: false, default: false, after: :email)

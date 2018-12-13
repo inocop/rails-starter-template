@@ -3,6 +3,7 @@ source/**/node_modules/*
 source/**/log/*
 source/**/tmp/*
 source/**/uploads/*
+source/**/storage/*
 source/**/config/myconf.yml
 
 deploy/config

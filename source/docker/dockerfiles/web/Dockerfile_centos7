@@ -44,17 +44,17 @@ RUN yum install -y sudo \
                    ImageMagick
 
 # ruby install
-RUN wget http://cache.ruby-lang.org/pub/ruby/2.4/ruby-2.4.5.tar.gz \
-&&  tar zxf ruby-2.4.5.tar.gz \
-&&  cd ruby-2.4.5 \
+RUN wget http://cache.ruby-lang.org/pub/ruby/2.5/ruby-2.5.3.tar.gz \
+&&  tar zxf ruby-2.5.3.tar.gz \
+&&  cd ruby-2.5.3 \
 &&  ./configure --disable-install-rdoc \
 &&  make \
 &&  make install \
-&&  rm -rf /tmp/ruby-2.4.5*
+&&  rm -rf /tmp/ruby-*
 
 
 # global gem install
-RUN bash -l -c 'gem install --no-document bundler  -v "1.16.6"' \
+RUN bash -l -c 'gem install --no-document bundler  -v "1.17.2"' \
 &&  bash -l -c 'gem install --no-document nokogiri -v "1.8.5"'
 
 
@@ -87,10 +87,10 @@ RUN if [ "${RAILS_ENV}" = "development" ] ; then ./install_adminer.sh ; fi
 
 # chromium install
 
-## epel-releaseからインストール（バージョンはepel-releaseに依存）
+## epel-releaseからインストール
 # RUN yum -y install chromium ipa-gothic-fonts ipa-mincho-fonts
 
-# puppeteer経由でインストール（puppeteerのバージョンでchromiumのバージョンも管理）
+# puppeteer経由でインストール
 RUN yum -y install libX11 \
                    libXcomposite \
                    libXcursor \

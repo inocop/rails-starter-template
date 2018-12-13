@@ -5,8 +5,8 @@
 #### アーキテクチャ
 |#    |name / version|
 |:----|--------------|
-|Lang |Ruby 2.4.5    |
-|Web  |Apache 2.4 + Passenger 5.3.6|
+|Lang |Ruby 2.5.3    |
+|Web  |Apache 2.4 + Passenger 5.3.7|
 |DB   |MySQL 5.7     |
 
 

@@ -1,6 +1,5 @@
 default: &default
   secret_key_base: xxxyyyzzz
-  db_max_threads: 5
   db_username: root
   db_password: root
   db_host: db
