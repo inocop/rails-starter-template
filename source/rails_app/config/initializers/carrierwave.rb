@@ -1,3 +1,4 @@
 CarrierWave.configure do |config|
-  config.cache_dir = AppConst::UPLOAD_TMP_DIR
+  config.root = "/var/www/app"
+  config.cache_dir = "/var/www/app/uploads/tmp"
 end
