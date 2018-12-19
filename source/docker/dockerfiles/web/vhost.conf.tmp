@@ -36,9 +36,40 @@ NameVirtualHost *:80
 
   # 初回起動の遅延防止
   PassengerPreStart http://localhost:80
+
+
+  # === パフォーマンス設定 ===
+
+  # Passenger全体でのプロセス数上限
+  # [default: 6]
+  PassengerMaxPoolSize 2
+
+  # アプリ毎のプロセス数上限(動作するアプリが一つなのでMaxPoolSizeと同値を設定)
+  # [default: 0]
+  PassengerMaxInstancesPerApp 2
+
+  # 最低限起動しておくプロセス数
+  # [default: 0]
+  PassengerMinInstances 1
+
+  # 設定した秒数idle状態が続いたプロセスを停止
+  # [default: 300]
+  PassengerPoolIdleTime 1800
+
+  # 設定した秒数idle状態が続いたAppPreloader(プロセスを生成・破棄するプロセス)を停止
+  # [default: 300]
+  PassengerMaxPreloaderIdleTime 0
+
+  # 処理待ちのリクエストキュー上限数（上限を超えたら503を返却）
+  # [default: 100]
+  PassengerMaxRequestQueueSize 100
+
+  # 設定したリクエスト数を処理するとプロセスを再起動する（時間経過で消費メモリが増大する場合に設定）
+  # [default: 0]
+  PassengerMaxRequests 0
 </IfModule>
 
-# Passengerが追加するHTTPヘッダを削除するための設定。
+# 公開する必要のないHTTPヘッダを隠す
 Header always unset "X-Powered-By"
 Header always unset "X-Rack-Cache"
 Header always unset "X-Content-Digest"
