@@ -19,13 +19,17 @@ su -s /bin/bash railsdev -c "npm install --prefix ./lib/nodejs"
 
 
 # db create
-bundle exec rake db:create          RAILS_ENV=${RAILS_ENV}
-bundle exec rake db:migrate:reset   RAILS_ENV=${RAILS_ENV} DISABLE_DATABASE_ENVIRONMENT_CHECK=1 # or bundle exec rake db:schema:load
-bundle exec rake db:seed            RAILS_ENV=${RAILS_ENV}
-bundle exec rake db:environment:set RAILS_ENV=${RAILS_ENV}
+RAILS_ENV=${RAILS_ENV}  bundle exec rake db:create
+RAILS_ENV=${RAILS_ENV}  bundle exec rake db:migrate:reset DISABLE_DATABASE_ENVIRONMENT_CHECK=1 # or bundle exec rake db:schema:load
+RAILS_ENV=${RAILS_ENV}  bundle exec rake db:seed
+RAILS_ENV=${RAILS_ENV}  bundle exec rake db:environment:set
 
-bundle exec rake db:create          RAILS_ENV=test
-bundle exec rake db:environment:set RAILS_ENV=test
+RAILS_ENV=test          bundle exec rake db:create
+RAILS_ENV=test          bundle exec rake db:environment:set
+
+
+# set /var/spool/cron/root
+RAILS_ENV=${RAILS_ENV}  bundle exec whenever --update-crontab
 
 
 # passenger

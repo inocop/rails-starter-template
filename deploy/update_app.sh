@@ -94,12 +94,16 @@ docker_cmd "exec" "cd ${DOCKER_RAILS_ROOT} \
 
 # テスト実行
 docker_cmd "exec" "cd ${DOCKER_RAILS_ROOT} \
-                   && bin/rails db:migrate RAILS_ENV=test"
+                   && RAILS_ENV=test  bin/rails db:migrate"
                     #&& bin/rails test:system test
 
 #  DBマイグレーション
 docker_cmd "exec" "cd ${DOCKER_RAILS_ROOT} \
-                   && bin/rails db:migrate RAILS_ENV=production"
+                   && RAILS_ENV=production  bin/rails db:migrate"
+
+# cron設定
+docker_cmd "exec" "cd ${DOCKER_RAILS_ROOT} \
+                   &&  RAILS_ENV=production  bundle exec whenever --update-crontab"
 
 
 ############################
