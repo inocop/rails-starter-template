@@ -38,13 +38,11 @@ NameVirtualHost *:80
   PassengerPreStart http://localhost:80
 
 
-  # === パフォーマンス設定 ===
-
-  # Passenger全体でのプロセス数上限
+  # Passenger全体でのプロセス数上限(Preloader含む)
   # [default: 6]
-  PassengerMaxPoolSize 2
+  PassengerMaxPoolSize 3
 
-  # アプリ毎のプロセス数上限(動作するアプリが一つなのでMaxPoolSizeと同値を設定)
+  # アプリ毎のプロセス数上限
   # [default: 0]
   PassengerMaxInstancesPerApp 2
 
@@ -53,11 +51,11 @@ NameVirtualHost *:80
   PassengerMinInstances 1
 
   # 設定した秒数idle状態が続いたプロセスを停止
-  # [default: 300]
+  # [default: 300(秒)]
   PassengerPoolIdleTime 1800
 
-  # 設定した秒数idle状態が続いたAppPreloader(プロセスを生成・破棄するプロセス)を停止
-  # [default: 300]
+  # 設定した秒数idle状態が続いたPreloader(プロセス生成時のフォーク元)を停止
+  # [default: 300(秒)]
   PassengerMaxPreloaderIdleTime 0
 
   # 処理待ちのリクエストキュー上限数（上限を超えたら503を返却）
