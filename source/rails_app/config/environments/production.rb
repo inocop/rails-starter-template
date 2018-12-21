@@ -88,6 +88,7 @@ Rails.application.configure do
   # override config   #
   #####################
   config.i18n.fallbacks = [:ja, :en]
+  config.log_level = :info
 
   #####################
   # add config        #
