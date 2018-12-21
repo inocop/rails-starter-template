@@ -35,4 +35,4 @@ RAILS_ENV=${RAILS_ENV}  bundle exec whenever --update-crontab
 # passenger
 passenger-config restart-app ${RAILS_APP_DIR}
 systemctl reload delayed_job
-
+systemctl restart crond

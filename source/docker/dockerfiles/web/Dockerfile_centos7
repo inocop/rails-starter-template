@@ -16,7 +16,8 @@ RUN yum install -y sudo \
                    which \
                    wget \
                    epel-release \
-&&  yum install -y httpd \
+&&  yum install -y rsyslog \
+                   httpd \
                    httpd-devel \
                    mod_xsendfile \
                    mod_ssl \
@@ -127,7 +128,8 @@ ADD delayed_job.service.tmp ./
 RUN RAILS_ENV=${RAILS_ENV} cat delayed_job.service.tmp | envsubst > /etc/systemd/system/delayed_job.service
 
 # set use systemd
-RUN systemctl enable httpd.service \
+RUN systemctl enable rsyslog.service \
+&&  systemctl enable httpd.service \
 &&  systemctl enable crond.service \
 &&  systemctl enable delayed_job.service \
 # disable no need daemon \
@@ -135,7 +137,6 @@ RUN systemctl enable httpd.service \
 &&  systemctl disable systemd-udevd.service \
 &&  rm -f /lib/systemd/system/systemd*udev* \
 &&  rm -f /lib/systemd/system/getty.target
-
 
 CMD /sbin/init
 WORKDIR /var/www/app
