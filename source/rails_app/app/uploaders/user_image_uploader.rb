@@ -1,7 +1,7 @@
 class UserImageUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
-  include CarrierWave::MiniMagick
+  # include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
   storage :file
@@ -9,8 +9,10 @@ class UserImageUploader < CarrierWave::Uploader::Base
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
+  #
+  # dafault "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   def store_dir
-    "source/rails_app/public/uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+    "source/rails_app/public/uploads/#{model.class.to_s.underscore}/#{model.id.to_s.scan(/.{1,3}/).join('/')}/#{mounted_as}"
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
