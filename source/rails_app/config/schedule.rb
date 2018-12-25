@@ -27,3 +27,9 @@ set :output, "/var/log/rails_cron.log"
 env :SHELL,  '/bin/bash'
 env :PATH,   '/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin'
 env :MAILTO, ''
+
+
+# データ削除バッチ
+every 1.day, at: '2:00 am' do
+  rake 'batch:delete_db:run'
+end
