@@ -1,0 +1,13 @@
+# 論理削除後、1年未満
+project_1001:
+  project:
+    id: 1001
+    name: テスト1001
+    deleted_at: <%= Time.current.ago(1.months) + 1.days %>
+
+# 論理削除後、1年以降
+project_1002:
+  project:
+    id: 1002
+    name: テスト1002
+    deleted_at: <%= Time.current.ago(1.months) %>

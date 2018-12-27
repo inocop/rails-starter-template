@@ -25,6 +25,7 @@ ticket_1:
   summary:
   project_id: 1
   assigned_user_id: 1
+  attachment_file: test.zip
   start_date: 2019-01-01
   end_date: 2020-01-01
 
@@ -34,5 +35,6 @@ ticket_2:
   summary:
   project_id: 1
   assigned_user_id: 1
+  attachment_file: test.zip
   start_date: 2019-01-02
   end_date: 2020-01-02

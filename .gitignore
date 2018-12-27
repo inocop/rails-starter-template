@@ -2,7 +2,8 @@ source/**/vendor/bundle/*
 source/**/node_modules/*
 source/**/log/*
 source/**/tmp/*
-source/**/uploads/*
+source/**/test/fixtures/carrierwave/*
+source/**/public/uploads/*
 source/**/storage/*
 source/**/config/myconf.yml
 

@@ -22,11 +22,10 @@
 
 rails_env = ENV['RAILS_ENV'] || :development
 set :environment, rails_env
-set :output, "/var/log/rails_cron.log"
 
 env :SHELL,  '/bin/bash'
 env :PATH,   '/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin'
-env :MAILTO, ''
+#env :MAILTO, ''
 
 
 # データ削除バッチ

@@ -1,7 +1,7 @@
 class DestroyProject
 
   def initialize
-   @one_years_ago = Time.current.ago(1.years)
+   @one_month_ago = Time.current.ago(1.months)
   end
 
   def run
@@ -17,17 +17,19 @@ class DestroyProject
 
   # 論理削除プロジェクトの物理削除
   def destroy_deleted_projects
-    targets_projects = Project.where.not(:deleted_at => nil).where("deleted_at < ?", @one_years_ago)
+    targets_projects = Project.where.not(:deleted_at => nil).where("deleted_at < ?", @one_month_ago)
     destroy(targets_projects)
   end
 
-  # Projectの物理削除
+  # DB削除
   # @params ProjectモデルのRelation
   #
   # @return void
   private def destroy(projects)
     projects.find_each(batch_size: 1000) do |project|
-      project.destroy!    # destroyでCarrierWaveの添付ファイルも削除
+      # 関連するチケットを削除
+      Ticket.where(project_id: project.id).destroy_all  # destroyでCarrierWaveのファイルごと削除
+      project.destroy!
     end
   end
 end
