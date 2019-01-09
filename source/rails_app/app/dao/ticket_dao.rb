@@ -2,7 +2,7 @@ class TicketDao
 
   def initialize(ticket)
     unless ticket.instance_of?(Ticket)
-      raise 'InvalidArgClass'
+      raise ArgumentError
     end
     @ticket = ticket
   end
