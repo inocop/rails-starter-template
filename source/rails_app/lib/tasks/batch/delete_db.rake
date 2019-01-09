@@ -1,5 +1,3 @@
-require_relative '../modules/destroy_project'
-
 namespace :batch do
   namespace :delete_db do
 
@@ -7,7 +5,7 @@ namespace :batch do
     task :run => :environment do
       Rails.logger.info "Start batch:delete_db:run"
 
-      DestroyProject.new.run
+      DestroyProjectService.new.run
 
       Rails.logger.info "End batch:delete_db:run"
     end

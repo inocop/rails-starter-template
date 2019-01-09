@@ -1,4 +1,4 @@
-class DestroyProject
+class DestroyProjectService
 
   def initialize
    @one_month_ago = Time.current.ago(1.months)
