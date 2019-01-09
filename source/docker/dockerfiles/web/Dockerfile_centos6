@@ -14,8 +14,9 @@ RUN yum install -y sudo \
                    cronie \
                    which \
                    wget \
-                   epel-release \
-&&  yum install -y httpd \
+                   epel-release
+
+RUN yum install -y httpd \
                    httpd-devel \
                    mod_xsendfile \
                    mod_ssl \

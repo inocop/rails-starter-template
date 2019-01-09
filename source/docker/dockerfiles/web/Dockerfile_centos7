@@ -15,8 +15,9 @@ RUN yum install -y sudo \
                    cronie \
                    which \
                    wget \
-                   epel-release \
-&&  yum install -y rsyslog \
+                   epel-release
+
+RUN yum install -y rsyslog \
                    httpd \
                    httpd-devel \
                    mod_xsendfile \
