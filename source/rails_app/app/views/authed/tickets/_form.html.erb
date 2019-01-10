@@ -10,7 +10,7 @@
   <div class="form-group row">
     <%= form.label :status, class: "col-form-label col-md-2" %>
     <div class="col-md-10">
-      <%= form.select :status, Ticket::STATUS_LIST.invert, {}, class: "form-control" %>
+      <%= form.select :status, TicketConst::STATUS_LIST.invert, {}, class: "form-control" %>
     </div>
   </div>
 

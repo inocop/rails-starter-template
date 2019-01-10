@@ -18,7 +18,7 @@
   <p class="col-3 col-md-2">
     <%= t('.status') %>
   </p>
-  <p class="col-8"><%= Ticket::STATUS_LIST[@ticket.status] %></p>
+  <p class="col-8"><%= TicketConst.status_name(@ticket.status) %></p>
 </div>
 
 <div class="form-group row border-bottom">

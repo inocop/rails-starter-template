@@ -9,14 +9,14 @@
           labels: <%= raw(@user_list.to_json) %>,
           datasets: [
           {
-              label: "<%= Ticket::STATUS_LIST[Ticket::STATUS_DRAFT] %>",
+              label: "<%= TicketConst.status_name(TicketConst::STATUS_DRAFT) %>",
               borderWidth:1,
               backgroundColor: "green",
               borderColor: "green",
               data: <%= raw(@draft_list.to_json) %>
            },
            {
-              label: "<%= Ticket::STATUS_LIST[Ticket::STATUS_START] %>",
+              label: "<%= TicketConst.status_name(TicketConst::STATUS_START) %>",
               borderWidth:1,
               backgroundColor: "cornflowerblue",
               borderColor: "cornflowerblue",

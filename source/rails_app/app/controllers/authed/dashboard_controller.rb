@@ -12,8 +12,8 @@ class Authed::DashboardController < AuthController
     @start_list = []
     users.each do |user|
       @user_list  << user.name
-      @draft_list << tickets.select{|item| user.id == item.assigned_user_id && item.status == Ticket::STATUS_DRAFT}.count
-      @start_list << tickets.select{|item| user.id == item.assigned_user_id && item.status == Ticket::STATUS_START}.count
+      @draft_list << tickets.select{|item| user.id == item.assigned_user_id && item.status == TicketConst::STATUS_DRAFT}.count
+      @start_list << tickets.select{|item| user.id == item.assigned_user_id && item.status == TicketConst::STATUS_START}.count
     end
   end
 

@@ -20,7 +20,7 @@ class TicketDao
     if completed
       tickets.completed
     else
-      tickets.incomplete
+      tickets.progress
     end
   end
 
