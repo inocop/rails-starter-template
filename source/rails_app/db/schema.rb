@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 30) do
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
-    t.string "email", default: "", null: false
+    t.string "email", limit: 300, default: "", null: false
     t.boolean "admin", default: false, null: false
     t.string "image"
     t.datetime "deleted_at"

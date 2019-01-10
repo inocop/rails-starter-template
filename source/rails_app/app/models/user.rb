@@ -7,7 +7,7 @@
 #  current_sign_in_at     :datetime
 #  current_sign_in_ip     :string(255)
 #  deleted_at             :datetime
-#  email                  :string(255)      default(""), not null
+#  email                  :string(300)      default(""), not null
 #  encrypted_password     :string(255)      default(""), not null
 #  image                  :string(255)
 #  last_sign_in_at        :datetime
@@ -40,7 +40,7 @@ class User < ApplicationRecord
                    length: {maximum: 50}
 
   validates :email, presence: true,
-                    length: {maximum: 244}, # 論理削除時のprefix分を確保して制限
+                    length: {maximum: 256},
                     uniqueness: {case_sensible: false}
 
   # instead of deleting, indicate the user requested a delete & timestamp it
@@ -51,7 +51,8 @@ class User < ApplicationRecord
       # 論理削除後に同emailで再登録できるよう、deleted_atをprefixにして更新
       deleted_at_email = "#{current_time.to_i.to_s}_#{self.email.to_s}"
       #self.skip_reconfirmation!   # deviseが送信するメールアドレス更新の通知をskip（confirmable利用時）
-      update(email: deleted_at_email, deleted_at: current_time)
+
+      update_columns(email: deleted_at_email, deleted_at: current_time) # update_columnsでバリデーションを無視
     end
     return true
   rescue => e

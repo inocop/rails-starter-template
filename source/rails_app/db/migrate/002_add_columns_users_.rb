@@ -4,6 +4,8 @@ class AddColumnsUsers < ActiveRecord::Migration[5.2]
     add_column(:users, :admin,      :boolean, null: false, default: false, after: :email)
     add_column(:users, :image,      :string,  after: :admin)
     add_column(:users, :deleted_at, :datetime, after: :image)
+
+    change_column(:users, :email, :string, limit: 300)
   end
 
   def down
