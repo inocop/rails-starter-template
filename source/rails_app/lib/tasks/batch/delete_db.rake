@@ -5,7 +5,7 @@ namespace :batch do
     task :run => :environment do
       Rails.logger.info "Start batch:delete_db:run"
 
-      DestroyProjectService.new.run
+      Batch::DestroyProjectService.new.run
 
       Rails.logger.info "End batch:delete_db:run"
     end

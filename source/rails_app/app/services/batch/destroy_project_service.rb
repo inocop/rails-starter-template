@@ -1,4 +1,4 @@
-class DestroyProjectService
+class Batch::DestroyProjectService
 
   def initialize
    @one_month_ago = Time.current.ago(1.months)

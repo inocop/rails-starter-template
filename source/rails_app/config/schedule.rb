@@ -23,10 +23,8 @@
 rails_env = ENV['RAILS_ENV'] || :development
 set :environment, rails_env
 
-env :SHELL,  '/bin/bash'
-env :PATH,   '/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin'
 #env :MAILTO, ''
-
+ENV.each { |k, v| env(k, v) }
 
 # データ削除バッチ
 every 1.day, at: '2:00 am' do
