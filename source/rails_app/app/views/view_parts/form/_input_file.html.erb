@@ -4,18 +4,26 @@
 # @params row         [any]
 # @params field_name  [string]
 # @params label_name  [string]
+# @params accept      [string]
+# @params required    [any]
 
 label_name = (label_name.present?) ? label_name.to_s : nil
+
+options = {}
+options[:class]    = "custom-file-input"
+options[:lang]     = "ja"
+options[:required] = true   if defined?(required)
+options[:accept]   = accept if defined?(accept)
 %>
 
 <%# ラベル横並び %>
 <% if defined?(row) %>
   <div class="form-group row view_parts__form__input_file <%= field_name %>">
-    <%= form.label(field_name, label_name, class: "col-form-label col-md-2") %>
+    <%= form.label(field_name, label_name, class: "col-form-label col-md-2 #{('required' if options[:required])}") %>
     <div class="col-md-10">
       <div class="input-group">
         <div class="custom-file">
-            <%= form.file_field(field_name, class: "custom-file-input", lang: "ja") %>
+            <%= form.file_field(field_name, options) %>
             <label class="custom-file-label">ファイル選択...</label>
         </div>
         <div class="input-group-append">
@@ -28,10 +36,10 @@ label_name = (label_name.present?) ? label_name.to_s : nil
 <%# ラベル縦並び %>
 <% else %>
   <div class="form-group view_parts__form__input_file <%= field_name %>">
-    <%= form.label(field_name, label_name) %>
+    <%= form.label(field_name, label_name, class: "col-form-label #{('required' if options[:required])}") %>
     <div class="input-group">
       <div class="custom-file">
-          <%= form.file_field(field_name, class: "custom-file-input", lang: "ja") %>
+          <%= form.file_field(field_name, options) %>
           <label class="custom-file-label">ファイル選択...</label>
       </div>
       <div class="input-group-append">
