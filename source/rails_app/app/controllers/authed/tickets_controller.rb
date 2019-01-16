@@ -6,8 +6,8 @@ class Authed::TicketsController < AuthController
   # GET /tickets
   # GET /tickets.json
   def index
-    @tickets = TicketDao.get_tickets(project_id: current_project_id,
-                                      completed: (params[:completed] == "1"))
+    @tickets = TicketQuery.get_tickets(project_id: current_project_id,
+                                        completed: (params[:completed] == "1"))
     @tickets = @tickets.page(params[:page])
   end
 

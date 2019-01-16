@@ -16,7 +16,7 @@ class Batch::DestroyProjectService
   end
 
   # 論理削除プロジェクトの物理削除
-  def destroy_deleted_projects
+  private def destroy_deleted_projects
     targets_projects = Project.where.not(:deleted_at => nil).where("deleted_at < ?", @one_month_ago)
     destroy(targets_projects)
   end

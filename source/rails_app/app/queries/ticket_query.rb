@@ -1,8 +1,8 @@
-class TicketDao
+class TicketQuery
 
   def initialize(ticket)
     unless ticket.instance_of?(Ticket)
-      raise ArgumentError
+      raise ArgumentError.new("ticket is not Ticket class")
     end
     @ticket = ticket
   end
