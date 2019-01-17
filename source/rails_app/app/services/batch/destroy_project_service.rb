@@ -1,5 +1,7 @@
 class Batch::DestroyProjectService
 
+  attr_reader :error_message
+
   def initialize
    @one_month_ago = Time.current.ago(1.months)
   end
@@ -10,8 +12,9 @@ class Batch::DestroyProjectService
         destroy_deleted_projects
       end
     rescue => e
-      Rails.logger.error e.message
-      Rails.logger.error e.backtrace.join("\n")
+      @error_message = e.message
+      Rails.logger.error(e.message)
+      Rails.logger.error(e.backtrace.join("\n"))
     end
   end
 
