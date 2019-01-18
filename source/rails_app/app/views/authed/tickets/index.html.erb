@@ -1,8 +1,8 @@
 <h1><%= t(".title") %></h1>
 
 <div class="btn-group mt-2 mb-4">
-  <a class="btn btn-sm <%= (params[:completed] != "1")? "btn-primary" : "btn-light" %>" style="width:150px;border:solid 1px rgb(0,0,0,0.125)" href="<%= tickets_path %>">未完了</a>
-  <a class="btn btn-sm <%= (params[:completed] == "1")? "btn-primary" : "btn-light" %>" style="width:150px;border:solid 1px rgb(0,0,0,0.125)" href="<%= tickets_path(completed: 1) %>">完了</a>
+  <a class="btn btn-sm <%= (@target_group == TicketConst::GROUP_PROGRESS)? "btn-primary" : "btn-light" %>" style="width:150px;border:solid 1px rgb(0,0,0,0.125)" href="<%= tickets_path %>">未完了</a>
+  <a class="btn btn-sm <%= (@target_group == TicketConst::GROUP_COMPLETE)? "btn-primary" : "btn-light" %>" style="width:150px;border:solid 1px rgb(0,0,0,0.125)" href="<%= tickets_path(group: TicketConst::GROUP_COMPLETE) %>">完了</a>
 </div>
 
 <div class="table-responsive">

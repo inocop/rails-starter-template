@@ -6,8 +6,10 @@ class Authed::TicketsController < AuthController
   # GET /tickets
   # GET /tickets.json
   def index
-    @tickets = TicketQuery.get_tickets(project_id: current_project_id,
-                                        completed: (params[:completed] == "1"))
+    @target_group = params[:group] || TicketConst::GROUP_PROGRESS
+
+    @tickets = TicketQuery.tickets_by_project(project_id: current_project_id,
+                                                   group: @target_group)
     @tickets = @tickets.page(params[:page])
   end
 

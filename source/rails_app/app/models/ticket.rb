@@ -30,9 +30,6 @@ class Ticket < ApplicationRecord
   belongs_to :user, foreign_key: 'assigned_user_id', primary_key: 'id', class_name: "User"
 
   scope :active,    -> {where(deleted_at: nil)}
-  scope :completed, -> {where(status: TicketConst::STATUS_GROUP_IDS[TicketConst::GROUP_COMPLETE])}
-  scope :progress,  -> {where.not(status: TicketConst::STATUS_GROUP_IDS[TicketConst::GROUP_PROGRESS])}
 
   validates :name, presence: true
-
 end
