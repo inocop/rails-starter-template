@@ -7,24 +7,21 @@ class Batch::DestroyProjectService
   end
 
   def run
-    begin
-      ActiveRecord::Base.transaction do
-        destroy_deleted_projects
-      end
-    rescue => e
-      @error_message = e.message
-      Rails.logger.error(e.message)
-      Rails.logger.error(e.backtrace.join("\n"))
+    ApplicationRecord.transaction do
+      # 論理削除プロジェクトを物理削除
+      targets_projects = Project.where.not(:deleted_at => nil).where("deleted_at < ?", @one_month_ago)
+      destroy(targets_projects)
     end
+  rescue => e
+    @error_message = e.message
+    Rails.logger.error(e.message)
+    Rails.logger.error(e.backtrace.join("\n"))
+
+    # バッチ処理の失敗をメールで通知
+    SystemMailer.send_error(exception: e).deliver
   end
 
-  # 論理削除プロジェクトの物理削除
-  private def destroy_deleted_projects
-    targets_projects = Project.where.not(:deleted_at => nil).where("deleted_at < ?", @one_month_ago)
-    destroy(targets_projects)
-  end
-
-  # DB削除
+  # DB物理削除
   # @params ProjectモデルのRelation
   #
   # @return void

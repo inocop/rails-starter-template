@@ -9,8 +9,23 @@ class SystemMailer < ApplicationMailer
     @user = user
     @greeting = "Hi"
 
+    return if @user.email.blank?
+
     mail(to: @user.email, subject: 'notification') do |format|
       format.html
+      format.text
+    end
+  end
+
+  # デベロッパーにエラーを通知
+  def send_error(exception:)
+    @message   = exception.message
+    @backtrace = exception.backtrace.join("\n")
+
+    to_emails = Rails.application.config.x.myconf.developer_emails.split(",")
+    return if to_emails.blank?
+
+    mail(to: to_emails, subject: 'エラーが発生しました') do |format|
       format.text
     end
   end

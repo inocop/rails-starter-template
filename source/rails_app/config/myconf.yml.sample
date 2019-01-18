@@ -4,7 +4,7 @@ default: &default
   db_password: root
   db_host: db
   db_database: rails_app_dev
-
+  developer_emails: admin@example.com,admin2@example.com
 
 production:
   <<: *default
