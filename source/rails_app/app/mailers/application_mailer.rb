@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "#{AppConst::APP_NAME}<#{Rails.application.config.x.myconf[:mail_from]}>"
+  default from: AppConst::MAIL_FROM
   layout 'mailer'
 end
