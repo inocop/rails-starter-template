@@ -95,9 +95,6 @@ docker_cmd "exec" "cd ${DOCKER_DEPLOY_DIR} \
 #  DBマイグレーション
 docker_cmd "exec" "cd ${DOCKER_DEPLOY_DIR} \
                    && RAILS_ENV=production  bin/rails db:migrate"
-# cron設定
-docker_cmd "exec" "cd ${DOCKER_DEPLOY_DIR} \
-                   &&  RAILS_ENV=production  bundle exec whenever --update-crontab"
 
 
 ############################
@@ -116,6 +113,10 @@ else
   docker_cmd "exec" "passenger-config restart-app ${DOCKER_RELEASE_DIR} \
                      && systemctl reload delayed_job"
 fi
+
+# cron設定
+docker_cmd "exec" "cd ${DOCKER_RELEASE_DIR} \
+                   &&  RAILS_ENV=production  bundle exec whenever --update-crontab"
 
 
 #############################
