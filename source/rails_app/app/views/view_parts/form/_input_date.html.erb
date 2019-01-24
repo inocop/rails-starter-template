@@ -14,7 +14,7 @@ label_name = (label_name.present?) ? label_name.to_s : nil
     <%= form.label(field_name, label_name, class: "col-form-label col-md-2") %>
     <div class="col-md-5">
       <div class="input-group view_parts__form__input_date">
-        <%= form.text_field(field_name, style: "background-color:#fff", class: "form-control", data: { input: "" }) %>
+        <%= form.date_field(field_name, style: "background-color:#fff", class: "form-control", data: { input: "" }) %>
         <div class="input-group-append" data-toggle>
           <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
         </div>
@@ -30,7 +30,7 @@ label_name = (label_name.present?) ? label_name.to_s : nil
   <div class="form-group">
     <%= form.label(field_name, label_name) %>
     <div class="input-group view_parts__form__input_date">
-      <%= form.text_field(field_name, style: "background-color:#fff", class: "form-control", data: { input: "" }) %>
+      <%= form.date_field(field_name, style: "background-color:#fff", class: "form-control", data: { input: "" }) %>
       <div class="input-group-append" data-toggle>
         <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
       </div>
