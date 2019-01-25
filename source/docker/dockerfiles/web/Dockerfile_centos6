@@ -72,7 +72,9 @@ RUN mv /etc/sysconfig/clock /etc/sysconfig/clock.org \
 ARG RAILS_ENV
 
 # set env for apache
-RUN echo "RAILS_ENV=${RAILS_ENV}" >> /etc/sysconfig/httpd
+RUN echo "RAILS_ENV=${RAILS_ENV}" >> /etc/sysconfig/httpd \
+# add X-Forwarded-For to LogFormat ([# a CustomLog directive]の2行下を置換) \
+&&  sed -i -e '/# a CustomLog directive/{n;n;s/LogFormat "%h/LogFormat "%{X-Forwarded-For}i %h/}' /etc/httpd/conf/httpd.conf
 
 # set conf for apache
 ADD vhost.conf.tmp ./

@@ -76,7 +76,9 @@ RUN ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 ARG RAILS_ENV
 
 # set env for apache
-RUN echo "RAILS_ENV=${RAILS_ENV}" >> /etc/sysconfig/httpd
+RUN echo "RAILS_ENV=${RAILS_ENV}" >> /etc/sysconfig/httpd \
+# add X-Forwarded-For to LogFormat \
+&&  sed -i -e '/# a CustomLog directive/{n;n;s/LogFormat "%h/LogFormat "%{X-Forwarded-For}i %h/}' /etc/httpd/conf/httpd.conf
 
 # set conf for apache-passenger
 ADD vhost.conf.tmp ./
