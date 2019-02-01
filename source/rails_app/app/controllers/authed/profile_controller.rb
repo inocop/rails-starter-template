@@ -28,11 +28,11 @@ class Authed::ProfileController < AuthController
   def update_image
     if current_user.update(profile_image_params)
       flash[:notice] = t('.success_message')
+      redirect_to(action: :edit_image) and return
     else
       flash.now[:alert] = current_user.errors.full_messages.join("\n")
+      render(:edit_image)
     end
-
-    render(:edit_image)
   end
 
   # パスワード編集
@@ -45,10 +45,11 @@ class Authed::ProfileController < AuthController
   def update_password
     if current_user.update_with_password(profile_password_params)
       bypass_sign_in(current_user)
-      flash.now[:notice] = t('.success_message')
+      flash[:notice] = t('.success_message')
+      redirect_to(action: :edit_password) and return
+    else
+      render(:edit_password)
     end
-
-    render(:edit_password)
   end
 
   private
