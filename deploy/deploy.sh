@@ -1,5 +1,17 @@
 #!/usr/bin/env bash
 
+echo -n 'Input deploy option [init/build/None]: '
+read OPTION
+
+if   [ "${OPTION,,}" = "init" ]; then
+  OPTION="init"
+elif [ "${OPTION,,}" = "build" ]; then
+  OPTION="build"
+else
+  OPTION="none"
+fi
+
+
 set -eux
 cd `dirname $0`
 
@@ -23,4 +35,4 @@ scp -i ${SECRET_KEY} source.tar.gz ${REMOTE_USER}@${REMOTE_SERVER}:/tmp/
 # デプロイ
 set +u
 ssh -i ${SECRET_KEY} ${REMOTE_USER}@${REMOTE_SERVER} \
-       OPTION="$1" MY_DOMAIN="$REMOTE_SERVER" bash < update_app.sh
+       OPTION="${OPTION}" MY_DOMAIN="$REMOTE_SERVER" bash < update_app.sh

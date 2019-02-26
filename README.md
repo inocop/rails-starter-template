@@ -154,10 +154,12 @@ configの以下パラメータを設定
 デプロイ実行
 ```
 # 初回デプロイ
-$ ./deploy.sh init
+$ ./deploy.sh
+Input deploy option [init/build/None]: init
 
 # デプロイ & Docker build（ダウンタイム有り）
 $ ./deploy.sh build
+Input deploy option [init/build/None]: build
 
 # デプロイ
 $ ./deploy.sh
