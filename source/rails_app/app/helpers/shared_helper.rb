@@ -11,9 +11,7 @@ module SharedHelper
   def filename_encoding(filename)
     if request.user_agent =~ /Windows/
       if (/MSIE/ =~ request.user_agent) || (/Trident/ =~ request.user_agent) || (/Edge/ =~ request.user_agent)
-        filename = URI.encode(filename).encode("Shift_JIS")
-      else
-        filename = filename.encode("Shift_JIS")
+        filename = URI.encode(filename)
       end
     end
 
