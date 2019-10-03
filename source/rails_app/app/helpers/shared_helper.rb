@@ -8,6 +8,7 @@ module SharedHelper
   end
 
   # ファイル名の文字化け対策
+  # Rails6からは対応不要かも
   def filename_encoding(filename)
     if request.user_agent =~ /Windows/
       if (/MSIE/ =~ request.user_agent) || (/Trident/ =~ request.user_agent) || (/Edge/ =~ request.user_agent)
