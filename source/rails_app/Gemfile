@@ -86,7 +86,7 @@ gem 'devise-i18n', '~> 1.6.4'
 #        >> root 'dashboard#index'
 
 
-gem 'kaminari', '~> 1.1.1'
+gem 'kaminari', '~> 1.2.1'
 # === pagenation custom template
 # bundle exec rails g kaminari:config
 # bundle exec rails g kaminari:views {default|bootstrap4}
